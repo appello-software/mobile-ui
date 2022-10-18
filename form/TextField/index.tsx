@@ -5,22 +5,22 @@ import { StyleProp, TextInputProps, ViewStyle } from 'react-native';
 import { Field } from '~/ui/form/Field';
 import { TextInput } from '~/ui/form/TextInput';
 
-interface Props<TFormValues> extends Omit<TextInputProps, 'style'> {
-  name: FieldPath<TFormValues>;
-  control: Control<TFormValues>;
+interface Props<FormValues extends FieldValues> extends Omit<TextInputProps, 'style'> {
+  name: FieldPath<FormValues>;
+  control: Control<FormValues>;
   label?: string;
   disabled?: boolean;
   style?: StyleProp<ViewStyle>;
 }
 
-export const TextField = <TFormValues extends FieldValues>({
+export const TextField = <FormValues extends FieldValues>({
   name,
   control,
   label,
   disabled,
   style,
   ...textInputProps
-}: Props<TFormValues>): React.ReactElement => {
+}: Props<FormValues>): React.ReactElement => {
   const controller = useController({ name, control });
 
   return (

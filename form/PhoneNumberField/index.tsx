@@ -17,7 +17,7 @@ const DropdownIcon: React.FC<Record<string, any>> = () => null; // todo: should 
 
 type InputValue = string;
 
-interface Props<FormValues, TName extends FieldPath<FormValues>>
+interface Props<FormValues extends FieldValues, TName extends FieldPath<FormValues>>
   extends Omit<TextInputProps, 'style'> {
   name: FieldPathValue<FormValues, TName> extends InputValue ? TName : never;
   control: Control<FormValues>;
