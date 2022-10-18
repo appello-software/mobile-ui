@@ -1,5 +1,5 @@
 import { useSwitchValue } from '@appello/common/lib/hooks';
-import { LinearGradient } from 'expo-linear-gradient';
+import { LinearGradient } from 'react-native-linear-gradient';
 import * as React from 'react';
 import { useMemo } from 'react';
 import { Pressable, PressableProps, StyleProp, TextStyle, ViewStyle } from 'react-native';
@@ -32,7 +32,7 @@ export const Button: React.FC<ButtonProps> = ({
   // icon,
   ...buttonProps
 }) => {
-  const [isPressed, on, off] = useSwitchValue(false);
+  const { value: isPressed, off, on } = useSwitchValue(false);
 
   const styles = useStyles({ variant, disabled });
   const buttonTheme = useButtonTheme({ variant, disabled });
