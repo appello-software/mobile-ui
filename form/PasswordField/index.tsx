@@ -10,7 +10,7 @@ import { makeStyles } from '~/ui/utils';
 import { Field } from '../Field';
 import { TextInput } from '../TextInput';
 
-interface Props<FormValues> extends Omit<TextInputProps, 'style'> {
+interface Props<FormValues extends FieldValues> extends Omit<TextInputProps, 'style'> {
   name: FieldPath<FormValues>;
   control: Control<FormValues>;
   label: string;
@@ -25,7 +25,7 @@ export const PasswordField = <FormValues extends FieldValues>({
   ...textInputProps
 }: Props<FormValues>): React.ReactElement => {
   const controller = useController({ name, control });
-  const [isPasswordVisible] = useSwitchValue(false);
+  const { value: isPasswordVisible } = useSwitchValue(false);
   const styles = useStyles();
   // const theme = useUIKitTheme();
 

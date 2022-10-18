@@ -1,4 +1,4 @@
-import { LinearGradientProps } from 'expo-linear-gradient';
+import { LinearGradientProps } from 'react-native-linear-gradient';
 import { ReactNode } from 'react';
 import { ShadowStyleIOS } from 'react-native';
 
