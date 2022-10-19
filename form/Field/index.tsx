@@ -1,10 +1,9 @@
+import { useUIKitTheme } from '@ui';
+import { makeStyles } from '@ui/utils';
 import deepMerge from 'deepmerge';
 import React, { ReactNode } from 'react';
 import { FieldError } from 'react-hook-form';
 import { StyleProp, Text, View, ViewStyle } from 'react-native';
-
-import { useUIKitTheme } from '~/ui';
-import { makeStyles } from '~/ui/utils';
 
 interface Props {
   label?: string;

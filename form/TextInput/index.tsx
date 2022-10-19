@@ -1,8 +1,7 @@
+import { useUIKitTheme } from '@ui/UIKitProvider';
+import { makeStyles } from '@ui/utils';
 import React, { FC, useMemo, useState } from 'react';
 import { TextInput as BaseTextInput, TextInputProps } from 'react-native';
-
-import { useUIKitTheme } from '~/ui/UIKitProvider';
-import { makeStyles } from '~/ui/utils';
 
 interface Props extends TextInputProps {
   error?: boolean;

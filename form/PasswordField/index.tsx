@@ -1,11 +1,10 @@
 import { useSwitchValue } from '@appello/common/lib/hooks';
+// import { useUIKitTheme } from '@ui';
+// import { SvgIcon } from '~/view/components/SvgIcon';
+import { makeStyles } from '@ui/utils';
 import React from 'react';
 import { Control, FieldPath, FieldValues, useController } from 'react-hook-form';
 import { StyleProp, TextInputProps, ViewStyle } from 'react-native';
-
-// import { useUIKitTheme } from '~/ui';
-// import { SvgIcon } from '~/view/components/SvgIcon';
-import { makeStyles } from '~/ui/utils';
 
 import { Field } from '../Field';
 import { TextInput } from '../TextInput';

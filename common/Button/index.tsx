@@ -1,14 +1,13 @@
 import { useSwitchValue } from '@appello/common/lib/hooks';
-import { LinearGradient } from 'react-native-linear-gradient';
+import { ButtonColors, ButtonVariant, TextThemeProps, UIKitTheme, useUIKitTheme } from '@ui';
+import { AppText } from '@ui/common/AppText';
+import { layout } from '@ui/styles';
+import { makeStyles } from '@ui/utils';
 import * as React from 'react';
 import { useMemo } from 'react';
 import { Pressable, PressableProps, StyleProp, TextStyle, ViewStyle } from 'react-native';
 import { Flow } from 'react-native-animated-spinkit';
-
-import { ButtonColors, ButtonVariant, TextThemeProps, UIKitTheme, useUIKitTheme } from '~/ui';
-import { AppText } from '~/ui/common/AppText';
-import { layout } from '~/ui/styles';
-import { makeStyles } from '~/ui/utils';
+import { LinearGradient } from 'react-native-linear-gradient';
 
 export interface ButtonProps extends Omit<PressableProps, 'title' | 'style'> {
   variant: ButtonVariant;

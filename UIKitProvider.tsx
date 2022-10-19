@@ -1,7 +1,6 @@
+import { defaultTheme } from '@ui/defaultTheme';
 import deepMerge from 'deepmerge';
 import React, { createContext, FC, useContext, useMemo } from 'react';
-
-import { defaultTheme } from '~/ui/defaultTheme';
 
 import { UIKitProviderProps, UIKitTheme } from './types';
 

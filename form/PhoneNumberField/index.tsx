@@ -1,13 +1,12 @@
+import { useUIKitTheme } from '@ui';
+import { Field } from '@ui/form/Field';
+import { makeStyles } from '@ui/utils';
 import { PhoneNumberUtil } from 'google-libphonenumber';
 import React, { useMemo, useRef } from 'react';
 import { Control, FieldPath, FieldValues, useController } from 'react-hook-form';
 import { FieldPathValue } from 'react-hook-form/dist/types';
 import { StyleProp, TextInputProps, ViewStyle } from 'react-native';
 import PhoneInput, { PhoneInputProps } from 'react-native-phone-number-input';
-
-import { useUIKitTheme } from '~/ui';
-import { Field } from '~/ui/form/Field';
-import { makeStyles } from '~/ui/utils';
 
 import { DEFAULT_COUNTRY_CODE } from './consts';
 

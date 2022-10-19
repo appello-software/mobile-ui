@@ -1,8 +1,7 @@
+import { FontWeight, TextVariant, useUIKitTheme } from '@ui';
+import { makeStyles } from '@ui/utils';
 import React from 'react';
 import { Text as DefaultText, TextProps } from 'react-native';
-
-import { FontWeight, TextVariant, useUIKitTheme } from '~/ui';
-import { makeStyles } from '~/ui/utils';
 
 type InnerAppTextProps = {
   variant?: TextVariant;

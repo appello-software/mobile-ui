@@ -1,6 +1,6 @@
-import { LinearGradientProps } from 'react-native-linear-gradient';
 import { ReactNode } from 'react';
 import { ShadowStyleIOS } from 'react-native';
+import { LinearGradientProps } from 'react-native-linear-gradient';
 
 export interface UIKitTheme {
   colors: {

@@ -1,9 +1,8 @@
+import { Field } from '@ui/form/Field';
+import { TextInput } from '@ui/form/TextInput';
 import React from 'react';
 import { Control, FieldPath, FieldValues, useController } from 'react-hook-form';
 import { StyleProp, TextInputProps, ViewStyle } from 'react-native';
-
-import { Field } from '~/ui/form/Field';
-import { TextInput } from '~/ui/form/TextInput';
 
 interface Props<FormValues extends FieldValues> extends Omit<TextInputProps, 'style'> {
   name: FieldPath<FormValues>;
