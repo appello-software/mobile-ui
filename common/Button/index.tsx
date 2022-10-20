@@ -1,8 +1,8 @@
 import { useSwitchValue } from '@appello/common/lib/hooks';
-import { ButtonColors, ButtonVariant, TextThemeProps, UIKitTheme, useUIKitTheme } from '@ui';
-import { AppText } from '@ui/common/AppText';
-import { layout } from '@ui/styles';
-import { makeStyles } from '@ui/utils';
+import { ButtonColors, ButtonVariant, TextThemeProps, UIKitTheme, useUIKitTheme } from '@appello/mobile-ui';
+import { AppText } from '@appello/mobile-ui/common/AppText';
+import { layout } from '@appello/mobile-ui/styles';
+import { makeStyles } from '@appello/mobile-ui/utils';
 import * as React from 'react';
 import { useMemo } from 'react';
 import { Pressable, PressableProps, StyleProp, TextStyle, ViewStyle } from 'react-native';

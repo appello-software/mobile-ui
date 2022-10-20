@@ -1,5 +1,5 @@
-import { useUIKitTheme } from '@ui';
-import { makeStyles } from '@ui/utils';
+import { useUIKitTheme } from '@appello/mobile-ui';
+import { makeStyles } from '@appello/mobile-ui/utils';
 import deepMerge from 'deepmerge';
 import React, { ReactNode } from 'react';
 import { FieldError } from 'react-hook-form';

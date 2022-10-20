@@ -1,4 +1,4 @@
-import { defaultTheme } from '@ui/defaultTheme';
+import { defaultTheme } from '@appello/mobile-ui/defaultTheme';
 import deepMerge from 'deepmerge';
 import React, { createContext, FC, useContext, useMemo } from 'react';
 

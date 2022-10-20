@@ -1,5 +1,5 @@
-import { useUIKitTheme } from '@ui';
-import { makeStyles } from '@ui/utils';
+import { useUIKitTheme } from '@appello/mobile-ui';
+import { makeStyles } from '@appello/mobile-ui/utils';
 import React from 'react';
 import { View, ViewProps } from 'react-native';
 

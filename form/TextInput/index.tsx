@@ -1,5 +1,5 @@
-import { useUIKitTheme } from '@ui/UIKitProvider';
-import { makeStyles } from '@ui/utils';
+import { useUIKitTheme } from '@appello/mobile-ui/UIKitProvider';
+import { makeStyles } from '@appello/mobile-ui/utils';
 import React, { FC, useMemo, useState } from 'react';
 import { TextInput as BaseTextInput, TextInputProps } from 'react-native';
 

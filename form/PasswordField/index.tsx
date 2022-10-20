@@ -1,7 +1,7 @@
 import { useSwitchValue } from '@appello/common/lib/hooks';
-// import { useUIKitTheme } from '@ui';
+// import { useUIKitTheme } from '@appello/mobile-ui';
 // import { SvgIcon } from '~/view/components/SvgIcon';
-import { makeStyles } from '@ui/utils';
+import { makeStyles } from '@appello/mobile-ui/utils';
 import React from 'react';
 import { Control, FieldPath, FieldValues, useController } from 'react-hook-form';
 import { StyleProp, TextInputProps, ViewStyle } from 'react-native';

@@ -1,5 +1,5 @@
-import { FontWeight, TextVariant, useUIKitTheme } from '@ui';
-import { makeStyles } from '@ui/utils';
+import { FontWeight, TextVariant, useUIKitTheme } from '@appello/mobile-ui';
+import { makeStyles } from '@appello/mobile-ui/utils';
 import React from 'react';
 import { Text as DefaultText, TextProps } from 'react-native';
 

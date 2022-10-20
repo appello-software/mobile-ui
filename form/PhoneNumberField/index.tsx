@@ -1,6 +1,6 @@
-import { useUIKitTheme } from '@ui';
-import { Field } from '@ui/form/Field';
-import { makeStyles } from '@ui/utils';
+import { useUIKitTheme } from '@appello/mobile-ui';
+import { Field } from '@appello/mobile-ui/form/Field';
+import { makeStyles } from '@appello/mobile-ui/utils';
 import { PhoneNumberUtil } from 'google-libphonenumber';
 import React, { useMemo, useRef } from 'react';
 import { Control, FieldPath, FieldValues, useController } from 'react-hook-form';
