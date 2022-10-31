@@ -1,5 +1,11 @@
 import { useSwitchValue } from '@appello/common/lib/hooks';
-import { ButtonColors, ButtonVariant, TextThemeProps, UIKitTheme, useUIKitTheme } from '@appello/mobile-ui';
+import {
+  ButtonColors,
+  ButtonVariant,
+  TextThemeProps,
+  UIKitTheme,
+  useUIKitTheme,
+} from '@appello/mobile-ui';
 import { AppText } from '@appello/mobile-ui/common/AppText';
 import { layout } from '@appello/mobile-ui/styles';
 import { makeStyles } from '@appello/mobile-ui/utils';
@@ -47,7 +53,7 @@ export const Button: React.FC<ButtonProps> = ({
       <LinearGradient
         {...(typeof buttonTheme.colors.background !== 'string'
           ? buttonTheme.colors.background
-          : { colors: [] })}
+          : { colors: [buttonTheme.colors.background, buttonTheme.colors.background] })}
         style={[
           styles.button,
           containerStyle,
