@@ -19,6 +19,8 @@ export interface UIKitTheme {
     white: string;
     black: Record<1 | 2 | 3, string>;
     gray: Record<1 | 2 | 3 | 4 | 5 | 6 | 7, string>;
+
+    [key: string]: any;
   };
   shadow: Record<1 | 2 | 3 | 4, ShadowStyleIOS & { elevation?: number }>;
   backgroundColor: string;
