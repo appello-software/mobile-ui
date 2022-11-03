@@ -95,10 +95,10 @@ export type TextVariant =
 
 export type FontWeight = 'regular' | 'medium' | 'semiBold' | 'bold';
 
-export type FontFamily = Record<FontWeight, string>;
+export type FontFamily = Partial<Record<FontWeight, string>>;
 
 export interface TextThemeProps {
-  fontFamily: string;
+  fontFamily: string | undefined;
   fontSize: number;
   lineHeight?: number;
 }

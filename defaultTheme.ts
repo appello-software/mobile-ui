@@ -1,4 +1,4 @@
-import { UIKitTheme } from './types';
+import { FontFamily, UIKitTheme } from './types';
 
 const colors: UIKitTheme['colors'] = {
   primary: '#1C88EC',
@@ -21,6 +21,13 @@ const colors: UIKitTheme['colors'] = {
     error: '#EF4646',
     success: '#219653',
   },
+};
+
+const fontFamily: FontFamily = {
+  regular: undefined,
+  medium: undefined,
+  semiBold: undefined,
+  bold: undefined,
 };
 
 export const defaultTheme: UIKitTheme = {
@@ -55,74 +62,69 @@ export const defaultTheme: UIKitTheme = {
       elevation: 4,
     },
   },
-  fontFamily: {
-    regular: 'Mulish-Regular',
-    medium: 'Mulish-Medium',
-    semiBold: 'Mulish-SemiBold',
-    bold: 'Mulish-Bold',
-  },
+  fontFamily,
   text: {
     h1: {
-      fontFamily: 'Mulish-Bold',
+      fontFamily: fontFamily.bold,
       fontSize: 34,
       lineHeight: 48,
     },
     h2: {
-      fontFamily: 'Mulish-Bold',
+      fontFamily: fontFamily.bold,
       fontSize: 29,
       lineHeight: 42,
     },
     h3: {
-      fontFamily: 'Mulish-Bold',
+      fontFamily: fontFamily.bold,
       fontSize: 26,
       lineHeight: 36,
     },
     h4: {
-      fontFamily: 'Mulish-Bold',
+      fontFamily: fontFamily.bold,
       fontSize: 21,
       lineHeight: 32,
     },
     h5: {
-      fontFamily: 'Mulish-Bold',
+      fontFamily: fontFamily.bold,
       fontSize: 19,
       lineHeight: 30,
     },
     h6: {
-      fontFamily: 'Mulish-Bold',
+      fontFamily: fontFamily.bold,
       fontSize: 17,
       lineHeight: 25,
     },
     p1: {
-      fontFamily: 'Mulish-Regular',
+      fontFamily: fontFamily.regular,
       fontSize: 15,
       lineHeight: 24,
     },
 
     p2: {
-      fontFamily: 'Mulish-Regular',
+      fontFamily: fontFamily.regular,
       fontSize: 14,
       lineHeight: 21,
     },
 
     p3: {
-      fontFamily: 'Mulish-Regular',
+      fontFamily: fontFamily.regular,
       fontSize: 13,
       lineHeight: 23,
     },
 
     p4: {
-      fontFamily: 'Mulish-Regular',
+      fontFamily: fontFamily.regular,
       fontSize: 12,
       lineHeight: 21,
     },
 
     c1: {
-      fontFamily: 'Mulish-Regular',
+      fontFamily: fontFamily.regular,
       fontSize: 11,
       lineHeight: 16,
     },
     c2: {
-      fontFamily: 'Mulish-Regular',
+      fontFamily: fontFamily.regular,
       fontSize: 10,
       lineHeight: 16,
     },
