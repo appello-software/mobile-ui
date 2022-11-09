@@ -13,7 +13,7 @@ import * as React from 'react';
 import { useMemo } from 'react';
 import { Pressable, PressableProps, StyleProp, TextStyle, ViewStyle } from 'react-native';
 import { Flow } from 'react-native-animated-spinkit';
-import { LinearGradient } from 'react-native-linear-gradient';
+import LinearGradient from 'react-native-linear-gradient';
 
 export interface ButtonProps extends Omit<PressableProps, 'title' | 'style'> {
   variant: ButtonVariant;
