@@ -5,7 +5,7 @@ import { babel } from '@rollup/plugin-babel';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
-import typescript from 'rollup-plugin-ts';
+import typescript from '@rollup/plugin-typescript';
 import terser from '@rollup/plugin-terser';
 import json from '@rollup/plugin-json';
 import copy from 'rollup-plugin-copy';
@@ -26,7 +26,7 @@ function tscAliasPlugin() {
           }
         });
       });
-    }
+    },
   };
 }
 
@@ -40,11 +40,11 @@ function watcher(globs) {
   const hook = {
     buildStart() {
       for (const item of globs) {
-        glob.sync(path.resolve(item)).forEach((filename) => {
+        glob.sync(path.resolve(item)).forEach(filename => {
           this.addWatchFile(filename);
         });
       }
-    }
+    },
   };
   return hook;
 }
@@ -56,13 +56,13 @@ const buildConfig = {
     {
       file: pkg.module,
       format: 'esm',
-      sourcemap: true
+      sourcemap: true,
     },
     {
       file: pkg.main,
       format: 'cjs',
-      sourcemap: true
-    }
+      sourcemap: true,
+    },
   ],
   plugins: [
     peerDepsExternal(),
@@ -74,11 +74,10 @@ const buildConfig = {
       presets: ['@babel/preset-env'],
     }),
     typescript({
-      tsconfig: './tsconfig.json',
-      sourceMap: true
+      sourceMap: true,
     }),
     tscAliasPlugin(),
-  ]
+  ],
 };
 
 /** @type {import('rollup').RollupOptions} */
@@ -89,9 +88,9 @@ const browserConfig = {
       file: pkg.unpkg,
       format: 'umd',
       name: '@appello/mobile-ui',
-    }
+    },
   ],
-  plugins: [terser()]
+  plugins: [terser()],
 };
 
 export default [buildConfig, browserConfig];
