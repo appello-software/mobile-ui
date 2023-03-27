@@ -1,0 +1,6 @@
+/.git
+/.vscode
+/.idea
+node_modules
+**/*.test.js
+/__tests__
