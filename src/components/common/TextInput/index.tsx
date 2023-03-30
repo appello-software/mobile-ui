@@ -2,12 +2,9 @@ import React, { FC, useState } from 'react';
 import { ComponentConfig, configured, FuncComponentConfig } from 'react-configured';
 import { StyleSheet, TextInput as RNTextInput, TextInputProps } from 'react-native';
 
-import {
-  mergePropsWithStyle,
-  useBaseComponentsConfig,
-  useUIKitTheme,
-  WithGetStyleByState,
-} from '../../..';
+import { mergePropsWithStyle } from '~/utils';
+import { useBaseComponentsConfig, useUIKitTheme } from '~/config';
+import { WithGetStyleByState } from '~/types';
 
 interface Props extends TextInputProps {
   error?: boolean;

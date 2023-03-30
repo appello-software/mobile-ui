@@ -1,14 +1,15 @@
 import { useSwitchValue } from '@appello/common/lib/hooks';
 import React from 'react';
 import { Control, FieldPath, FieldValues, useController } from 'react-hook-form';
-import { StyleProp, TouchableOpacity, ViewStyle } from 'react-native';
+import { StyleProp, StyleSheet, TouchableOpacity, ViewStyle } from 'react-native';
 
-import { makeStyles, TextInput } from '../../..';
+import { TextInput } from '~/components/common/TextInput';
 import { Field } from '../Field';
 import { TextFieldProps as TextFieldProps } from '../TextField';
 import { getFieldError } from '../utils';
 
-export interface PasswordFieldProps<TFormValues extends FieldValues> extends TextFieldProps<TFormValues> {
+export interface PasswordFieldProps<TFormValues extends FieldValues>
+  extends TextFieldProps<TFormValues> {
   name: FieldPath<TFormValues>;
   control: Control<TFormValues>;
   togglePasswordVisibilityIcons?: {
@@ -28,7 +29,6 @@ export const PasswordField = <TFormValues extends FieldValues>({
 }: PasswordFieldProps<TFormValues>): React.ReactElement => {
   const controller = useController({ name, control });
   const { value: isPasswordVisible, toggle: togglePasswordVisibility } = useSwitchValue(false);
-  const styles = useStyles();
 
   const fieldError = getFieldError(controller);
 
@@ -54,7 +54,7 @@ export const PasswordField = <TFormValues extends FieldValues>({
   );
 };
 
-const useStyles = makeStyles({
+const styles = StyleSheet.create({
   input: {
     paddingRight: 9 + 24 + 10,
   },

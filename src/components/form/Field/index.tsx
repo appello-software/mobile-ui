@@ -4,8 +4,8 @@ import { FieldError } from 'react-hook-form';
 import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 
 import { AppText } from '~/components/common/AppText';
-
-import { mergePropsWithStyle, useBaseComponentsConfig, useUIKitTheme } from '../../..';
+import { mergePropsWithStyle } from '~/utils';
+import { useBaseComponentsConfig, useUIKitTheme } from '~/config';
 
 export interface FieldProps {
   label?: string;
