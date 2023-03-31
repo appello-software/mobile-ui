@@ -9,10 +9,10 @@ import { useUIKitTheme } from '~/config/utils';
 type Styles = Parameters<typeof StyleSheet.create>[0];
 
 export const makeStyles = <TProps extends Record<string, unknown> | void>(
-  styles: ((props: TProps, theme: UIKitTheme) => Styles) | Styles,
+  styles: ((theme: UIKitTheme, props: TProps) => Styles) | Styles,
 ): ((props: TProps) => Styles) => {
   const theme = useUIKitTheme();
-  return styles instanceof Function ? (props: TProps) => styles(props, theme) : () => styles;
+  return styles instanceof Function ? (props: TProps) => styles(theme, props) : () => styles;
 };
 
 export const makeTheme = <T extends DeepPartial<UIKitTheme>>(theme: T): T => theme;

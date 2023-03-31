@@ -43,10 +43,10 @@ export function createUIKitConfigProvider<T extends DeepPartial<UIKitTheme>>() {
   }
 
   const makeStyles = <TProps extends Record<string, unknown> | void>(
-    styles: ((props: TProps, theme: FullContext['theme']) => Styles) | Styles,
+    styles: ((theme: FullContext['theme'], props: TProps) => Styles) | Styles,
   ): ((props: TProps) => Styles) => {
     const theme = useUIKitTheme();
-    return styles instanceof Function ? (props: TProps) => styles(props, theme) : () => styles;
+    return styles instanceof Function ? (props: TProps) => styles(theme, props) : () => styles;
   };
 
   return {
