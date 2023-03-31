@@ -21,10 +21,30 @@ type TextVariant =
 
 interface AppTextProps extends RNTextProps {
   variant: TextVariant;
+  color?: string;
+  uppercase?: boolean;
+  underline?: boolean;
 }
 
-const BaseAppText: React.FC<AppTextProps> = ({ variant, ...textProps }) => {
-  return <RNText {...textProps} />;
+const BaseAppText: React.FC<AppTextProps> = ({
+  variant,
+  color,
+  uppercase,
+  underline,
+  style,
+  ...textProps
+}) => {
+  return (
+    <RNText
+      {...textProps}
+      style={StyleSheet.flatten([
+        style,
+        !!color && { color },
+        uppercase && { textTransform: 'uppercase' },
+        underline && { textDecorationLine: 'underline' },
+      ])}
+    />
+  );
 };
 
 export type AppTextConfig = ComponentConfig<React.FC<AppTextProps>>;
