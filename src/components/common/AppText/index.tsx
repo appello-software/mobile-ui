@@ -19,7 +19,7 @@ type TextVariant =
   | 'p5'
   | 'p6';
 
-interface AppTextProps extends RNTextProps {
+export interface AppTextProps extends RNTextProps {
   variant: TextVariant;
   color?: string;
   uppercase?: boolean;

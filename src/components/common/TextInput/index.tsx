@@ -1,19 +1,26 @@
 import React, { FC, useState } from 'react';
 import { ComponentConfig, configured, FuncComponentConfig } from 'react-configured';
-import { StyleSheet, TextInput as RNTextInput, TextInputProps } from 'react-native';
+import {
+  StyleSheet,
+  TextInput as RNTextInput,
+  TextInputProps as RNTextInputProps,
+} from 'react-native';
 
 import { mergePropsWithStyle } from '~/utils';
 import { useBaseComponentsConfig, useUIKitTheme } from '~/config/utils';
 import { WithGetStyleByState } from '~/types';
 
-interface Props extends TextInputProps {
+interface Props extends RNTextInputProps {
   error?: boolean;
   disabled?: boolean;
 }
 
-const BaseTextInput: FC<
-  WithGetStyleByState<Props, ['error', 'focused', 'disabled', 'multiline']>
-> = ({
+export type TextInputProps = WithGetStyleByState<
+  Props,
+  ['error', 'focused', 'disabled', 'multiline']
+>;
+
+const BaseTextInput: FC<TextInputProps> = ({
   error,
   disabled,
   multiline,

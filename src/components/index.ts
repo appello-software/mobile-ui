@@ -3,9 +3,9 @@ import { PasswordField } from './form/PasswordField';
 // import { PhoneNumberField } from './form/PhoneNumberField';
 import { TextField } from './form/TextField';
 
-export { AppText } from './common/AppText';
-export { Button } from './common/Button';
-export { TextInput } from './common/TextInput';
+export { AppText, AppTextProps } from './common/AppText';
+export { Button, ButtonProps } from './common/Button';
+export { TextInput, TextInputProps } from './common/TextInput';
 
 export const Form = {
   Field,
