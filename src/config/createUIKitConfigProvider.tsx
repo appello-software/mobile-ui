@@ -6,6 +6,9 @@ import { DeepPartial } from '~/types';
 import { UIKitTheme } from './types';
 
 import { UIKitConfigContext, ThemeProviderProps } from './UIKitConfigProvider';
+import { StyleSheet } from 'react-native';
+
+type Styles = Parameters<typeof StyleSheet.create>[0];
 
 export function createUIKitConfigProvider<T extends DeepPartial<UIKitTheme>>() {
   type FullContext = Required<ThemeProviderProps<T>>;
@@ -39,9 +42,17 @@ export function createUIKitConfigProvider<T extends DeepPartial<UIKitTheme>>() {
     return useContext(UIKitConfigContext).baseComponentsConfig;
   }
 
+  const makeStyles = <TProps extends Record<string, unknown> | void>(
+    styles: ((props: TProps, theme: FullContext['theme']) => Styles) | Styles,
+  ): ((props: TProps) => Styles) => {
+    const theme = useUIKitTheme();
+    return styles instanceof Function ? (props: TProps) => styles(props, theme) : () => styles;
+  };
+
   return {
     UIKitConfigProvider,
     useUIKitTheme,
     useBaseComponentsConfig,
+    makeStyles,
   };
 }
