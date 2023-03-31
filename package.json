@@ -67,6 +67,8 @@
   },
   "dependencies": {
     "@appello/common": "^1.0.22",
+    "@types/chroma-js": "^2.4.0",
+    "chroma-js": "^2.4.2",
     "deepmerge-ts": "^4.3.0",
     "react-configured": "^0.0.1-alpha",
     "react-native-animated-spinkit": "^1.5.2"

@@ -1,19 +1,21 @@
 import * as React from 'react';
 import { ComponentProps } from 'react';
 import { ComponentConfig, configured, FuncComponentConfig } from 'react-configured';
-import { StyleSheet, TouchableOpacity, TouchableOpacityProps } from 'react-native';
+import { StyleSheet, Pressable, PressableProps, View } from 'react-native';
 import { Flow } from 'react-native-animated-spinkit';
+import chroma from 'chroma-js';
 
 import { AppText } from '~/components/common/AppText';
-import { mergePropsWithStyle } from '~/utils';
+import { makeStyles, mergePropsWithStyle } from '~/utils';
 import { useBaseComponentsConfig, useUIKitTheme } from '~/config/utils';
 
-export interface ButtonProps extends TouchableOpacityProps {
+export interface ButtonProps extends PressableProps {
   labelProps: ComponentProps<typeof AppText>;
   loaderColor?: string;
   isLoading?: boolean;
   variant?: 'primary' | 'secondary';
   size?: 'medium' | 'big';
+  pressedOverlayColor?: string;
   // icon?: IconName;
 }
 
@@ -23,20 +25,65 @@ const BaseButton: React.FC<React.PropsWithChildren<ButtonProps>> = ({
   isLoading,
   children,
   loaderColor,
+  pressedOverlayColor,
+  style,
+  onPressIn,
+  onPressOut,
   // icon,
   ...buttonProps
 }) => {
-  const label =
-    typeof children === 'string' ? <AppText {...labelProps}>{children}</AppText> : children;
+  const [pressed, setPressed] = React.useState(false);
+  const styles = useStyles();
 
-  // TODO: use TouchableHighlight after designers fix the design
+  const label =
+    typeof children === 'string' ? (
+      <AppText
+        {...labelProps}
+        style={StyleSheet.flatten([labelProps.style, disabled && styles['disabled__text']])}
+      >
+        {children}
+      </AppText>
+    ) : (
+      children
+    );
+
+  const handlePressIn = React.useCallback<NonNullable<PressableProps['onPressIn']>>(
+    event => {
+      setPressed(true);
+      onPressIn?.(event);
+    },
+    [onPressIn],
+  );
+
+  const handlePressOut = React.useCallback<NonNullable<PressableProps['onPressOut']>>(
+    event => {
+      setPressed(true);
+      onPressOut?.(event);
+    },
+    [onPressOut],
+  );
+
   return (
-    <TouchableOpacity {...buttonProps} accessibilityRole="button" disabled={disabled || isLoading}>
+    <Pressable
+      {...buttonProps}
+      onPressIn={handlePressIn}
+      onPressOut={handlePressOut}
+      accessibilityRole="button"
+      disabled={disabled || isLoading}
+      style={StyleSheet.flatten([
+        style,
+        disabled && styles.disabled,
+        { position: 'relative', overflow: 'hidden' },
+      ])}
+    >
+      {!!pressedOverlayColor && (
+        <View style={[styles.overlay, pressed && { backgroundColor: pressedOverlayColor }]} />
+      )}
       <>
         {label}
         {isLoading && <Flow color={loaderColor} size={40} />}
       </>
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 
@@ -54,54 +101,66 @@ export const Button = configured(
 
     if (projectButtonConfig) return projectButtonConfig;
 
-    const { disabled, variant } = props;
+    const { variant } = props;
 
-    const styles = StyleSheet.create({
-      baseStyle: {
-        height: 54,
-        paddingHorizontal: 16,
-        borderRadius: 12,
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexDirection: 'row',
-        borderStyle: 'solid',
-        borderWidth: 0,
-      },
-      disabled: {
-        backgroundColor: theme.colors.gray['5'],
-      },
-      disabled__text: {
-        color: theme.colors.gray['3'],
-      },
-      'variant:primary': {
-        backgroundColor: theme.colors.primary,
-      },
-      'variant:primary__text': {
-        color: theme.colors.white,
-      },
-      'variant:secondary': {
-        backgroundColor: theme.colors.white,
-        borderWidth: 1,
-        borderColor: theme.colors.gray['5'],
-      },
-      'variant:secondary__text': {
-        color: theme.colors.black['2'],
-      },
-    });
+    const styles = useStyles();
 
     return {
       style: StyleSheet.flatten([
         styles.baseStyle,
         variant === 'primary' ? styles['variant:primary'] : styles['variant:secondary'],
-        disabled && styles.disabled,
       ]),
       loaderColor: theme.colors.white,
-      activeOpacity: 0.85,
       labelProps: {
         variant: 'p3',
-        style: [styles['variant:primary__text'], disabled && styles.disabled__text],
+        style: styles['variant:primary__text'],
       },
+      pressedOverlayColor: (variant === 'primary'
+        ? chroma(theme.colors.black[1]).alpha(0.1)
+        : chroma(theme.colors.gray[2]).alpha(0.5)
+      ).hex(),
     };
   },
   { mergeProps: mergePropsWithStyle },
 );
+
+const useStyles = makeStyles(theme => ({
+  baseStyle: {
+    height: 54,
+    paddingHorizontal: 16,
+    borderRadius: 12,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+    borderStyle: 'solid',
+    borderWidth: 0,
+  },
+  disabled: {
+    backgroundColor: theme.colors.gray['5'],
+  },
+  disabled__text: {
+    color: theme.colors.gray['3'],
+  },
+  'variant:primary': {
+    backgroundColor: theme.colors.primary,
+  },
+  'variant:primary__text': {
+    color: theme.colors.white,
+  },
+  'variant:secondary': {
+    backgroundColor: theme.colors.white,
+    borderWidth: 1,
+    borderColor: theme.colors.gray['5'],
+  },
+  'variant:secondary__text': {
+    color: theme.colors.black['2'],
+  },
+
+  overlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+  },
+}));
