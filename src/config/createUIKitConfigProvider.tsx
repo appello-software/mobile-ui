@@ -8,7 +8,7 @@ import { UIKitTheme } from './types';
 import { UIKitConfigContext, ThemeProviderProps } from './UIKitConfigProvider';
 import { StyleSheet } from 'react-native';
 
-type Styles = Parameters<typeof StyleSheet.create>[0];
+import NamedStyles = StyleSheet.NamedStyles;
 
 export function createUIKitConfigProvider<T extends DeepPartial<UIKitTheme>>() {
   type FullContext = Required<ThemeProviderProps<T>>;
@@ -42,12 +42,20 @@ export function createUIKitConfigProvider<T extends DeepPartial<UIKitTheme>>() {
     return useContext(UIKitConfigContext).baseComponentsConfig;
   }
 
-  const makeStyles = <TProps extends Record<string, unknown> | void>(
-    styles: ((theme: FullContext['theme'], props: TProps) => Styles) | Styles,
-  ): ((props: TProps) => Styles) => {
-    const theme = useUIKitTheme();
-    return styles instanceof Function ? (props: TProps) => styles(theme, props) : () => styles;
-  };
+  const makeStyles =
+    <
+      TStyles extends NamedStyles<TStyles> | NamedStyles<any>,
+      TProps extends Record<string, unknown> | void,
+    >(
+      styles: ((theme: FullContext['theme'], props: TProps) => TStyles) | TStyles,
+    ): ((props: TProps) => TStyles) =>
+    props => {
+      const theme = useUIKitTheme();
+      return React.useMemo(
+        () => (styles instanceof Function ? styles(theme, props) : styles),
+        [theme, props],
+      );
+    };
 
   return {
     UIKitConfigProvider,

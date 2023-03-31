@@ -1,4 +1,4 @@
-import { ElementType } from 'react';
+import React, { ElementType } from 'react';
 import { PartialProps } from 'react-configured';
 import { StyleSheet } from 'react-native';
 
@@ -6,14 +6,22 @@ import { UIKitTheme } from '~/config/types';
 import { DeepPartial } from '~/types';
 import { useUIKitTheme } from '~/config/utils';
 
-type Styles = Parameters<typeof StyleSheet.create>[0];
+import NamedStyles = StyleSheet.NamedStyles;
 
-export const makeStyles = <TProps extends Record<string, unknown> | void>(
-  styles: ((theme: UIKitTheme, props: TProps) => Styles) | Styles,
-): ((props: TProps) => Styles) => {
-  const theme = useUIKitTheme();
-  return styles instanceof Function ? (props: TProps) => styles(theme, props) : () => styles;
-};
+export const makeStyles =
+  <
+    TStyles extends NamedStyles<TStyles> | NamedStyles<any>,
+    TProps extends Record<string, unknown> | void,
+  >(
+    styles: ((theme: UIKitTheme, props: TProps) => TStyles) | TStyles,
+  ): ((props: TProps) => TStyles) =>
+  props => {
+    const theme = useUIKitTheme();
+    return React.useMemo(
+      () => (styles instanceof Function ? styles(theme, props) : styles),
+      [theme, props],
+    );
+  };
 
 export const makeTheme = <T extends DeepPartial<UIKitTheme>>(theme: T): T => theme;
 
