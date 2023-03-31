@@ -19,7 +19,6 @@
   "sideEffects": false,
   "files": [
     "dist",
-    "src",
     "tsconfig.json"
   ],
   "peerDependencies": {
