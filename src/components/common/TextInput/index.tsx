@@ -3,7 +3,7 @@ import { ComponentConfig, configured, FuncComponentConfig } from 'react-configur
 import { StyleSheet, TextInput as RNTextInput, TextInputProps } from 'react-native';
 
 import { mergePropsWithStyle } from '~/utils';
-import { useBaseComponentsConfig, useUIKitTheme } from '~/config';
+import { useBaseComponentsConfig, useUIKitTheme } from '~/config/utils';
 import { WithGetStyleByState } from '~/types';
 
 interface Props extends TextInputProps {

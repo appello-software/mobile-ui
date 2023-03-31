@@ -6,7 +6,7 @@ import { Flow } from 'react-native-animated-spinkit';
 
 import { AppText } from '~/components/common/AppText';
 import { mergePropsWithStyle } from '~/utils';
-import { useBaseComponentsConfig, useUIKitTheme } from '~/config';
+import { useBaseComponentsConfig, useUIKitTheme } from '~/config/utils';
 
 export interface ButtonProps extends TouchableOpacityProps {
   labelProps: ComponentProps<typeof AppText>;

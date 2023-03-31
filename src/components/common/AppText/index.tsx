@@ -3,7 +3,7 @@ import { ComponentConfig, configured, FuncComponentConfig } from 'react-configur
 import { StyleSheet, Text as RNText, TextProps as RNTextProps } from 'react-native';
 
 import { mergePropsWithStyle } from '~/utils';
-import { useBaseComponentsConfig } from '~/config';
+import { useBaseComponentsConfig } from '~/config/utils';
 
 type TextVariant =
   | 'h1'

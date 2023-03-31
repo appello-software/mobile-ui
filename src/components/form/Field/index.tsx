@@ -5,7 +5,7 @@ import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 
 import { AppText } from '~/components/common/AppText';
 import { mergePropsWithStyle } from '~/utils';
-import { useBaseComponentsConfig, useUIKitTheme } from '~/config';
+import { useBaseComponentsConfig, useUIKitTheme } from '~/config/utils';
 
 export interface FieldProps {
   label?: string;
