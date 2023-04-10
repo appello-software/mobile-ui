@@ -24,6 +24,7 @@ export interface AppTextProps extends RNTextProps {
   color?: string;
   uppercase?: boolean;
   underline?: boolean;
+  weight?: 'light' | 'regular' | 'medium' | 'bold';
 }
 
 const BaseAppText: React.FC<AppTextProps> = ({
