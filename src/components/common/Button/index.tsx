@@ -34,12 +34,14 @@ const BaseButton: React.FC<React.PropsWithChildren<ButtonProps>> = ({
 }) => {
   const [pressed, setPressed] = React.useState(false);
   const styles = useStyles();
+  const theme = useUIKitTheme();
 
   const label =
     typeof children === 'string' ? (
       <AppText
         {...labelProps}
-        style={StyleSheet.flatten([labelProps.style, disabled && styles['disabled__text']])}
+        color={!disabled ? labelProps.color : theme.colors.gray['3']}
+        style={labelProps.style}
       >
         {children}
       </AppText>
