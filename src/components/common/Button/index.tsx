@@ -10,7 +10,7 @@ import { makeStyles, mergePropsWithStyle } from '~/utils';
 import { useBaseComponentsConfig, useUIKitTheme } from '~/config/utils';
 
 export interface ButtonProps extends PressableProps {
-  labelProps: ComponentProps<typeof AppText>;
+  labelProps?: ComponentProps<typeof AppText>;
   loaderColor?: string;
   isLoading?: boolean;
   variant?: 'primary' | 'secondary';
@@ -40,8 +40,8 @@ const BaseButton: React.FC<React.PropsWithChildren<ButtonProps>> = ({
     typeof children === 'string' ? (
       <AppText
         {...labelProps}
-        color={!disabled ? labelProps.color : theme.colors.gray['3']}
-        style={labelProps.style}
+        color={!disabled ? labelProps?.color : theme.colors.gray['3']}
+        style={labelProps?.style}
       >
         {children}
       </AppText>
