@@ -44,8 +44,8 @@ export function createUIKitConfigProvider<T extends DeepPartial<UIKitTheme>>() {
 
   const makeStyles =
     <
-      TStyles extends NamedStyles<TStyles> | NamedStyles<any>,
       TProps extends Record<string, unknown> | void,
+      TStyles extends NamedStyles<TStyles> | NamedStyles<any>,
     >(
       styles: ((theme: FullContext['theme'], props: TProps) => TStyles) | TStyles,
     ): ((props: TProps) => TStyles) =>

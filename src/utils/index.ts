@@ -10,8 +10,8 @@ import NamedStyles = StyleSheet.NamedStyles;
 
 export const makeStyles =
   <
-    TStyles extends NamedStyles<TStyles> | NamedStyles<any>,
     TProps extends Record<string, unknown> | void,
+    TStyles extends NamedStyles<TStyles> | NamedStyles<any>,
   >(
     styles: ((theme: UIKitTheme, props: TProps) => TStyles) | TStyles,
   ): ((props: TProps) => TStyles) =>
