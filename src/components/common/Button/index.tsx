@@ -20,8 +20,8 @@ export interface ButtonProps extends PressableProps {
   size?: 'medium' | 'big';
   pressedOverlayColor?: string;
   // icon?: IconName;
-  style?: StyleProp<ViewStyle> & {
-    color?: string | string[];
+  style?: PressableProps['style'] & {
+    backgroundColor?: string | string[];
   };
 }
 
@@ -75,8 +75,9 @@ const BaseButton: React.FC<React.PropsWithChildren<ButtonProps>> = ({
     () =>
       StyleSheet.flatten([
         {
-          ...StyleSheet.flatten(style),
-          color: typeof style?.color === 'string' ? style.color : undefined,
+          ...StyleSheet.flatten(style as StyleProp<ViewStyle>),
+          backgroundColor:
+            typeof style?.backgroundColor === 'string' ? style.backgroundColor : undefined,
         },
         disabled && styles.disabled,
         { position: 'relative', overflow: 'hidden' },
@@ -102,10 +103,10 @@ const BaseButton: React.FC<React.PropsWithChildren<ButtonProps>> = ({
       accessibilityRole="button"
       disabled={disabled || isLoading}
     >
-      {typeof style?.color === 'string' || !style?.color ? (
+      {typeof style?.backgroundColor === 'string' || !style?.backgroundColor ? (
         <View style={buttonContainerStyle}>{buttonContent}</View>
       ) : (
-        <LinearGradient colors={style.color} style={buttonContainerStyle} />
+        <LinearGradient colors={style.backgroundColor} style={buttonContainerStyle} />
       )}
     </Pressable>
   );
