@@ -4,10 +4,13 @@ import { ComponentConfig, configured, FuncComponentConfig } from 'react-configur
 import { StyleSheet, Pressable, PressableProps, View } from 'react-native';
 import { Flow } from 'react-native-animated-spinkit';
 import chroma from 'chroma-js';
+import { LinearGradient } from 'expo-linear-gradient';
 
 import { AppText } from '~/components/common/AppText';
 import { makeStyles, mergePropsWithStyle } from '~/utils';
 import { useBaseComponentsConfig, useUIKitTheme } from '~/config/utils';
+import { StyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
+import { ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheetTypes';
 
 export interface ButtonProps extends PressableProps {
   labelProps?: ComponentProps<typeof AppText>;
@@ -17,6 +20,9 @@ export interface ButtonProps extends PressableProps {
   size?: 'medium' | 'big';
   pressedOverlayColor?: string;
   // icon?: IconName;
+  style?: StyleProp<ViewStyle> & {
+    color?: string | string[];
+  };
 }
 
 const BaseButton: React.FC<React.PropsWithChildren<ButtonProps>> = ({
@@ -65,6 +71,29 @@ const BaseButton: React.FC<React.PropsWithChildren<ButtonProps>> = ({
     [onPressOut],
   );
 
+  const buttonContainerStyle = React.useMemo<StyleProp<ViewStyle>>(
+    () =>
+      StyleSheet.flatten([
+        {
+          ...StyleSheet.flatten(style),
+          color: typeof style?.color === 'string' ? style.color : undefined,
+        },
+        disabled && styles.disabled,
+        { position: 'relative', overflow: 'hidden' },
+      ]),
+    [style],
+  );
+
+  const buttonContent = (
+    <>
+      {!!pressedOverlayColor && (
+        <View style={[styles.overlay, pressed && { backgroundColor: pressedOverlayColor }]} />
+      )}
+      {label}
+      {isLoading && <Flow color={loaderColor} size={40} />}
+    </>
+  );
+
   return (
     <Pressable
       {...buttonProps}
@@ -72,19 +101,12 @@ const BaseButton: React.FC<React.PropsWithChildren<ButtonProps>> = ({
       onPressOut={handlePressOut}
       accessibilityRole="button"
       disabled={disabled || isLoading}
-      style={StyleSheet.flatten([
-        style,
-        disabled && styles.disabled,
-        { position: 'relative', overflow: 'hidden' },
-      ])}
     >
-      {!!pressedOverlayColor && (
-        <View style={[styles.overlay, pressed && { backgroundColor: pressedOverlayColor }]} />
+      {typeof style?.color === 'string' || !style?.color ? (
+        <View style={buttonContainerStyle}>{buttonContent}</View>
+      ) : (
+        <LinearGradient colors={style.color} style={buttonContainerStyle} />
       )}
-      <>
-        {label}
-        {isLoading && <Flow color={loaderColor} size={40} />}
-      </>
     </Pressable>
   );
 };

@@ -24,7 +24,9 @@
   "peerDependencies": {
     "react": "18.2.0",
     "react-hook-form": "^7.43.5",
-    "react-native": "~0.71.4"
+    "react-native": "~0.71.4",
+    "expo": "^48.0.19",
+    "expo-linear-gradient": "~12.1.2"
   },
   "devDependencies": {
     "@babel/core": "^7.20.12",
@@ -38,6 +40,8 @@
     "@tsconfig/react-native": "^2.0.3",
     "@types/react": "^18.0.28",
     "babel-preset-env": "^1.7.0",
+    "expo": "^48.0.19",
+    "expo-linear-gradient": "~12.1.2",
     "prettier": "^2.8.3",
     "react": "18.2.0",
     "react-hook-form": "^7.43.5",
