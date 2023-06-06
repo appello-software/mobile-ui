@@ -19,7 +19,7 @@ export interface ButtonProps extends PressableProps {
   variant?: 'primary' | 'secondary';
   size?: 'medium' | 'big';
   pressedOverlayColor?: string;
-  backgroundGradient?: LinearGradientProps['colors'];
+  backgroundGradient?: Pick<LinearGradientProps, 'colors' | 'locations' | 'start' | 'end'>;
   // icon?: IconName;
   style?: StyleProp<ViewStyle>;
 }
@@ -100,7 +100,9 @@ const BaseButton: React.FC<React.PropsWithChildren<ButtonProps>> = ({
       disabled={disabled || isLoading}
     >
       {backgroundGradient ? (
-        <LinearGradient colors={backgroundGradient} style={buttonContainerStyle} />
+        <LinearGradient {...backgroundGradient} style={buttonContainerStyle}>
+          {buttonContent}
+        </LinearGradient>
       ) : (
         <View style={buttonContainerStyle}>{buttonContent}</View>
       )}
