@@ -4,7 +4,7 @@ import { ComponentConfig, configured, FuncComponentConfig } from 'react-configur
 import { StyleSheet, Pressable, PressableProps, View } from 'react-native';
 import { Flow } from 'react-native-animated-spinkit';
 import chroma from 'chroma-js';
-import { LinearGradient } from 'expo-linear-gradient';
+import { LinearGradient, LinearGradientProps } from 'expo-linear-gradient';
 
 import { AppText } from '~/components/common/AppText';
 import { makeStyles, mergePropsWithStyle } from '~/utils';
@@ -19,10 +19,9 @@ export interface ButtonProps extends PressableProps {
   variant?: 'primary' | 'secondary';
   size?: 'medium' | 'big';
   pressedOverlayColor?: string;
+  backgroundGradient?: LinearGradientProps['colors'];
   // icon?: IconName;
-  style?: PressableProps['style'] & {
-    backgroundColor?: string | string[];
-  };
+  style?: StyleProp<ViewStyle>;
 }
 
 const BaseButton: React.FC<React.PropsWithChildren<ButtonProps>> = ({
@@ -32,6 +31,7 @@ const BaseButton: React.FC<React.PropsWithChildren<ButtonProps>> = ({
   children,
   loaderColor,
   pressedOverlayColor,
+  backgroundGradient,
   style,
   onPressIn,
   onPressOut,
@@ -74,11 +74,7 @@ const BaseButton: React.FC<React.PropsWithChildren<ButtonProps>> = ({
   const buttonContainerStyle = React.useMemo<StyleProp<ViewStyle>>(
     () =>
       StyleSheet.flatten([
-        {
-          ...StyleSheet.flatten(style as StyleProp<ViewStyle>),
-          backgroundColor:
-            typeof style?.backgroundColor === 'string' ? style.backgroundColor : undefined,
-        },
+        style,
         disabled && styles.disabled,
         { position: 'relative', overflow: 'hidden' },
       ]),
@@ -103,10 +99,10 @@ const BaseButton: React.FC<React.PropsWithChildren<ButtonProps>> = ({
       accessibilityRole="button"
       disabled={disabled || isLoading}
     >
-      {typeof style?.backgroundColor === 'string' || !style?.backgroundColor ? (
-        <View style={buttonContainerStyle}>{buttonContent}</View>
+      {backgroundGradient ? (
+        <LinearGradient colors={backgroundGradient} style={buttonContainerStyle} />
       ) : (
-        <LinearGradient colors={style.backgroundColor} style={buttonContainerStyle} />
+        <View style={buttonContainerStyle}>{buttonContent}</View>
       )}
     </Pressable>
   );
