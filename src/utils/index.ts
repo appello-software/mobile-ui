@@ -1,6 +1,7 @@
 import React, { ElementType } from 'react';
 import { PartialProps } from 'react-configured';
 import { StyleSheet } from 'react-native';
+import chromaJs from 'chroma-js';
 
 import { UIKitTheme } from '~/config/types';
 import { DeepPartial } from '~/types';
@@ -41,3 +42,5 @@ export const mergePropsWithStyle = <
       }
     : {}),
 });
+
+export const chroma = chromaJs;

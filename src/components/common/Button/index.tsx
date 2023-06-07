@@ -3,11 +3,10 @@ import { ComponentProps } from 'react';
 import { ComponentConfig, configured, FuncComponentConfig } from 'react-configured';
 import { StyleSheet, Pressable, PressableProps, View } from 'react-native';
 import { Flow } from 'react-native-animated-spinkit';
-import chroma from 'chroma-js';
 import { LinearGradient, LinearGradientProps } from 'expo-linear-gradient';
 
 import { AppText } from '~/components/common/AppText';
-import { makeStyles, mergePropsWithStyle } from '~/utils';
+import { chroma, makeStyles, mergePropsWithStyle } from '~/utils';
 import { useBaseComponentsConfig, useUIKitTheme } from '~/config/utils';
 import { StyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import { ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheetTypes';
