@@ -161,7 +161,7 @@ const useStyles = makeStyles(theme => ({
   },
   buttonContentContainer: {
     width: '100%',
-    height: '100',
+    height: '100%',
   },
   disabled: {
     backgroundColor: theme.colors.gray['5'],
