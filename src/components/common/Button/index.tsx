@@ -81,16 +81,6 @@ const BaseButton: React.FC<React.PropsWithChildren<ButtonProps>> = ({
     [style],
   );
 
-  const buttonContent = (
-    <>
-      {!!pressedOverlayColor && (
-        <View style={[styles.overlay, pressed && { backgroundColor: pressedOverlayColor }]} />
-      )}
-      {label}
-      {isLoading && <Flow color={loaderColor} size={40} />}
-    </>
-  );
-
   return (
     <Pressable
       {...buttonProps}
@@ -100,13 +90,14 @@ const BaseButton: React.FC<React.PropsWithChildren<ButtonProps>> = ({
       disabled={disabled || isLoading}
       style={buttonContainerStyle}
     >
-      {backgroundGradient ? (
-        <LinearGradient {...backgroundGradient} style={styles.buttonContentContainer}>
-          {buttonContent}
-        </LinearGradient>
-      ) : (
-        <View style={styles.buttonContentContainer}>{buttonContent}</View>
+      {!!pressedOverlayColor && (
+        <View style={[styles.overlay, pressed && { backgroundColor: pressedOverlayColor }]} />
       )}
+      {label}
+      {isLoading && <Flow color={loaderColor} size={40} />}
+      {backgroundGradient ? (
+        <LinearGradient {...backgroundGradient} style={styles.overlay} />
+      ) : null}
     </Pressable>
   );
 };
@@ -158,10 +149,6 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'row',
     borderStyle: 'solid',
     borderWidth: 0,
-  },
-  buttonContentContainer: {
-    width: '100%',
-    height: '100%',
   },
   disabled: {
     backgroundColor: theme.colors.gray['5'],
