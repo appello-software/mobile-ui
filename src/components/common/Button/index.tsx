@@ -96,7 +96,7 @@ const BaseButton: React.FC<React.PropsWithChildren<ButtonProps>> = ({
       {label}
       {isLoading && <Flow color={loaderColor} size={40} />}
       {backgroundGradient ? (
-        <LinearGradient {...backgroundGradient} style={styles.overlay} />
+        <LinearGradient {...backgroundGradient} style={[styles.overlay, styles.gradientBg]} />
       ) : null}
     </Pressable>
   );
@@ -175,7 +175,10 @@ const useStyles = makeStyles(theme => ({
     position: 'absolute',
     top: 0,
     left: 0,
-    width: '100%',
+    right: 0,
     height: '100%',
   },
+  gradientBg: {
+    zIndex: -1,
+  }
 }));
