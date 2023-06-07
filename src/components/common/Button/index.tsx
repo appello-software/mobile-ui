@@ -98,13 +98,14 @@ const BaseButton: React.FC<React.PropsWithChildren<ButtonProps>> = ({
       onPressOut={handlePressOut}
       accessibilityRole="button"
       disabled={disabled || isLoading}
+      style={buttonContainerStyle}
     >
       {backgroundGradient ? (
-        <LinearGradient {...backgroundGradient} style={buttonContainerStyle}>
+        <LinearGradient {...backgroundGradient} style={styles.buttonContentContainer}>
           {buttonContent}
         </LinearGradient>
       ) : (
-        <View style={buttonContainerStyle}>{buttonContent}</View>
+        <View style={styles.buttonContentContainer}>{buttonContent}</View>
       )}
     </Pressable>
   );
@@ -157,6 +158,10 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'row',
     borderStyle: 'solid',
     borderWidth: 0,
+  },
+  buttonContentContainer: {
+    width: '100%',
+    height: '100',
   },
   disabled: {
     backgroundColor: theme.colors.gray['5'],
