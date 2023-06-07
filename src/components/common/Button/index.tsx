@@ -64,7 +64,7 @@ const BaseButton: React.FC<React.PropsWithChildren<ButtonProps>> = ({
 
   const handlePressOut = React.useCallback<NonNullable<PressableProps['onPressOut']>>(
     event => {
-      setPressed(true);
+      setPressed(false);
       onPressOut?.(event);
     },
     [onPressOut],
