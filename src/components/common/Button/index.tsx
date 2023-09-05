@@ -1,15 +1,13 @@
 import * as React from 'react';
 import { ComponentProps } from 'react';
 import { ComponentConfig, configured, FuncComponentConfig } from 'react-configured';
-import { StyleSheet, Pressable, PressableProps, View } from 'react-native';
+import { StyleSheet, Pressable, PressableProps, View, StyleProp, ViewStyle } from 'react-native';
 import { Flow } from 'react-native-animated-spinkit';
 import { LinearGradient, LinearGradientProps } from 'expo-linear-gradient';
 
 import { AppText } from '~/components/common/AppText';
 import { chroma, makeStyles, mergePropsWithStyle } from '~/utils';
 import { useBaseComponentsConfig, useUIKitTheme } from '~/config/utils';
-import { StyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
-import { ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheetTypes';
 
 export interface ButtonProps extends PressableProps {
   labelProps?: ComponentProps<typeof AppText>;

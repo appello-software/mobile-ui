@@ -1,5 +1,5 @@
 import { deepmerge } from 'deepmerge-ts';
-import React, { useContext, useMemo } from 'react';
+import React, { useContext } from 'react';
 
 import { defaultTheme } from '~/__defaults__/defaultTheme';
 import { DeepPartial } from '~/types';
@@ -10,7 +10,7 @@ import { StyleSheet } from 'react-native';
 
 import NamedStyles = StyleSheet.NamedStyles;
 
-export function createUIKitConfigProvider<T extends DeepPartial<UIKitTheme>>() {
+export function createUIKitConfigProvider<T extends DeepPartial<UIKitTheme> = UIKitTheme>() {
   type FullContext = Required<ThemeProviderProps<T>>;
 
   const UIKitConfigProvider: React.FC<React.PropsWithChildren<ThemeProviderProps<T>>> = ({
@@ -18,7 +18,7 @@ export function createUIKitConfigProvider<T extends DeepPartial<UIKitTheme>>() {
     theme,
     baseComponentsConfig = {},
   }) => {
-    const mergedTheme = useMemo<FullContext['theme']>(() => {
+    const mergedTheme = React.useMemo<FullContext['theme']>(() => {
       return (theme ? deepmerge(defaultTheme, theme) : defaultTheme) as FullContext['theme'];
     }, [theme]);
 

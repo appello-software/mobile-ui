@@ -22,11 +22,13 @@
     "tsconfig.json"
   ],
   "peerDependencies": {
+    "expo": "^48.0.19",
+    "expo-linear-gradient": "~12.1.2",
     "react": "18.2.0",
+    "react-dom": "18.2.0",
     "react-hook-form": "^7.43.5",
     "react-native": "~0.71.4",
-    "expo": "^48.0.19",
-    "expo-linear-gradient": "~12.1.2"
+    "react-native-svg": "^13.12.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.12",
@@ -44,6 +46,7 @@
     "expo-linear-gradient": "~12.1.2",
     "prettier": "^2.8.3",
     "react": "18.2.0",
+    "react-dom": "18.2.0",
     "react-hook-form": "^7.43.5",
     "react-native": "^0.71.4",
     "rollup": "^3.12.1",
@@ -61,7 +64,8 @@
     "prepublishOnly": "npm run build",
     "preversion": "npm run build",
     "postversion": "git push && git push --tags",
-    "generateDocs": "npx typedoc"
+    "generateDocs": "npx typedoc",
+    "local:watch": "chokidar \"dist/**/*.*\" -c \"cp -R dist ../ui-kit-app/node_modules/@appello/mobile-ui\" --initial"
   },
   "babel": {
     "presets": [
@@ -70,10 +74,12 @@
   },
   "dependencies": {
     "@appello/common": "^1.0.22",
+    "@react-native-community/slider": "^4.4.3",
     "@types/chroma-js": "^2.4.0",
     "chroma-js": "^2.4.2",
     "deepmerge-ts": "^4.3.0",
     "react-configured": "^0.0.1-alpha",
-    "react-native-animated-spinkit": "^1.5.2"
+    "react-native-animated-spinkit": "^1.5.2",
+    "react-native-svg": "^13.12.0"
   }
 }

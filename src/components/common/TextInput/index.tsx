@@ -1,18 +1,26 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import { ComponentConfig, configured, FuncComponentConfig } from 'react-configured';
 import {
   StyleSheet,
   TextInput as RNTextInput,
   TextInputProps as RNTextInputProps,
+  View,
 } from 'react-native';
 
 import { mergePropsWithStyle } from '~/utils';
 import { useBaseComponentsConfig, useUIKitTheme } from '~/config/utils';
 import { WithGetStyleByState } from '~/types';
+import { SvgProps } from 'react-native-svg';
 
 interface Props extends RNTextInputProps {
   error?: boolean;
   disabled?: boolean;
+  accessoryRight?: React.ReactNode;
+  Icon?: React.FC<SvgProps>;
+  iconSize?: {
+    width: number;
+    height: number;
+  };
 }
 
 export type TextInputProps = WithGetStyleByState<
@@ -26,11 +34,14 @@ const BaseTextInput: FC<TextInputProps> = ({
   multiline,
   getStyleByState = (states, style) => style,
   style,
+  accessoryRight,
+  Icon,
+  iconSize,
   ...textInputProps
 }) => {
-  const [isFocused, setIsFocused] = useState<boolean>(false);
+  const [isFocused, setIsFocused] = React.useState<boolean>(false);
 
-  const fullStyle = getStyleByState?.(
+  const fullStyle = getStyleByState(
     {
       focused: !error && isFocused,
       error: !!error,
@@ -51,15 +62,27 @@ const BaseTextInput: FC<TextInputProps> = ({
   };
 
   return (
-    <RNTextInput
-      {...textInputProps}
-      style={fullStyle}
-      autoCapitalize="none"
-      onFocus={handleFocus}
-      onBlur={handleBlur}
-      editable={!disabled}
-      multiline={multiline}
-    />
+    <View>
+      <RNTextInput
+        {...textInputProps}
+        style={fullStyle}
+        autoCapitalize="none"
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+        editable={!disabled}
+        multiline={multiline}
+      />
+      {Icon ? (
+        <View style={styles.iconContainer}>
+          <Icon
+            color={fullStyle && 'color' in fullStyle ? fullStyle.color : undefined}
+            width={iconSize?.width}
+            height={iconSize?.height}
+          />
+        </View>
+      ) : null}
+      {accessoryRight ? <View style={styles.accessoryRightContainer}>{accessoryRight}</View> : null}
+    </View>
   );
 };
 export type TextInputConfig = ComponentConfig<typeof BaseTextInput>;
@@ -82,20 +105,22 @@ export const TextInput = configured(
     const styles = StyleSheet.create({
       baseStyle: {
         height: 54,
-        paddingHorizontal: 19,
+        paddingHorizontal: 18,
 
         borderRadius: 6,
         borderWidth: 1,
         borderStyle: 'solid',
 
         fontSize: 13,
-        lineHeight: 23,
         textAlignVertical: 'center',
         includeFontPadding: false,
 
         color: theme.colors.black['1'],
         backgroundColor: theme.colors.white,
         borderColor: theme.colors.gray['5'],
+      },
+      withIcon: {
+        paddingLeft: 47,
       },
       'state:disabled': {
         color: theme.colors.gray['3'],
@@ -127,14 +152,37 @@ export const TextInput = configured(
         partStyle = StyleSheet.compose(partStyle, styles['state:focused']);
       }
 
-      return getStyleByState?.(states, partStyle) || partStyle || {};
+      return StyleSheet.flatten(getStyleByState?.(states, partStyle) || partStyle || {});
     };
 
     return {
-      style: styles.baseStyle,
+      style: StyleSheet.compose(styles.baseStyle, props.Icon && styles.withIcon),
       placeholderTextColor: theme.colors.gray['3'],
       getStyleByState: getStyle,
+      iconSize: {
+        width: 20,
+        height: 20,
+      },
     };
   },
   { mergeProps: mergePropsWithStyle },
 );
+
+const styles = StyleSheet.create({
+  accessoryRightContainer: {
+    height: '100%',
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  iconContainer: {
+    height: '100%',
+    position: 'absolute',
+    top: 0,
+    left: 18,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
