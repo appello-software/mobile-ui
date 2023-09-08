@@ -6,7 +6,7 @@ import {
   TextInputProps as RNTextInputProps,
   View,
 } from 'react-native';
-import { useMaskedInputProps, MaskInputProps } from 'react-native-mask-input';
+import { useMaskedInputProps, MaskInputProps, createNumberMask, Masks } from 'react-native-mask-input';
 
 import { mergePropsWithStyle } from '~/utils';
 import { useBaseComponentsConfig, useUIKitTheme } from '~/config/utils';
@@ -189,6 +189,8 @@ export const TextInput = configured(
   },
   { mergeProps: mergePropsWithStyle },
 );
+
+export { createNumberMask, Masks };
 
 const styles = StyleSheet.create({
   accessoryRightContainer: {
