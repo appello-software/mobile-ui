@@ -6,6 +6,7 @@ import {
   TextInputProps as RNTextInputProps,
   View,
 } from 'react-native';
+import { useMaskedInputProps, MaskInputProps } from 'react-native-mask-input';
 
 import { mergePropsWithStyle } from '~/utils';
 import { useBaseComponentsConfig, useUIKitTheme } from '~/config/utils';
@@ -21,6 +22,8 @@ interface Props extends RNTextInputProps {
     width: number;
     height: number;
   };
+  mask?: MaskInputProps['mask'];
+  placeholderFillCharacter?: MaskInputProps['placeholderFillCharacter'];
 }
 
 export type TextInputProps = WithGetStyleByState<
@@ -37,6 +40,11 @@ const BaseTextInput: FC<TextInputProps> = ({
   accessoryRight,
   Icon,
   iconSize,
+  value,
+  onChangeText,
+  mask,
+  placeholderFillCharacter,
+  placeholder,
   ...textInputProps
 }) => {
   const [isFocused, setIsFocused] = React.useState<boolean>(false);
@@ -61,12 +69,26 @@ const BaseTextInput: FC<TextInputProps> = ({
     setIsFocused(false);
   };
 
+  const {
+    onChangeText: onMaskChangeText,
+    value: maskValue,
+    placeholder: maskPlaceholder,
+  } = useMaskedInputProps({
+    value,
+    onChangeText,
+    mask,
+    placeholderFillCharacter,
+  });
+
   return (
     <View>
       <RNTextInput
         {...textInputProps}
         style={fullStyle}
         autoCapitalize="none"
+        placeholder={placeholder ?? maskPlaceholder}
+        value={maskValue}
+        onChangeText={onMaskChangeText}
         onFocus={handleFocus}
         onBlur={handleBlur}
         editable={!disabled}

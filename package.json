@@ -80,6 +80,7 @@
     "deepmerge-ts": "^4.3.0",
     "react-configured": "^0.0.1-alpha",
     "react-native-animated-spinkit": "^1.5.2",
+    "react-native-mask-input": "^1.2.3",
     "react-native-svg": "^13.12.0"
   }
 }
