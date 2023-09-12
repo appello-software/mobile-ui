@@ -8,16 +8,21 @@ import { LinearGradient, LinearGradientProps } from 'expo-linear-gradient';
 import { AppText } from '~/components/common/AppText';
 import { chroma, makeStyles, mergePropsWithStyle } from '~/utils';
 import { useBaseComponentsConfig, useUIKitTheme } from '~/config/utils';
+import { SvgProps } from 'react-native-svg';
 
 export interface ButtonProps extends PressableProps {
   labelProps?: ComponentProps<typeof AppText>;
   loaderColor?: string;
   isLoading?: boolean;
   variant?: 'primary' | 'secondary';
-  size?: 'medium' | 'big';
   pressedOverlayColor?: string;
   backgroundGradient?: Pick<LinearGradientProps, 'colors' | 'locations' | 'start' | 'end'>;
-  // icon?: IconName;
+  Icon?: React.FC<SvgProps>;
+  iconSize?: {
+    width: number;
+    height: number;
+  };
+  iconPosition?: 'left' | 'center-left' | 'right' | 'center-right';
   style?: StyleProp<ViewStyle>;
 }
 
@@ -32,22 +37,37 @@ const BaseButton: React.FC<React.PropsWithChildren<ButtonProps>> = ({
   style,
   onPressIn,
   onPressOut,
-  // icon,
+  Icon,
+  iconSize,
+  iconPosition,
   ...buttonProps
 }) => {
   const [pressed, setPressed] = React.useState(false);
   const styles = useStyles();
   const theme = useUIKitTheme();
 
+  const labelColor = !disabled ? labelProps?.color : theme.colors.gray['3'];
   const label =
     typeof children === 'string' ? (
-      <AppText
-        {...labelProps}
-        color={!disabled ? labelProps?.color : theme.colors.gray['3']}
-        style={labelProps?.style}
+      <View
+        style={[
+          styles.labelContainer,
+          Icon &&
+            (iconPosition === 'left' || iconPosition === 'right') &&
+            styles.labelContainerSides,
+          Icon &&
+            (iconPosition === 'right' || iconPosition === 'center-right') &&
+            styles.labelContainerRight,
+        ]}
       >
-        {children}
-      </AppText>
+        {Icon ? <Icon color={labelColor} {...iconSize} /> : null}
+        <AppText {...labelProps} color={labelColor} style={[labelProps?.style, styles.label]}>
+          {children}
+        </AppText>
+        {Icon && (iconPosition === 'right' || iconPosition === 'left') ? (
+          <View style={iconSize} />
+        ) : null}
+      </View>
     ) : (
       children
     );
@@ -125,12 +145,17 @@ export const Button = configured(
       loaderColor: theme.colors.white,
       labelProps: {
         variant: 'p3',
-        style: styles['variant:primary__text'],
+        color: variant === 'primary' ? theme.colors.white : theme.colors.black['2'],
       },
       pressedOverlayColor: (variant === 'primary'
         ? chroma(theme.colors.black[1]).alpha(0.1)
         : chroma(theme.colors.gray[2]).alpha(0.5)
       ).hex(),
+      iconSize: {
+        width: 20,
+        height: 20,
+      },
+      iconPosition: 'left',
     };
   },
   { mergeProps: mergePropsWithStyle },
@@ -150,22 +175,32 @@ const useStyles = makeStyles(theme => ({
   disabled: {
     backgroundColor: theme.colors.gray['5'],
   },
-  disabled__text: {
+  label: {
+    marginHorizontal: 7,
+  },
+  disabled__label: {
     color: theme.colors.gray['3'],
   },
   'variant:primary': {
     backgroundColor: theme.colors.primary,
-  },
-  'variant:primary__text': {
-    color: theme.colors.white,
   },
   'variant:secondary': {
     backgroundColor: theme.colors.white,
     borderWidth: 1,
     borderColor: theme.colors.gray['5'],
   },
-  'variant:secondary__text': {
-    color: theme.colors.black['2'],
+
+  labelContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  labelContainerSides: {
+    justifyContent: 'space-between',
+  },
+  labelContainerRight: {
+    flexDirection: 'row-reverse',
   },
 
   overlay: {
@@ -177,5 +212,5 @@ const useStyles = makeStyles(theme => ({
   },
   gradientBg: {
     zIndex: -1,
-  }
+  },
 }));
