@@ -136,18 +136,19 @@ export const Button = configured(
     const { variant } = props;
 
     const styles = useStyles();
+    const isPrimary = variant === 'primary';
 
     return {
       style: StyleSheet.flatten([
         styles.baseStyle,
-        variant === 'primary' ? styles['variant:primary'] : styles['variant:secondary'],
+        isPrimary ? styles['variant:primary'] : styles['variant:secondary'],
       ]),
-      loaderColor: theme.colors.white,
+      loaderColor: isPrimary ? theme.colors.white : theme.colors.primary,
       labelProps: {
         variant: 'p3',
-        color: variant === 'primary' ? theme.colors.white : theme.colors.black['2'],
+        color: isPrimary ? theme.colors.white : theme.colors.black['2'],
       },
-      pressedOverlayColor: (variant === 'primary'
+      pressedOverlayColor: (isPrimary
         ? chroma(theme.colors.black[1]).alpha(0.1)
         : chroma(theme.colors.gray[2]).alpha(0.5)
       ).hex(),
