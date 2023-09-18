@@ -20,10 +20,15 @@ type TextVariant =
   | 'p6';
 
 export interface AppTextProps extends RNTextProps {
+  /** Variant of displaying text */
   variant: TextVariant;
+  /** Text color */
   color?: string;
+  /** Should text be in uppercase */
   uppercase?: boolean;
+  /** Should text be underlined */
   underline?: boolean;
+  /** Text weight */
   weight?: 'light' | 'regular' | 'medium' | 'bold';
 }
 
@@ -52,6 +57,10 @@ export type AppTextConfig = ComponentConfig<React.FC<AppTextProps>>;
 
 export type FuncAppTextConfig = FuncComponentConfig<React.FC<AppTextProps>, AppTextConfig>;
 
+/**
+ * Primary UI component for text displaying.
+ * It extends default [RN Text](https://reactnative.dev/docs/text) component and its props.
+ */
 export const AppText = configured(
   BaseAppText,
   (props): AppTextConfig => {
@@ -62,7 +71,7 @@ export const AppText = configured(
 
     if (projectAppTextConfig) return projectAppTextConfig;
 
-    const { variant } = props;
+    const { variant = 'p3' } = props;
 
     const variantStyles = StyleSheet.create({
       h1: {

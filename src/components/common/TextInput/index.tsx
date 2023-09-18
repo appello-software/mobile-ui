@@ -1,12 +1,19 @@
 import React, { FC } from 'react';
 import { ComponentConfig, configured, FuncComponentConfig } from 'react-configured';
 import {
+  Pressable,
   StyleSheet,
   TextInput as RNTextInput,
   TextInputProps as RNTextInputProps,
+  TouchableOpacity,
   View,
 } from 'react-native';
-import { useMaskedInputProps, MaskInputProps, createNumberMask, Masks } from 'react-native-mask-input';
+import {
+  useMaskedInputProps,
+  MaskInputProps,
+  createNumberMask,
+  Masks,
+} from 'react-native-mask-input';
 
 import { mergePropsWithStyle } from '~/utils';
 import { useBaseComponentsConfig, useUIKitTheme } from '~/config/utils';
@@ -14,15 +21,24 @@ import { WithGetStyleByState } from '~/types';
 import { SvgProps } from 'react-native-svg';
 
 interface Props extends RNTextInputProps {
+  /** Should TextInput have an error state */
   error?: boolean;
+  /** Should TextInput be disabled */
   disabled?: boolean;
+  /** Callback that is called after a touch. If set, TextInput is not editable */
+  onPress?: () => void;
+  /** ReactNode to display on the right of the TextInput */
   accessoryRight?: React.ReactNode;
+  /** Icon component to display on the left of the TextInput */
   Icon?: React.FC<SvgProps>;
+  /** Size of the Icon component */
   iconSize?: {
     width: number;
     height: number;
   };
+  /** Mask to display text in specific format ([check the documentation here](https://github.com/CaioQuirinoMedeiros/react-native-mask-input#mask)) */
   mask?: MaskInputProps['mask'];
+  /** Character to be used as the "fill character" on the default placeholder value when using mask. */
   placeholderFillCharacter?: MaskInputProps['placeholderFillCharacter'];
 }
 
@@ -34,6 +50,8 @@ export type TextInputProps = WithGetStyleByState<
 const BaseTextInput: FC<TextInputProps> = ({
   error,
   disabled,
+  onPress,
+  editable,
   multiline,
   getStyleByState = (states, style) => style,
   style,
@@ -81,17 +99,16 @@ const BaseTextInput: FC<TextInputProps> = ({
   });
 
   return (
-    <View>
+    <TouchableOpacity disabled={!onPress} onPress={onPress}>
       <RNTextInput
         {...textInputProps}
         style={fullStyle}
-        autoCapitalize="none"
         placeholder={placeholder ?? maskPlaceholder}
         value={maskValue}
         onChangeText={onMaskChangeText}
         onFocus={handleFocus}
         onBlur={handleBlur}
-        editable={!disabled}
+        editable={disabled || onPress ? false : editable}
         multiline={multiline}
       />
       {Icon ? (
@@ -104,13 +121,18 @@ const BaseTextInput: FC<TextInputProps> = ({
         </View>
       ) : null}
       {accessoryRight ? <View style={styles.accessoryRightContainer}>{accessoryRight}</View> : null}
-    </View>
+    </TouchableOpacity>
   );
 };
 export type TextInputConfig = ComponentConfig<typeof BaseTextInput>;
 
 export type FuncTextInputConfig = FuncComponentConfig<typeof BaseTextInput, TextInputConfig>;
 
+/**
+ * Primary UI component for inputting text into the app via a keyboard.
+ * It extends default [RN TextInput](https://reactnative.dev/docs/textinput) component and its props.
+ * It has additional built-in functionality such as icon on the left, any right accessory and mask.
+ */
 export const TextInput = configured(
   BaseTextInput,
   (props): TextInputConfig => {

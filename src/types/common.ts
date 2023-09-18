@@ -16,5 +16,6 @@ export interface WithStyleProps {
 }
 
 export type WithGetStyleByState<T extends WithStyleProps, TStates extends string[]> = T & {
+  /** A function to change the default style depending on current state */
   getStyleByState?: GetStyleByState<T, TStates>;
 };

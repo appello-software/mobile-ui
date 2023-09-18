@@ -1,28 +1,37 @@
 import * as React from 'react';
-import { ComponentProps } from 'react';
 import { ComponentConfig, configured, FuncComponentConfig } from 'react-configured';
 import { StyleSheet, Pressable, PressableProps, View, StyleProp, ViewStyle } from 'react-native';
 import { Flow } from 'react-native-animated-spinkit';
 import { LinearGradient, LinearGradientProps } from 'expo-linear-gradient';
 
-import { AppText } from '~/components/common/AppText';
+import { AppText, AppTextProps } from '~/components/common/AppText';
 import { chroma, makeStyles, mergePropsWithStyle } from '~/utils';
 import { useBaseComponentsConfig, useUIKitTheme } from '~/config/utils';
 import { SvgProps } from 'react-native-svg';
 
 export interface ButtonProps extends PressableProps {
-  labelProps?: ComponentProps<typeof AppText>;
+  /** Properties of the label text */
+  labelProps?: AppTextProps;
+  /** Color of the loader component */
   loaderColor?: string;
+  /** Is the Button currently in loading state */
   isLoading?: boolean;
+  /** Variant of displaying the button */
   variant?: 'primary' | 'secondary';
+  /** Color of the overlay when the Button is pressed */
   pressedOverlayColor?: string;
+  /** Use it only if the Button should have gradient background */
   backgroundGradient?: Pick<LinearGradientProps, 'colors' | 'locations' | 'start' | 'end'>;
+  /** Icon component to display along with label */
   Icon?: React.FC<SvgProps>;
+  /** Icon size */
   iconSize?: {
     width: number;
     height: number;
   };
+  /** Icon position */
   iconPosition?: 'left' | 'center-left' | 'right' | 'center-right';
+  /** Button style */
   style?: StyleProp<ViewStyle>;
 }
 
@@ -110,8 +119,7 @@ const BaseButton: React.FC<React.PropsWithChildren<ButtonProps>> = ({
       {!!pressedOverlayColor && (
         <View style={[styles.overlay, pressed && { backgroundColor: pressedOverlayColor }]} />
       )}
-      {label}
-      {isLoading && <Flow color={loaderColor} size={40} />}
+      {!isLoading ? label : <Flow color={loaderColor} size={40} />}
       {backgroundGradient ? (
         <LinearGradient {...backgroundGradient} style={[styles.overlay, styles.gradientBg]} />
       ) : null}
@@ -123,6 +131,10 @@ export type ButtonConfig = ComponentConfig<typeof BaseButton>;
 
 export type FuncButtonConfig = FuncComponentConfig<typeof BaseButton, ButtonConfig>;
 
+/**
+ * Primary UI component for user interaction.
+ * It extends default [RN Pressable](https://reactnative.dev/docs/pressable) component and its props.
+ */
 export const Button = configured(
   BaseButton,
   (props): ButtonConfig => {
@@ -133,7 +145,7 @@ export const Button = configured(
 
     if (projectButtonConfig) return projectButtonConfig;
 
-    const { variant } = props;
+    const { variant = 'primary' } = props;
 
     const styles = useStyles();
     const isPrimary = variant === 'primary';
