@@ -1,5 +1,4 @@
-import React, { ElementType } from 'react';
-import { PartialProps } from 'react-configured';
+import React, { ComponentProps } from 'react';
 import { StyleSheet } from 'react-native';
 import chromaJs from 'chroma-js';
 
@@ -24,23 +23,15 @@ export const makeStyles =
     );
   };
 
-export const makeTheme = <T extends DeepPartial<UIKitTheme>>(theme: T): T => theme;
+export const makeDefaultProps =
+  <TProps extends ComponentProps<any>>(
+    makeProps: (theme: UIKitTheme) => TProps,
+  ): (() => TProps) =>
+  () => {
+    const theme = useUIKitTheme();
+    return React.useMemo(() => makeProps(theme), [theme]);
+  };
 
-export const mergePropsWithStyle = <
-  T extends ElementType,
-  TProps extends PartialProps<T>,
-  TSecondProps extends PartialProps<T>,
->(
-  baseProps: TProps,
-  variantProps: TSecondProps,
-): TProps | TSecondProps => ({
-  ...baseProps,
-  ...variantProps,
-  ...('style' in baseProps && 'style' in variantProps
-    ? {
-        style: StyleSheet.compose(baseProps.style, variantProps.style),
-      }
-    : {}),
-});
+export const makeTheme = <T extends DeepPartial<UIKitTheme>>(theme: T): T => theme;
 
 export const chroma = chromaJs;

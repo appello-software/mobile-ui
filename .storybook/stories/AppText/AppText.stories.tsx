@@ -1,6 +1,7 @@
 import { AppText, AppTextProps, Button } from '../../../src';
 import { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
+import { CONFIG_DETAIL } from '../../constants';
 
 enum AppTextVariant {
   H1 = 'h1',
@@ -26,39 +27,25 @@ const meta: Meta<AppTextProps> = {
       table: {
         defaultValue: {
           summary: 'p3',
-          detail: 'Set it up in the component config'
-        }
-      }
+          detail: CONFIG_DETAIL,
+        },
+      },
     },
     color: {
       table: {
         defaultValue: {
-          summary: 'none',
-          detail: 'Set it up in the component config'
-        }
-      }
-    },
-    uppercase: {
-      table: {
-        defaultValue: {
-          summary: false,
-        }
-      }
-    },
-    underline: {
-      table: {
-        defaultValue: {
-          summary: false,
-        }
-      }
+          summary: '-',
+          detail: CONFIG_DETAIL,
+        },
+      },
     },
     weight: {
       table: {
         defaultValue: {
-          summary: 'none',
-          detail: 'Set it up in the component config'
-        }
-      }
+          summary: '-',
+          detail: CONFIG_DETAIL,
+        },
+      },
     },
   },
   args: {

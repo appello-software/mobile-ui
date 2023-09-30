@@ -44,51 +44,17 @@ const meta: Meta<TextInputProps> = {
     iconSize: { width: 20, height: 20 },
   },
   argTypes: {
-    disabled: {
-      table: {
-        defaultValue: {
-          summary: false,
-        },
-      },
-    },
     accessoryRight: {
       control: 'boolean',
-      table: {
-        defaultValue: {
-          summary: 'undefined',
-        },
-      },
-    },
-    error: {
-      table: {
-        defaultValue: {
-          summary: false,
-        },
-      },
     },
     mask: {
       control: 'boolean',
-      table: {
-        defaultValue: {
-          summary: 'undefined',
-        },
-      },
     },
     Icon: {
       control: 'boolean',
-      table: {
-        defaultValue: {
-          summary: 'undefined',
-        },
-      },
     },
     onPress: {
       control: 'boolean',
-      table: {
-        defaultValue: {
-          summary: 'undefined',
-        },
-      },
     },
     iconSize: {
       table: {
@@ -99,15 +65,6 @@ const meta: Meta<TextInputProps> = {
       },
     },
     placeholderFillCharacter: {
-      table: {
-        defaultValue: {
-          summary: 'undefined',
-        },
-        category: CONFIG_CATEGORY,
-      },
-    },
-    getStyleByState: {
-      control: false,
       table: {
         category: CONFIG_CATEGORY,
       },

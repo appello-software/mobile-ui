@@ -1,13 +1,14 @@
 import * as React from 'react';
-import { ComponentConfig, configured, FuncComponentConfig } from 'react-configured';
 import { StyleSheet, Pressable, PressableProps, View, StyleProp, ViewStyle } from 'react-native';
 import { Flow } from 'react-native-animated-spinkit';
 import { LinearGradient, LinearGradientProps } from 'expo-linear-gradient';
 
 import { AppText, AppTextProps } from '~/components/common/AppText';
-import { chroma, makeStyles, mergePropsWithStyle } from '~/utils';
-import { useBaseComponentsConfig, useUIKitTheme } from '~/config/utils';
+import { makeStyles } from '~/utils';
+import { useUIKitTheme } from '~/config/utils';
 import { SvgProps } from 'react-native-svg';
+import { useCombinedStylesWithConfig } from '~/hooks/useCombinedStylesWithConfig';
+import { useCombinedPropsWithConfig } from '~/hooks/useCombinedPropsWithConfig';
 
 export interface ButtonProps extends PressableProps {
   /** Properties of the label text */
@@ -35,24 +36,40 @@ export interface ButtonProps extends PressableProps {
   style?: StyleProp<ViewStyle>;
 }
 
-const BaseButton: React.FC<React.PropsWithChildren<ButtonProps>> = ({
-  labelProps,
-  disabled,
-  isLoading,
-  children,
-  loaderColor,
-  pressedOverlayColor,
-  backgroundGradient,
-  style,
-  onPressIn,
-  onPressOut,
-  Icon,
-  iconSize,
-  iconPosition,
-  ...buttonProps
+/**
+ * Primary UI component for user interaction.
+ * It extends default [RN Pressable](https://reactnative.dev/docs/pressable) component and its props.
+ */
+export const Button: React.FC<React.PropsWithChildren<ButtonProps>> = ({
+  variant = 'primary',
+  ...props
 }) => {
   const [pressed, setPressed] = React.useState(false);
-  const styles = useStyles();
+
+  const {
+    children,
+    style,
+    labelProps,
+    disabled,
+    isLoading,
+    loaderColor,
+    pressedOverlayColor,
+    backgroundGradient,
+    onPressIn,
+    onPressOut,
+    Icon,
+    iconSize = { width: 20, height: 20 },
+    iconPosition = 'left',
+    ...buttonProps
+  } = {
+    primary: useCombinedPropsWithConfig('Button.Primary', props),
+    secondary: useCombinedPropsWithConfig('Button.Secondary', props),
+  }[variant];
+  const styles = {
+    primary: useCombinedStylesWithConfig('Button.Primary', usePrimaryButtonStyles),
+    secondary: useCombinedStylesWithConfig('Button.Secondary', useSecondaryButtonStyles),
+  }[variant];
+  const layoutStyles = useLayoutStyles();
   const theme = useUIKitTheme();
 
   const labelColor = !disabled ? labelProps?.color : theme.colors.gray['3'];
@@ -60,17 +77,21 @@ const BaseButton: React.FC<React.PropsWithChildren<ButtonProps>> = ({
     typeof children === 'string' ? (
       <View
         style={[
-          styles.labelContainer,
+          layoutStyles.labelContainer,
           Icon &&
             (iconPosition === 'left' || iconPosition === 'right') &&
-            styles.labelContainerSides,
+            layoutStyles.labelContainerSides,
           Icon &&
             (iconPosition === 'right' || iconPosition === 'center-right') &&
-            styles.labelContainerRight,
+            layoutStyles.labelContainerRight,
         ]}
       >
         {Icon ? <Icon color={labelColor} {...iconSize} /> : null}
-        <AppText {...labelProps} color={labelColor} style={[labelProps?.style, styles.label]}>
+        <AppText
+          {...labelProps}
+          color={labelColor}
+          style={[styles.button__label, labelProps?.style]}
+        >
           {children}
         </AppText>
         {Icon && (iconPosition === 'right' || iconPosition === 'left') ? (
@@ -100,8 +121,9 @@ const BaseButton: React.FC<React.PropsWithChildren<ButtonProps>> = ({
   const buttonContainerStyle = React.useMemo<StyleProp<ViewStyle>>(
     () =>
       StyleSheet.flatten([
+        styles.button,
         style,
-        disabled && styles.disabled,
+        disabled && styles['button--disabled'],
         { position: 'relative', overflow: 'hidden' },
       ]),
     [style],
@@ -117,92 +139,20 @@ const BaseButton: React.FC<React.PropsWithChildren<ButtonProps>> = ({
       style={buttonContainerStyle}
     >
       {!!pressedOverlayColor && (
-        <View style={[styles.overlay, pressed && { backgroundColor: pressedOverlayColor }]} />
+        <View style={[layoutStyles.overlay, pressed && { backgroundColor: pressedOverlayColor }]} />
       )}
       {!isLoading ? label : <Flow color={loaderColor} size={40} />}
       {backgroundGradient ? (
-        <LinearGradient {...backgroundGradient} style={[styles.overlay, styles.gradientBg]} />
+        <LinearGradient
+          {...backgroundGradient}
+          style={[layoutStyles.overlay, layoutStyles.gradientBg]}
+        />
       ) : null}
     </Pressable>
   );
 };
 
-export type ButtonConfig = ComponentConfig<typeof BaseButton>;
-
-export type FuncButtonConfig = FuncComponentConfig<typeof BaseButton, ButtonConfig>;
-
-/**
- * Primary UI component for user interaction.
- * It extends default [RN Pressable](https://reactnative.dev/docs/pressable) component and its props.
- */
-export const Button = configured(
-  BaseButton,
-  (props): ButtonConfig => {
-    const theme = useUIKitTheme();
-    const { button } = useBaseComponentsConfig();
-
-    const projectButtonConfig = button && typeof button === 'function' ? button(props) : button;
-
-    if (projectButtonConfig) return projectButtonConfig;
-
-    const { variant = 'primary' } = props;
-
-    const styles = useStyles();
-    const isPrimary = variant === 'primary';
-
-    return {
-      style: StyleSheet.flatten([
-        styles.baseStyle,
-        isPrimary ? styles['variant:primary'] : styles['variant:secondary'],
-      ]),
-      loaderColor: isPrimary ? theme.colors.white : theme.colors.primary,
-      labelProps: {
-        variant: 'p3',
-        color: isPrimary ? theme.colors.white : theme.colors.black['2'],
-      },
-      pressedOverlayColor: (isPrimary
-        ? chroma(theme.colors.black[1]).alpha(0.1)
-        : chroma(theme.colors.gray[2]).alpha(0.5)
-      ).hex(),
-      iconSize: {
-        width: 20,
-        height: 20,
-      },
-      iconPosition: 'left',
-    };
-  },
-  { mergeProps: mergePropsWithStyle },
-);
-
-const useStyles = makeStyles(theme => ({
-  baseStyle: {
-    height: 54,
-    paddingHorizontal: 16,
-    borderRadius: 12,
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'row',
-    borderStyle: 'solid',
-    borderWidth: 0,
-  },
-  disabled: {
-    backgroundColor: theme.colors.gray['5'],
-  },
-  label: {
-    marginHorizontal: 7,
-  },
-  disabled__label: {
-    color: theme.colors.gray['3'],
-  },
-  'variant:primary': {
-    backgroundColor: theme.colors.primary,
-  },
-  'variant:secondary': {
-    backgroundColor: theme.colors.white,
-    borderWidth: 1,
-    borderColor: theme.colors.gray['5'],
-  },
-
+const useLayoutStyles = makeStyles(() => ({
   labelContainer: {
     flex: 1,
     flexDirection: 'row',
@@ -227,3 +177,51 @@ const useStyles = makeStyles(theme => ({
     zIndex: -1,
   },
 }));
+
+const commonStyles = StyleSheet.create({
+  button: {
+    height: 54,
+    paddingHorizontal: 16,
+    borderRadius: 12,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+    borderStyle: 'solid',
+    borderWidth: 0,
+  },
+  button__label: {
+    marginHorizontal: 7,
+  },
+});
+
+export const usePrimaryButtonStyles = makeStyles(theme =>
+  StyleSheet.create({
+    button: {
+      ...commonStyles.button,
+      backgroundColor: theme.colors.primary,
+    },
+    'button--disabled': {
+      backgroundColor: theme.colors.gray['5'],
+    },
+    button__label: {
+      ...commonStyles.button__label,
+    },
+  }),
+);
+
+export const useSecondaryButtonStyles = makeStyles(theme =>
+  StyleSheet.create({
+    button: {
+      ...commonStyles.button,
+      backgroundColor: theme.colors.white,
+      borderColor: theme.colors.gray['5'],
+      borderWidth: 1,
+    },
+    'button--disabled': {
+      backgroundColor: theme.colors.gray['5'],
+    },
+    button__label: {
+      ...commonStyles.button__label,
+    },
+  }),
+);

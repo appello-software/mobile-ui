@@ -1,5 +1,5 @@
 import { deepmerge } from 'deepmerge-ts';
-import React, { useContext } from 'react';
+import React, { ComponentProps, useContext } from 'react';
 
 import { defaultTheme } from '~/__defaults__/defaultTheme';
 import { DeepPartial } from '~/types';
@@ -16,7 +16,7 @@ export function createUIKitConfigProvider<T extends DeepPartial<UIKitTheme> = UI
   const UIKitConfigProvider: React.FC<React.PropsWithChildren<ThemeProviderProps<T>>> = ({
     children,
     theme,
-    baseComponentsConfig = {},
+    componentsConfig = {},
   }) => {
     const mergedTheme = React.useMemo<FullContext['theme']>(() => {
       return (theme ? deepmerge(defaultTheme, theme) : defaultTheme) as FullContext['theme'];
@@ -24,10 +24,7 @@ export function createUIKitConfigProvider<T extends DeepPartial<UIKitTheme> = UI
 
     return (
       <UIKitConfigContext.Provider
-        value={React.useMemo(
-          () => ({ theme: mergedTheme, baseComponentsConfig }),
-          [mergedTheme, baseComponentsConfig],
-        )}
+        value={{ theme: mergedTheme, componentsConfig }}
       >
         {children}
       </UIKitConfigContext.Provider>
@@ -36,10 +33,6 @@ export function createUIKitConfigProvider<T extends DeepPartial<UIKitTheme> = UI
 
   function useUIKitTheme(): FullContext['theme'] {
     return useContext(UIKitConfigContext).theme as FullContext['theme'];
-  }
-
-  function useBaseComponentsConfig(): FullContext['baseComponentsConfig'] {
-    return useContext(UIKitConfigContext).baseComponentsConfig;
   }
 
   const makeStyles =
@@ -57,10 +50,18 @@ export function createUIKitConfigProvider<T extends DeepPartial<UIKitTheme> = UI
       );
     };
 
+  const makeDefaultProps =
+    <TProps extends ComponentProps<any>>(
+      makeProps: (theme: FullContext['theme']) => TProps,
+    ): (() => TProps) =>
+    () => {
+      const theme = useUIKitTheme();
+      return React.useMemo(() => makeProps(theme), [theme]);
+    };
+
   return {
     UIKitConfigProvider,
     useUIKitTheme,
-    useBaseComponentsConfig,
     makeStyles,
   };
 }

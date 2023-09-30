@@ -1,12 +1,16 @@
 import { ShadowStyleIOS } from 'react-native';
 
-import { AppTextConfig, FuncAppTextConfig } from '~/components/common/AppText';
-import { ButtonConfig, FuncButtonConfig } from '~/components/common/Button';
-import { FuncTextInputConfig, TextInputConfig } from '~/components/common/TextInput';
-import { FieldConfig, FuncFieldConfig } from '~/components/form/Field';
-
-export type FontWeight = 'regular' | 'medium' | 'semiBold' | 'bold';
-export type FontFamily = Partial<Record<FontWeight, string>>;
+import { AppText, useAppTextStyles } from '~/components/common/AppText';
+import {
+  Button,
+  usePrimaryButtonStyles,
+  useSecondaryButtonStyles,
+} from '~/components/common/Button';
+import { TextInput, useTextInputStyles } from '~/components/common/TextInput';
+import { Field, useFieldStyle } from '~/components/form/Field';
+import { makeDefaultProps, makeStyles } from '~/utils';
+import { ElementType } from 'react';
+import { PartialProps } from '~/types';
 
 export interface UIKitTheme {
   colors: {
@@ -24,9 +28,36 @@ export interface UIKitTheme {
   shadow: Record<1 | 2 | 3 | 4, ShadowStyleIOS & { elevation?: number }>;
 }
 
-export interface BaseComponentsConfig {
-  appText?: AppTextConfig | FuncAppTextConfig;
-  button?: ButtonConfig | FuncButtonConfig;
-  field?: FieldConfig | FuncFieldConfig;
-  textInput?: TextInputConfig | FuncTextInputConfig;
+type DefaultPropsConfig<T extends ElementType, TPartialProps = PartialProps<T>> =
+  | TPartialProps
+  | ReturnType<typeof makeDefaultProps<TPartialProps>>;
+
+export interface BasicConfig {
+  defaultProps: DefaultPropsConfig<ElementType>;
+  styles: ReturnType<typeof makeStyles>;
 }
+
+export interface UIComponents {
+  AppText: {
+    defaultProps: DefaultPropsConfig<typeof AppText>;
+    styles: typeof useAppTextStyles;
+  };
+  TextInput: {
+    defaultProps: DefaultPropsConfig<typeof TextInput>;
+    styles: typeof useTextInputStyles;
+  };
+  'Button.Primary': {
+    defaultProps: DefaultPropsConfig<typeof Button>;
+    styles: typeof usePrimaryButtonStyles;
+  };
+  'Button.Secondary': {
+    defaultProps: DefaultPropsConfig<typeof Button>;
+    styles: typeof useSecondaryButtonStyles;
+  };
+  Field: {
+    defaultProps: DefaultPropsConfig<typeof Field>;
+    styles: typeof useFieldStyle;
+  };
+}
+
+export type ComponentsConfig = { [P in keyof UIComponents]?: Partial<UIComponents[P]> };

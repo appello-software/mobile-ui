@@ -1,5 +1,5 @@
 import { CenterView } from '../../components/CenterView';
-import { JSX } from 'react';
+import React from 'react';
 
 export const parameters = {
   controls: {
@@ -11,8 +11,7 @@ export const parameters = {
 };
 
 export const decorators = [
-  (Story: JSX.ElementType) => {
-    console.log(Story);
+  (Story: React.ElementType) => {
     return (
       <CenterView>
         <Story />

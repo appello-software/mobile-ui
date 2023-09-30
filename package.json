@@ -89,7 +89,7 @@
     "preversion": "npm run build",
     "postversion": "git push && git push --tags",
     "generateDocs": "npx typedoc",
-    "local:watch": "chokidar \"dist/**/*.*\" -c \"cp -R dist ../ui-kit-app/node_modules/@appello/mobile-ui\" --initial",
+    "local:watch": "chokidar \"dist/**/*.*\" -c \"cp -rf dist ../ui-kit-app/node_modules/@appello/mobile-ui\" --initial",
     "storybook:web": "storybook dev --config-dir .storybook/configs/web",
     "build-storybook": "storybook build",
     "storybook-generate": "sb-rn-get-stories --config-path .storybook/configs/ondevice",
@@ -102,7 +102,6 @@
     "@types/chroma-js": "^2.4.0",
     "chroma-js": "^2.4.2",
     "deepmerge-ts": "^4.3.0",
-    "react-configured": "^0.0.1-alpha",
     "react-native-animated-spinkit": "^1.5.2",
     "react-native-mask-input": "^1.2.3",
     "react-native-svg": "^13.12.0"

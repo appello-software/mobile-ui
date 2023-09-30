@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
-import { ComponentConfig, configured, FuncComponentConfig } from 'react-configured';
 import {
-  Pressable,
+  ColorValue,
   StyleSheet,
   TextInput as RNTextInput,
   TextInputProps as RNTextInputProps,
@@ -15,12 +14,13 @@ import {
   Masks,
 } from 'react-native-mask-input';
 
-import { mergePropsWithStyle } from '~/utils';
-import { useBaseComponentsConfig, useUIKitTheme } from '~/config/utils';
-import { WithGetStyleByState } from '~/types';
+import { makeStyles } from '~/utils';
+import { useUIKitTheme } from '~/config/utils';
 import { SvgProps } from 'react-native-svg';
+import { useCombinedStylesWithConfig } from '~/hooks/useCombinedStylesWithConfig';
+import { useCombinedPropsWithConfig } from '~/hooks/useCombinedPropsWithConfig';
 
-interface Props extends RNTextInputProps {
+export interface TextInputProps extends RNTextInputProps {
   /** Should TextInput have an error state */
   error?: boolean;
   /** Should TextInput be disabled */
@@ -42,40 +42,44 @@ interface Props extends RNTextInputProps {
   placeholderFillCharacter?: MaskInputProps['placeholderFillCharacter'];
 }
 
-export type TextInputProps = WithGetStyleByState<
-  Props,
-  ['error', 'focused', 'disabled', 'multiline']
->;
+/**
+ * Primary UI component for inputting text into the app via a keyboard.
+ * It extends default [RN TextInput](https://reactnative.dev/docs/textinput) component and its props.
+ * It has additional built-in functionality such as icon on the left, any right accessory and mask.
+ */
+export const TextInput: FC<TextInputProps> = props => {
+  const theme = useUIKitTheme();
 
-const BaseTextInput: FC<TextInputProps> = ({
-  error,
-  disabled,
-  onPress,
-  editable,
-  multiline,
-  getStyleByState = (states, style) => style,
-  style,
-  accessoryRight,
-  Icon,
-  iconSize,
-  value,
-  onChangeText,
-  mask,
-  placeholderFillCharacter,
-  placeholder,
-  ...textInputProps
-}) => {
+  const styles = useCombinedStylesWithConfig('TextInput', useTextInputStyles);
+  const {
+    error,
+    disabled,
+    onPress,
+    multiline,
+    style,
+    value,
+    onChangeText,
+    placeholder,
+    Icon,
+    accessoryRight,
+    mask,
+    placeholderFillCharacter,
+    iconSize = { width: 20, height: 20 },
+    placeholderTextColor = theme.colors.gray['3'],
+    ...textInputProps
+  } = useCombinedPropsWithConfig('TextInput', props);
+
   const [isFocused, setIsFocused] = React.useState<boolean>(false);
 
-  const fullStyle = getStyleByState(
-    {
-      focused: !error && isFocused,
-      error: !!error,
-      disabled,
-      multiline,
-    },
+  const fullStyle = StyleSheet.flatten([
+    styles['text-input'],
     style,
-  );
+    multiline && styles['text-input--multiline'],
+    !multiline && !!Icon && styles['text-input--with-icon'],
+    disabled && styles['text-input--disabled'],
+    !disabled && error && styles['text-input--error'],
+    !disabled && !error && isFocused && styles['text-input--focused'],
+  ]);
 
   const handleFocus: TextInputProps['onFocus'] = e => {
     textInputProps.onFocus?.(e);
@@ -99,136 +103,88 @@ const BaseTextInput: FC<TextInputProps> = ({
   });
 
   return (
-    <TouchableOpacity disabled={!onPress} onPress={onPress}>
+    <TouchableOpacity disabled={disabled || !onPress} onPress={onPress}>
       <RNTextInput
         {...textInputProps}
         style={fullStyle}
+        placeholderTextColor={placeholderTextColor}
         placeholder={placeholder ?? maskPlaceholder}
         value={maskValue}
         onChangeText={onMaskChangeText}
         onFocus={handleFocus}
         onBlur={handleBlur}
-        editable={disabled || onPress ? false : editable}
+        editable={!disabled && !onPress}
         multiline={multiline}
       />
-      {Icon ? (
-        <View style={styles.iconContainer}>
+      {!multiline && Icon ? (
+        <View style={styles['text-input__icon-container']}>
           <Icon
-            color={fullStyle && 'color' in fullStyle ? fullStyle.color : undefined}
+            color={'color' in fullStyle ? (fullStyle?.color as ColorValue) : undefined}
             width={iconSize?.width}
             height={iconSize?.height}
           />
         </View>
       ) : null}
-      {accessoryRight ? <View style={styles.accessoryRightContainer}>{accessoryRight}</View> : null}
+      {!multiline && accessoryRight ? (
+        <View style={styles['text-input__accessory-right-container']}>{accessoryRight}</View>
+      ) : null}
     </TouchableOpacity>
   );
 };
-export type TextInputConfig = ComponentConfig<typeof BaseTextInput>;
 
-export type FuncTextInputConfig = FuncComponentConfig<typeof BaseTextInput, TextInputConfig>;
+export const useTextInputStyles = makeStyles(theme => {
+  return StyleSheet.create({
+    'text-input': {
+      height: 54,
+      paddingHorizontal: 18,
 
-/**
- * Primary UI component for inputting text into the app via a keyboard.
- * It extends default [RN TextInput](https://reactnative.dev/docs/textinput) component and its props.
- * It has additional built-in functionality such as icon on the left, any right accessory and mask.
- */
-export const TextInput = configured(
-  BaseTextInput,
-  (props): TextInputConfig => {
-    const theme = useUIKitTheme();
-    const { textInput } = useBaseComponentsConfig();
+      borderRadius: 6,
+      borderWidth: 1,
+      borderStyle: 'solid',
 
-    const projectTextInputConfig =
-      textInput && typeof textInput === 'function' ? textInput(props) : textInput;
+      fontSize: 13,
+      textAlignVertical: 'center',
+      includeFontPadding: false,
 
-    if (projectTextInputConfig) return projectTextInputConfig;
-
-    const { getStyleByState } = props;
-
-    const styles = StyleSheet.create({
-      baseStyle: {
-        height: 54,
-        paddingHorizontal: 18,
-
-        borderRadius: 6,
-        borderWidth: 1,
-        borderStyle: 'solid',
-
-        fontSize: 13,
-        textAlignVertical: 'center',
-        includeFontPadding: false,
-
-        color: theme.colors.black['1'],
-        backgroundColor: theme.colors.white,
-        borderColor: theme.colors.gray['5'],
-      },
-      withIcon: {
-        paddingLeft: 47,
-      },
-      'state:disabled': {
-        color: theme.colors.gray['3'],
-        backgroundColor: theme.colors.gray['7'],
-        borderColor: theme.colors.gray['7'],
-      },
-      'state:focused': {
-        borderColor: theme.colors.primary,
-      },
-      'state:error': {
-        borderColor: theme.colors.error,
-      },
-      'state:multiline': {
-        height: 104,
-        paddingHorizontal: 19,
-      },
-    });
-
-    const getStyle: typeof getStyleByState = (states, style) => {
-      let partStyle = style;
-      if (states.multiline) {
-        partStyle = StyleSheet.compose(partStyle, styles['state:multiline']);
-      }
-      if (states.disabled) {
-        partStyle = StyleSheet.compose(partStyle, styles['state:disabled']);
-      } else if (states.error) {
-        partStyle = StyleSheet.compose(partStyle, styles['state:error']);
-      } else if (states.focused) {
-        partStyle = StyleSheet.compose(partStyle, styles['state:focused']);
-      }
-
-      return StyleSheet.flatten(getStyleByState?.(states, partStyle) || partStyle || {});
-    };
-
-    return {
-      style: StyleSheet.compose(styles.baseStyle, props.Icon && styles.withIcon),
-      placeholderTextColor: theme.colors.gray['3'],
-      getStyleByState: getStyle,
-      iconSize: {
-        width: 20,
-        height: 20,
-      },
-    };
-  },
-  { mergeProps: mergePropsWithStyle },
-);
+      color: theme.colors.black['1'],
+      backgroundColor: theme.colors.white,
+      borderColor: theme.colors.gray['5'],
+    },
+    'text-input--with-icon': {
+      paddingLeft: 47,
+    },
+    'text-input--disabled': {
+      color: theme.colors.gray['3'],
+      backgroundColor: theme.colors.gray['7'],
+      borderColor: theme.colors.gray['7'],
+    },
+    'text-input--focused': {
+      borderColor: theme.colors.primary,
+    },
+    'text-input--error': {
+      borderColor: theme.colors.error,
+    },
+    'text-input--multiline': {
+      height: 104,
+      paddingHorizontal: 19,
+    },
+    'text-input__accessory-right-container': {
+      height: '100%',
+      position: 'absolute',
+      top: 0,
+      right: 0,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    'text-input__icon-container': {
+      height: '100%',
+      position: 'absolute',
+      top: 0,
+      left: 18,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+  });
+});
 
 export { createNumberMask, Masks };
-
-const styles = StyleSheet.create({
-  accessoryRightContainer: {
-    height: '100%',
-    position: 'absolute',
-    top: 0,
-    right: 0,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  iconContainer: {
-    height: '100%',
-    position: 'absolute',
-    top: 0,
-    left: 18,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

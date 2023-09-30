@@ -3,7 +3,7 @@ import { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 
 import ChatIcon from '../../assets/icons/unicons/chat.svg';
-import { CONFIG_CATEGORY } from '../../constants';
+import { CONFIG_CATEGORY, CONFIG_DETAIL } from '../../constants';
 
 const meta: Meta<ButtonProps & { Icon: boolean }> = {
   component: Button,
@@ -18,55 +18,28 @@ const meta: Meta<ButtonProps & { Icon: boolean }> = {
     labelProps: {
       table: {
         category: CONFIG_CATEGORY,
-        defaultValue: {
-          summary: JSON.stringify({
-            variant: 'p3',
-            color: 'depending on variant',
-          }),
-          detail: 'Set it up in the component config',
-        },
       },
     },
     loaderColor: {
       table: {
         category: CONFIG_CATEGORY,
-        defaultValue: {
-          summary: 'depending on variant',
-          detail: 'Set it up in the component config',
-        },
-      },
-    },
-    isLoading: {
-      table: {
-        defaultValue: {
-          summary: false,
-        },
       },
     },
     variant: {
       table: {
         defaultValue: {
           summary: 'primary',
-          detail: 'Set it up in the component config',
         },
       },
     },
     pressedOverlayColor: {
       table: {
         category: CONFIG_CATEGORY,
-        defaultValue: {
-          summary: 'depending on variant',
-          detail: 'Set it up in the component config',
-        },
       },
     },
     backgroundGradient: {
       table: {
         category: CONFIG_CATEGORY,
-        defaultValue: {
-          summary: 'depending on variant',
-          detail: 'Set it up in the component config',
-        },
       },
     },
     Icon: {
@@ -79,7 +52,6 @@ const meta: Meta<ButtonProps & { Icon: boolean }> = {
         category: CONFIG_CATEGORY,
         defaultValue: {
           summary: JSON.stringify({ width: 20, height: 20 }),
-          detail: 'Set it up in the component config',
         },
       },
     },
@@ -87,7 +59,7 @@ const meta: Meta<ButtonProps & { Icon: boolean }> = {
       table: {
         defaultValue: {
           summary: 'left',
-          detail: 'Set it up in the component config',
+          detail: CONFIG_DETAIL,
         },
       },
     },

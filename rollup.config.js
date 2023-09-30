@@ -71,7 +71,7 @@ const buildConfig = {
     json(),
     babel({
       exclude: 'node_modules/**',
-      presets: ['@babel/preset-env'],
+      extensions: ['.js', '.jsx', '.ts', '.tsx'],
     }),
     typescript({
       sourceMap: true,

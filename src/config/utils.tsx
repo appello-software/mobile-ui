@@ -1,14 +1,14 @@
 import { useContext } from 'react';
 
-import { BaseComponentsConfig, UIKitTheme } from './types';
+import { ComponentsConfig, UIKitTheme } from './types';
 import { UIKitConfigContext } from './UIKitConfigProvider';
 
 export function useUIKitTheme(): UIKitTheme {
   return useContext(UIKitConfigContext).theme as UIKitTheme;
 }
 
-export function useBaseComponentsConfig(): BaseComponentsConfig {
-  return useContext(UIKitConfigContext).baseComponentsConfig;
+export function useComponentsConfig(): ComponentsConfig {
+  return useContext(UIKitConfigContext).componentsConfig;
 }
 
 interface WithThemeProps {

@@ -13846,13 +13846,6 @@ react-confetti@^6.1.0:
   dependencies:
     tween-functions "^1.2.0"
 
-react-configured@^0.0.1-alpha:
-  version "0.0.1-alpha"
-  resolved "https://registry.yarnpkg.com/react-configured/-/react-configured-0.0.1-alpha.tgz#450ec292c70e99c05b0203d17cf0db2ac144b4b0"
-  integrity sha512-sL2QeHHOYwP7YqRH1C2TDTbDCSWBL/enTq/q61KMHQtn9oAfuIKVGF2biwTb3gEsqy6OtXo6ptEvFIqnRhsJ/Q==
-  dependencies:
-    "@appello/common" "^1.0.22"
-
 react-devtools-core@^4.26.1:
   version "4.27.2"
   resolved "https://registry.yarnpkg.com/react-devtools-core/-/react-devtools-core-4.27.2.tgz#d20fc57e258c656eedabafc2c851d38b33583148"

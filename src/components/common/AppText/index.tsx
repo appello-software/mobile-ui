@@ -1,9 +1,9 @@
 import React from 'react';
-import { ComponentConfig, configured, FuncComponentConfig } from 'react-configured';
 import { StyleSheet, Text as RNText, TextProps as RNTextProps } from 'react-native';
 
-import { mergePropsWithStyle } from '~/utils';
-import { useBaseComponentsConfig } from '~/config/utils';
+import { makeStyles } from '~/utils';
+import { useCombinedStylesWithConfig } from '~/hooks/useCombinedStylesWithConfig';
+import { useCombinedPropsWithConfig } from '~/hooks/useCombinedPropsWithConfig';
 
 type TextVariant =
   | 'h1'
@@ -21,7 +21,7 @@ type TextVariant =
 
 export interface AppTextProps extends RNTextProps {
   /** Variant of displaying text */
-  variant: TextVariant;
+  variant?: TextVariant;
   /** Text color */
   color?: string;
   /** Should text be in uppercase */
@@ -32,18 +32,29 @@ export interface AppTextProps extends RNTextProps {
   weight?: 'light' | 'regular' | 'medium' | 'bold';
 }
 
-const BaseAppText: React.FC<AppTextProps> = ({
-  variant,
-  color,
-  uppercase,
-  underline,
-  style,
-  ...textProps
-}) => {
+/**
+ * Primary UI component for text displaying.
+ * It extends default [RN Text](https://reactnative.dev/docs/text) component and its props.
+ */
+export const AppText: React.FC<AppTextProps> = props => {
+  const styles = useCombinedStylesWithConfig('AppText', useAppTextStyles);
+  const {
+    variant = 'p3',
+    weight = 'regular',
+    color,
+    uppercase,
+    underline,
+    style,
+    ...textProps
+  } = useCombinedPropsWithConfig('AppText', props);
+
   return (
     <RNText
       {...textProps}
       style={StyleSheet.flatten([
+        styles['app-text'],
+        styles[`app-text--${variant}`],
+        styles[`app-text--${weight}`],
         style,
         !!color && { color },
         uppercase && { textTransform: 'uppercase' },
@@ -53,84 +64,62 @@ const BaseAppText: React.FC<AppTextProps> = ({
   );
 };
 
-export type AppTextConfig = ComponentConfig<React.FC<AppTextProps>>;
+export const useAppTextStyles = makeStyles(() => {
+  return StyleSheet.create({
+    'app-text': {},
+    'app-text--h1': {
+      fontSize: 34,
+      lineHeight: 48,
+    },
+    'app-text--h2': {
+      fontSize: 29,
+      lineHeight: 42,
+    },
+    'app-text--h3': {
+      fontSize: 26,
+      lineHeight: 36,
+    },
+    'app-text--h4': {
+      fontSize: 21,
+      lineHeight: 32,
+    },
+    'app-text--h5': {
+      fontSize: 19,
+      lineHeight: 30,
+    },
+    'app-text--h6': {
+      fontSize: 17,
+      lineHeight: 25,
+    },
 
-export type FuncAppTextConfig = FuncComponentConfig<React.FC<AppTextProps>, AppTextConfig>;
+    'app-text--p1': {
+      fontSize: 15,
+      lineHeight: 24,
+    },
+    'app-text--p2': {
+      fontSize: 14,
+      lineHeight: 21,
+    },
+    'app-text--p3': {
+      fontSize: 13,
+      lineHeight: 23,
+    },
+    'app-text--p4': {
+      fontSize: 12,
+      lineHeight: 21,
+    },
+    'app-text--p5': {
+      fontSize: 11,
+      lineHeight: 16,
+    },
+    'app-text--p6': {
+      fontSize: 10,
+      lineHeight: 16,
+    },
 
-/**
- * Primary UI component for text displaying.
- * It extends default [RN Text](https://reactnative.dev/docs/text) component and its props.
- */
-export const AppText = configured(
-  BaseAppText,
-  (props): AppTextConfig => {
-    const { appText } = useBaseComponentsConfig();
-
-    const projectAppTextConfig =
-      appText && typeof appText === 'function' ? appText(props) : appText;
-
-    if (projectAppTextConfig) return projectAppTextConfig;
-
-    const { variant = 'p3' } = props;
-
-    const variantStyles = StyleSheet.create({
-      h1: {
-        fontSize: 34,
-        lineHeight: 48,
-      },
-      h2: {
-        fontSize: 29,
-        lineHeight: 42,
-      },
-      h3: {
-        fontSize: 26,
-        lineHeight: 36,
-      },
-      h4: {
-        fontSize: 21,
-        lineHeight: 32,
-      },
-      h5: {
-        fontSize: 19,
-        lineHeight: 30,
-      },
-      h6: {
-        fontSize: 17,
-        lineHeight: 25,
-      },
-      p1: {
-        fontSize: 15,
-        lineHeight: 24,
-      },
-
-      p2: {
-        fontSize: 14,
-        lineHeight: 21,
-      },
-
-      p3: {
-        fontSize: 13,
-        lineHeight: 23,
-      },
-
-      p4: {
-        fontSize: 12,
-        lineHeight: 21,
-      },
-
-      p5: {
-        fontSize: 11,
-        lineHeight: 16,
-      },
-      p6: {
-        fontSize: 10,
-        lineHeight: 16,
-      },
-    });
-
-    return {
-      style: variantStyles[variant],
-    };
-  },
-  { mergeProps: mergePropsWithStyle },
-);
+    'app-text--light': {},
+    'app-text--regular': {},
+    'app-text--medium': {},
+    'app-text--bold': {},
+  });
+});
