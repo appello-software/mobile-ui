@@ -18,6 +18,7 @@ const accessoryRightRender = (
 );
 const dollarMask = ['$', /\d/, /\d/, '.', /\d/, /\d/];
 const meta: Meta<TextInputProps> = {
+  title: 'Basic/TextInput',
   component: TextInput,
   render: ({ accessoryRight, Icon, mask, onPress, ...args }) => {
     const [value, setValue] = useState('');

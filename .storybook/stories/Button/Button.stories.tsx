@@ -6,6 +6,7 @@ import ChatIcon from '../../assets/icons/unicons/chat.svg';
 import { CONFIG_CATEGORY, CONFIG_DETAIL } from '../../constants';
 
 const meta: Meta<ButtonProps & { Icon: boolean }> = {
+  title: 'Basic/Button',
   component: Button,
   render: ({ Icon, children, ...args }) => {
     return (
@@ -18,6 +19,9 @@ const meta: Meta<ButtonProps & { Icon: boolean }> = {
     labelProps: {
       table: {
         category: CONFIG_CATEGORY,
+        defaultValue: {
+          summary: JSON.stringify({ variant: 'p3' }),
+        },
       },
     },
     loaderColor: {

@@ -49,7 +49,7 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> = ({
   const {
     children,
     style,
-    labelProps,
+    labelProps = { variant: 'p3' },
     disabled,
     isLoading,
     loaderColor,

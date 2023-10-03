@@ -1,4 +1,4 @@
-import React, { ComponentProps, PropsWithChildren } from 'react';
+import React, { ComponentProps, PropsWithChildren, ReactNode } from 'react';
 import { FieldError } from 'react-hook-form';
 import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 
@@ -7,27 +7,36 @@ import { makeStyles } from '~/utils';
 import { useCombinedStylesWithConfig } from '~/hooks/useCombinedStylesWithConfig';
 import { useCombinedPropsWithConfig } from '~/hooks/useCombinedPropsWithConfig';
 
-export interface FieldProps {
+export interface FieldProps extends PropsWithChildren {
+  /** A form component that is being wrapped */
+  children: ReactNode;
+  /** Field label */
   label?: string;
+  /** [`react-hook-form` Field error](https://react-hook-form.com/ts#FieldError) */
   error?: FieldError;
+  /** Additional style of field wrapper */
   style?: StyleProp<ViewStyle>;
+  /** Properties of the label text */
   labelProps?: ComponentProps<typeof AppText>;
+  /** Properties of the error text */
   errorProps?: ComponentProps<typeof AppText>;
+  /** Function for error displaying in case of more custom errors than just text */
   renderError?: (props: React.PropsWithChildren) => React.ReactNode;
 }
 
-export const Field: React.FC<PropsWithChildren<FieldProps>> = props => {
+/**
+ * A common wrapper for form fields, mostly for displaying label and errors
+ */
+export const Field: React.FC<FieldProps> = props => {
   const styles = useCombinedStylesWithConfig('Field', useFieldStyle);
   const {
     label,
     error,
     children,
     labelProps = {
-      style: styles.field__label,
       variant: 'p3',
     },
     errorProps = {
-      style: styles.field__error,
       variant: 'p3',
     },
     renderError,
@@ -36,14 +45,23 @@ export const Field: React.FC<PropsWithChildren<FieldProps>> = props => {
 
   const errorNode = React.useMemo(() => {
     if (!error) return null;
-    if (!renderError) return <AppText {...errorProps}>{error.message}</AppText>;
+    if (!renderError)
+      return (
+        <AppText {...errorProps} style={[styles.field__error, errorProps?.style]}>
+          {error.message}
+        </AppText>
+      );
 
     return renderError({ children: error.message });
-  }, [error, renderError, errorProps]);
+  }, [error, renderError, errorProps, styles.field__error]);
 
   return (
     <View style={[styles.field, style]}>
-      {label ? <AppText {...labelProps}>{label}</AppText> : null}
+      {label ? (
+        <AppText {...labelProps} style={[styles.field__label, labelProps?.style]}>
+          {label}
+        </AppText>
+      ) : null}
       <View>{children}</View>
       {errorNode}
     </View>

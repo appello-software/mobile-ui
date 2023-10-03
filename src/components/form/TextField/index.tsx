@@ -6,19 +6,30 @@ import { TextInput } from '~/components/common/TextInput';
 import { Field } from '~/components/form/Field';
 import { getFieldError } from '~/components/form/utils';
 
-export interface TextFieldProps<TFormValues extends FieldValues> extends Omit<TextInputProps, 'style'> {
+export interface TextFieldProps<TFormValues extends FieldValues>
+  extends Omit<TextInputProps, 'style'> {
   name: FieldPath<TFormValues>;
   control: Control<TFormValues>;
   label?: string;
-  disabled?: boolean;
   style?: StyleProp<ViewStyle>;
 }
 
+/**
+ * Basic text field controlled by `react-hook-form` controller.<br>
+ * Extends the UIKit TextInput and all of its props.<br>
+ * Example of usage:
+ *
+ * ```ts
+ * const Form = (props) => {
+ *    const form = useForm<{ textField: string }>();
+ *
+ *    return <TextField control={form.control} name="textField" />;
+ * }```
+ * */
 export const TextField = <TFormValues extends FieldValues>({
   name,
   control,
   label,
-  disabled,
   style,
   ...textInputProps
 }: TextFieldProps<TFormValues>): React.ReactElement => {
@@ -32,7 +43,6 @@ export const TextField = <TFormValues extends FieldValues>({
         onChangeText={controller.field.onChange}
         onBlur={controller.field.onBlur}
         error={!!fieldError}
-        disabled={disabled}
         {...textInputProps}
       />
     </Field>

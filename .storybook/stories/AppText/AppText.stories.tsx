@@ -1,6 +1,5 @@
 import { AppText, AppTextProps, Button } from '../../../src';
 import { Meta, StoryObj } from '@storybook/react-native';
-import React from 'react';
 import { CONFIG_DETAIL } from '../../constants';
 
 enum AppTextVariant {
@@ -19,6 +18,7 @@ enum AppTextVariant {
 }
 
 const meta: Meta<AppTextProps> = {
+  title: 'Basic/AppText',
   component: AppText,
   argTypes: {
     variant: {

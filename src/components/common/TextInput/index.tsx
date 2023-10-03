@@ -43,8 +43,8 @@ export interface TextInputProps extends RNTextInputProps {
 }
 
 /**
- * Primary UI component for inputting text into the app via a keyboard.
- * It extends default [RN TextInput](https://reactnative.dev/docs/textinput) component and its props.
+ * Primary UI component for inputting text into the app via a keyboard.<br>
+ * It extends default [RN TextInput](https://reactnative.dev/docs/textinput) component and its props.<br>
  * It has additional built-in functionality such as icon on the left, any right accessory and mask.
  */
 export const TextInput: FC<TextInputProps> = props => {
