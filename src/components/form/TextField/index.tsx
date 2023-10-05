@@ -1,8 +1,8 @@
 import React from 'react';
 import { Control, FieldPath, FieldValues, useController } from 'react-hook-form';
-import { StyleProp, TextInputProps, ViewStyle } from 'react-native';
+import { StyleProp, ViewStyle } from 'react-native';
 
-import { TextInput } from '~/components/common/TextInput';
+import { TextInput, TextInputProps } from '~/components/common/TextInput';
 import { Field } from '~/components/form/Field';
 import { getFieldError } from '~/components/form/utils';
 

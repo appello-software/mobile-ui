@@ -1,3 +1,4 @@
+import { ElementType } from 'react';
 import { ShadowStyleIOS } from 'react-native';
 
 import { AppText, useAppTextStyles } from '~/components/common/AppText';
@@ -8,9 +9,9 @@ import {
 } from '~/components/common/Button';
 import { TextInput, useTextInputStyles } from '~/components/common/TextInput';
 import { Field, useFieldStyle } from '~/components/form/Field';
-import { makeDefaultProps, makeStyles } from '~/utils';
-import { ElementType } from 'react';
+import { PasswordField } from '~/components/form/PasswordField';
 import { PartialProps } from '~/types';
+import { makeDefaultProps, makeStyles } from '~/utils';
 
 export interface UIKitTheme {
   colors: {
@@ -57,6 +58,10 @@ export interface UIComponents {
   Field: {
     defaultProps: DefaultPropsConfig<typeof Field>;
     styles: typeof useFieldStyle;
+  };
+  PasswordField: {
+    defaultProps: DefaultPropsConfig<typeof PasswordField>;
+    styles: never;
   };
 }
 

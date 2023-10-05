@@ -1,66 +1,51 @@
 import { useSwitchValue } from '@appello/common/lib/hooks';
 import React from 'react';
-import { Control, FieldPath, FieldValues, useController } from 'react-hook-form';
-import { StyleProp, StyleSheet, TouchableOpacity, ViewStyle } from 'react-native';
+import { FieldValues } from 'react-hook-form';
+import { TouchableOpacity } from 'react-native';
+import { SvgProps } from 'react-native-svg';
 
-import { TextInput } from '~/components/common/TextInput';
-import { Field } from '../Field';
-import { TextFieldProps as TextFieldProps } from '../TextField';
-import { getFieldError } from '../utils';
+import { TextField, TextFieldProps } from '../TextField';
 
 export interface PasswordFieldProps<TFormValues extends FieldValues>
   extends TextFieldProps<TFormValues> {
-  name: FieldPath<TFormValues>;
-  control: Control<TFormValues>;
   togglePasswordVisibilityIcons?: {
-    show: React.ReactNode;
-    hide: React.ReactNode;
+    show: React.FC<SvgProps>;
+    hide: React.FC<SvgProps>;
   };
-  style?: StyleProp<ViewStyle>;
 }
 
-export const PasswordField = <TFormValues extends FieldValues>({
-  name,
-  control,
-  label,
-  style,
-  togglePasswordVisibilityIcons,
-  ...textInputProps
-}: PasswordFieldProps<TFormValues>): React.ReactElement => {
-  const controller = useController({ name, control });
+/**
+ * Password field with functionality to show and hide the password value.<br>
+ * Extends the UIKit TextField and all of its props.<br>
+ * */
+export const PasswordField = <TFormValues extends FieldValues>(
+  props: PasswordFieldProps<TFormValues>,
+): React.ReactElement => {
   const { value: isPasswordVisible, toggle: togglePasswordVisibility } = useSwitchValue(false);
 
-  const fieldError = getFieldError(controller);
+  const { togglePasswordVisibilityIcons, ...textFieldProps } = props;
+
+  const renderAccessoryRight = React.useMemo(() => {
+    const Icon = isPasswordVisible
+      ? togglePasswordVisibilityIcons?.hide
+      : togglePasswordVisibilityIcons?.show;
+
+    if (!Icon) return null;
+
+    return (
+      <TouchableOpacity onPress={togglePasswordVisibility} style={{ marginRight: 18 }}>
+        <Icon />
+      </TouchableOpacity>
+    );
+  }, [togglePasswordVisibilityIcons, togglePasswordVisibility, isPasswordVisible]);
 
   return (
-    <Field style={style} label={label} error={fieldError}>
-      <TextInput
-        value={controller.field.value}
-        onChangeText={controller.field.onChange}
-        onBlur={controller.field.onBlur}
-        style={styles.input}
-        error={!!fieldError}
-        secureTextEntry={!isPasswordVisible}
-        autoComplete="password"
-        autoCapitalize="none"
-        {...textInputProps}
-      />
-      <TouchableOpacity onPress={togglePasswordVisibility} style={styles.toggle}>
-        {isPasswordVisible
-          ? togglePasswordVisibilityIcons?.hide
-          : togglePasswordVisibilityIcons?.show}
-      </TouchableOpacity>
-    </Field>
+    <TextField
+      {...textFieldProps}
+      autoComplete="password"
+      autoCapitalize="none"
+      secureTextEntry={!isPasswordVisible}
+      accessoryRight={renderAccessoryRight}
+    />
   );
 };
-
-const styles = StyleSheet.create({
-  input: {
-    paddingRight: 9 + 24 + 10,
-  },
-  toggle: {
-    position: 'absolute',
-    right: 15,
-    top: 12,
-  },
-});
