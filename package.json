@@ -23,13 +23,13 @@
     "tsconfig.json"
   ],
   "peerDependencies": {
-    "expo": "^48.0.19",
-    "expo-linear-gradient": "~12.1.2",
+    "expo": ">=48.0.0",
+    "expo-linear-gradient": ">=12.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-hook-form": "^7.43.5",
-    "react-native": "~0.71.4",
-    "react-native-svg": "^13.12.0"
+    "react-hook-form": ">=7.43.5",
+    "react-native": ">=0.71.0",
+    "react-native-svg": ">=13.12.0"
   },
   "devDependencies": {
     "@appello/eslint-config": "^0.1.12",
