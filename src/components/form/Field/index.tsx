@@ -1,69 +1,83 @@
-import React, { ComponentProps, PropsWithChildren } from 'react';
-import { ComponentConfig, configured, FuncComponentConfig } from 'react-configured';
+import React, { ComponentProps, PropsWithChildren, ReactNode } from 'react';
 import { FieldError } from 'react-hook-form';
 import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 
 import { AppText } from '~/components/common/AppText';
-import { mergePropsWithStyle } from '~/utils';
-import { useBaseComponentsConfig, useUIKitTheme } from '~/config/utils';
+import { useCombinedPropsWithConfig } from '~/hooks/useCombinedPropsWithConfig';
+import { useCombinedStylesWithConfig } from '~/hooks/useCombinedStylesWithConfig';
+import { makeStyles } from '~/utils';
 
-export interface FieldProps {
+export interface FieldProps extends PropsWithChildren {
+  /** A form component that is being wrapped */
+  children: ReactNode;
+  /** Field label */
   label?: string;
+  /** [`react-hook-form` Field error](https://react-hook-form.com/ts#FieldError) */
   error?: FieldError;
+  /** Additional style of field wrapper */
   style?: StyleProp<ViewStyle>;
-  labelProps: ComponentProps<typeof AppText>;
-  renderError: (props: React.PropsWithChildren) => React.ReactNode;
+  /** Properties of the label text */
+  labelProps?: ComponentProps<typeof AppText>;
+  /** Properties of the error text */
+  errorProps?: ComponentProps<typeof AppText>;
+  /** Function for error displaying in case of more custom errors than just text */
+  renderError?: (props: React.PropsWithChildren) => React.ReactNode;
 }
 
-const BaseField: React.FC<PropsWithChildren<FieldProps>> = ({
-  label,
-  error,
-  children,
-  labelProps,
-  renderError,
-  style,
-}) => {
+/**
+ * A common wrapper for form fields, mostly for displaying label and errors
+ */
+export const Field: React.FC<FieldProps> = props => {
+  const styles = useCombinedStylesWithConfig('Field', useFieldStyle);
+  const {
+    label,
+    error,
+    children,
+    labelProps = {
+      variant: 'p3',
+    },
+    errorProps = {
+      variant: 'p3',
+    },
+    renderError,
+    style,
+  } = useCombinedPropsWithConfig('Field', props);
+
+  const errorNode = React.useMemo(() => {
+    if (!error) return null;
+    if (!renderError)
+      return (
+        <AppText {...errorProps} style={[styles.field__error, errorProps?.style]}>
+          {error.message}
+        </AppText>
+      );
+
+    return renderError({ children: error.message });
+  }, [error, renderError, errorProps, styles.field__error]);
+
   return (
-    <View style={style}>
-      {!!label && <AppText {...labelProps}>{label}</AppText>}
+    <View style={[styles.field, style]}>
+      {label ? (
+        <AppText {...labelProps} style={[styles.field__label, labelProps?.style]}>
+          {label}
+        </AppText>
+      ) : null}
       <View>{children}</View>
-      {!!error && renderError({ children: error.message })}
+      {errorNode}
     </View>
   );
 };
 
-export type FieldConfig = ComponentConfig<typeof BaseField>;
-
-export type FuncFieldConfig = FuncComponentConfig<typeof BaseField, FieldConfig>;
-
-export const Field = configured(
-  BaseField,
-  (props): FieldConfig => {
-    const theme = useUIKitTheme();
-    const { field } = useBaseComponentsConfig();
-
-    const projectFieldConfig = field && typeof field === 'function' ? field(props) : field;
-
-    if (projectFieldConfig) return projectFieldConfig;
-
-    const styles = StyleSheet.create({
-      label: {
-        color: theme.colors.gray['2'],
-        marginBottom: 3,
-      },
-      error: {
-        color: theme.colors.error,
-        marginTop: 3,
-      },
-    });
-
-    return {
-      labelProps: {
-        style: styles.label,
-        variant: 'p3',
-      },
-      renderError: () => <AppText style={styles.error} variant="p3" />,
-    };
-  },
-  { mergeProps: mergePropsWithStyle },
+export const useFieldStyle = makeStyles(theme =>
+  StyleSheet.create({
+    field: {},
+    field__label: {
+      color: theme.colors.gray['2'],
+      marginBottom: 3,
+    },
+    field__error: {
+      color: theme.colors.error,
+      marginTop: 3,
+    },
+  }),
 );

@@ -1,12 +1,12 @@
 import { deepmerge } from 'deepmerge-ts';
-import React, { useContext } from 'react';
+import React, { ComponentProps, useContext } from 'react';
+import { StyleSheet } from 'react-native';
 
 import { defaultTheme } from '~/__defaults__/defaultTheme';
 import { DeepPartial } from '~/types';
-import { UIKitTheme } from './types';
 
-import { UIKitConfigContext, ThemeProviderProps } from './UIKitConfigProvider';
-import { StyleSheet } from 'react-native';
+import { UIKitTheme } from './types';
+import { ThemeProviderProps, UIKitConfigContext } from './UIKitConfigProvider';
 
 import NamedStyles = StyleSheet.NamedStyles;
 
@@ -16,19 +16,14 @@ export function createUIKitConfigProvider<T extends DeepPartial<UIKitTheme> = UI
   const UIKitConfigProvider: React.FC<React.PropsWithChildren<ThemeProviderProps<T>>> = ({
     children,
     theme,
-    baseComponentsConfig = {},
+    componentsConfig = {},
   }) => {
     const mergedTheme = React.useMemo<FullContext['theme']>(() => {
       return (theme ? deepmerge(defaultTheme, theme) : defaultTheme) as FullContext['theme'];
     }, [theme]);
 
     return (
-      <UIKitConfigContext.Provider
-        value={React.useMemo(
-          () => ({ theme: mergedTheme, baseComponentsConfig }),
-          [mergedTheme, baseComponentsConfig],
-        )}
-      >
+      <UIKitConfigContext.Provider value={{ theme: mergedTheme, componentsConfig }}>
         {children}
       </UIKitConfigContext.Provider>
     );
@@ -36,10 +31,6 @@ export function createUIKitConfigProvider<T extends DeepPartial<UIKitTheme> = UI
 
   function useUIKitTheme(): FullContext['theme'] {
     return useContext(UIKitConfigContext).theme as FullContext['theme'];
-  }
-
-  function useBaseComponentsConfig(): FullContext['baseComponentsConfig'] {
-    return useContext(UIKitConfigContext).baseComponentsConfig;
   }
 
   const makeStyles =
@@ -57,10 +48,18 @@ export function createUIKitConfigProvider<T extends DeepPartial<UIKitTheme> = UI
       );
     };
 
+  const makeDefaultProps =
+    <TProps extends ComponentProps<any>>(
+      makeProps: (theme: FullContext['theme']) => TProps,
+    ): (() => TProps) =>
+    () => {
+      const theme = useUIKitTheme();
+      return React.useMemo(() => makeProps(theme), [theme]);
+    };
+
   return {
     UIKitConfigProvider,
     useUIKitTheme,
-    useBaseComponentsConfig,
     makeStyles,
   };
 }
