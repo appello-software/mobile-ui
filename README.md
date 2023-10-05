@@ -1,6 +1,21 @@
 # @appello/mobile-ui
 Appello Mobile UIKit.
 
+# Install
+With `npm`:
+```
+npm install @appello/mobile-ui react-hook-form react-native-svg
+
+npx expo install expo-linear-gradient
+```
+
+With `yarn`:
+```
+yarn add @appello/mobile-ui react-hook-form react-native-svg
+
+npx expo install expo-linear-gradient
+```
+
 # List of components
 [You can find a list of components and theirs props here](https://main--651eac83bd7f617778b019a6.chromatic.com)
 
