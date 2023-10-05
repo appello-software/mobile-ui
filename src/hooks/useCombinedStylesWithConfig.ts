@@ -1,6 +1,7 @@
+import { keys } from '@appello/common/lib/utils/object';
+
 import { UIComponents } from '~/config';
 import { useComponentsConfig } from '~/config/utils';
-import { keys } from '@appello/common/lib/utils/object';
 
 export function useCombinedStylesWithConfig<T extends keyof UIComponents>(
   componentName: T,

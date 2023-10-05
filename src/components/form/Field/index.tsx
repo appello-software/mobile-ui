@@ -3,9 +3,9 @@ import { FieldError } from 'react-hook-form';
 import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 
 import { AppText } from '~/components/common/AppText';
-import { makeStyles } from '~/utils';
-import { useCombinedStylesWithConfig } from '~/hooks/useCombinedStylesWithConfig';
 import { useCombinedPropsWithConfig } from '~/hooks/useCombinedPropsWithConfig';
+import { useCombinedStylesWithConfig } from '~/hooks/useCombinedStylesWithConfig';
+import { makeStyles } from '~/utils';
 
 export interface FieldProps extends PropsWithChildren {
   /** A form component that is being wrapped */

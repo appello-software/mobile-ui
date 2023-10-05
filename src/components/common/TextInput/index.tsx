@@ -8,17 +8,17 @@ import {
   View,
 } from 'react-native';
 import {
-  useMaskedInputProps,
-  MaskInputProps,
   createNumberMask,
+  MaskInputProps,
   Masks,
+  useMaskedInputProps,
 } from 'react-native-mask-input';
-
-import { makeStyles } from '~/utils';
-import { useUIKitTheme } from '~/config/utils';
 import { SvgProps } from 'react-native-svg';
-import { useCombinedStylesWithConfig } from '~/hooks/useCombinedStylesWithConfig';
+
+import { useUIKitTheme } from '~/config/utils';
 import { useCombinedPropsWithConfig } from '~/hooks/useCombinedPropsWithConfig';
+import { useCombinedStylesWithConfig } from '~/hooks/useCombinedStylesWithConfig';
+import { makeStyles } from '~/utils';
 
 export interface TextInputProps extends RNTextInputProps {
   /** Should TextInput have an error state */

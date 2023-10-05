@@ -1,5 +1,5 @@
-import { Falsy, ImageStyle, StyleProp, TextStyle, ViewStyle } from 'react-native';
 import React, { ElementType } from 'react';
+import { Falsy, ImageStyle, StyleProp, TextStyle, ViewStyle } from 'react-native';
 
 export type DeepPartial<T> = T extends object
   ? {

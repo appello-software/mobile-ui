@@ -31,14 +31,11 @@ module.exports = {
                 },
               ],
             },
-          }
-
+          },
         },
       ],
     });
-    config.plugins.push(
-      new NodePolyfillPlugin()
-    )
+    config.plugins.push(new NodePolyfillPlugin());
     return config;
   },
 };

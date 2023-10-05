@@ -1,9 +1,9 @@
 import React from 'react';
 import { StyleSheet, Text as RNText, TextProps as RNTextProps } from 'react-native';
 
-import { makeStyles } from '~/utils';
-import { useCombinedStylesWithConfig } from '~/hooks/useCombinedStylesWithConfig';
 import { useCombinedPropsWithConfig } from '~/hooks/useCombinedPropsWithConfig';
+import { useCombinedStylesWithConfig } from '~/hooks/useCombinedStylesWithConfig';
+import { makeStyles } from '~/utils';
 
 type TextVariant =
   | 'h1'

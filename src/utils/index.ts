@@ -1,10 +1,10 @@
+import chromaJs from 'chroma-js';
 import React, { ComponentProps } from 'react';
 import { StyleSheet } from 'react-native';
-import chromaJs from 'chroma-js';
 
 import { UIKitTheme } from '~/config/types';
-import { DeepPartial } from '~/types';
 import { useUIKitTheme } from '~/config/utils';
+import { DeepPartial } from '~/types';
 
 import NamedStyles = StyleSheet.NamedStyles;
 
@@ -24,9 +24,7 @@ export const makeStyles =
   };
 
 export const makeDefaultProps =
-  <TProps extends ComponentProps<any>>(
-    makeProps: (theme: UIKitTheme) => TProps,
-  ): (() => TProps) =>
+  <TProps extends ComponentProps<any>>(makeProps: (theme: UIKitTheme) => TProps): (() => TProps) =>
   () => {
     const theme = useUIKitTheme();
     return React.useMemo(() => makeProps(theme), [theme]);

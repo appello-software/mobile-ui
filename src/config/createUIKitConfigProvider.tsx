@@ -1,12 +1,12 @@
 import { deepmerge } from 'deepmerge-ts';
 import React, { ComponentProps, useContext } from 'react';
+import { StyleSheet } from 'react-native';
 
 import { defaultTheme } from '~/__defaults__/defaultTheme';
 import { DeepPartial } from '~/types';
-import { UIKitTheme } from './types';
 
-import { UIKitConfigContext, ThemeProviderProps } from './UIKitConfigProvider';
-import { StyleSheet } from 'react-native';
+import { UIKitTheme } from './types';
+import { ThemeProviderProps, UIKitConfigContext } from './UIKitConfigProvider';
 
 import NamedStyles = StyleSheet.NamedStyles;
 
@@ -23,9 +23,7 @@ export function createUIKitConfigProvider<T extends DeepPartial<UIKitTheme> = UI
     }, [theme]);
 
     return (
-      <UIKitConfigContext.Provider
-        value={{ theme: mergedTheme, componentsConfig }}
-      >
+      <UIKitConfigContext.Provider value={{ theme: mergedTheme, componentsConfig }}>
         {children}
       </UIKitConfigContext.Provider>
     );

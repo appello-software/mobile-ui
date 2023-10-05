@@ -1,14 +1,14 @@
-import * as React from 'react';
-import { StyleSheet, Pressable, PressableProps, View, StyleProp, ViewStyle } from 'react-native';
-import { Flow } from 'react-native-animated-spinkit';
 import { LinearGradient, LinearGradientProps } from 'expo-linear-gradient';
+import * as React from 'react';
+import { Pressable, PressableProps, StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
+import { Flow } from 'react-native-animated-spinkit';
+import { SvgProps } from 'react-native-svg';
 
 import { AppText, AppTextProps } from '~/components/common/AppText';
-import { makeStyles } from '~/utils';
 import { useUIKitTheme } from '~/config/utils';
-import { SvgProps } from 'react-native-svg';
-import { useCombinedStylesWithConfig } from '~/hooks/useCombinedStylesWithConfig';
 import { useCombinedPropsWithConfig } from '~/hooks/useCombinedPropsWithConfig';
+import { useCombinedStylesWithConfig } from '~/hooks/useCombinedStylesWithConfig';
+import { makeStyles } from '~/utils';
 
 export interface ButtonProps extends PressableProps {
   /** Properties of the label text */

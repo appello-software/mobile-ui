@@ -2,6 +2,7 @@ import React from 'react';
 
 import { defaultTheme } from '~/__defaults__/defaultTheme';
 import { DeepPartial } from '~/types';
+
 import { ComponentsConfig, UIKitTheme } from './types';
 
 export type ThemeProviderProps<T extends DeepPartial<UIKitTheme>> = {
