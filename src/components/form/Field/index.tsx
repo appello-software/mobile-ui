@@ -1,6 +1,6 @@
 import React, { ComponentProps, PropsWithChildren, ReactNode } from 'react';
 import { FieldError } from 'react-hook-form';
-import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
+import { StyleProp, StyleSheet, TextStyle, View, ViewStyle } from 'react-native';
 
 import { AppText } from '~/components/common/AppText';
 import { useCombinedPropsWithConfig } from '~/hooks/useCombinedPropsWithConfig';
@@ -68,7 +68,13 @@ export const Field: React.FC<FieldProps> = props => {
   );
 };
 
-export const useFieldStyle = makeStyles(theme =>
+interface FieldStyle {
+  field: ViewStyle;
+  field__label: TextStyle;
+  field__error: TextStyle;
+}
+
+export const useFieldStyle = makeStyles((theme) =>
   StyleSheet.create({
     field: {},
     field__label: {
@@ -79,5 +85,6 @@ export const useFieldStyle = makeStyles(theme =>
       color: theme.colors.error,
       marginTop: 3,
     },
-  }),
+    field_foo: {},
+  } as FieldStyle),
 );

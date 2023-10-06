@@ -1,6 +1,14 @@
 import { LinearGradient, LinearGradientProps } from 'expo-linear-gradient';
 import * as React from 'react';
-import { Pressable, PressableProps, StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
+import {
+  Pressable,
+  PressableProps,
+  StyleProp,
+  StyleSheet,
+  TextStyle,
+  View,
+  ViewStyle,
+} from 'react-native';
 import { Flow } from 'react-native-animated-spinkit';
 import { SvgProps } from 'react-native-svg';
 
@@ -194,6 +202,12 @@ const commonStyles = StyleSheet.create({
   },
 });
 
+interface ButtonStyle {
+  button: ViewStyle;
+  'button--disabled': ViewStyle;
+  button__label: TextStyle;
+}
+
 export const usePrimaryButtonStyles = makeStyles(theme =>
   StyleSheet.create({
     button: {
@@ -206,7 +220,7 @@ export const usePrimaryButtonStyles = makeStyles(theme =>
     button__label: {
       ...commonStyles.button__label,
     },
-  }),
+  } as ButtonStyle),
 );
 
 export const useSecondaryButtonStyles = makeStyles(theme =>
@@ -223,5 +237,5 @@ export const useSecondaryButtonStyles = makeStyles(theme =>
     button__label: {
       ...commonStyles.button__label,
     },
-  }),
+  } as ButtonStyle),
 );

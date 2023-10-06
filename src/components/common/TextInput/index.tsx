@@ -4,8 +4,10 @@ import {
   StyleSheet,
   TextInput as RNTextInput,
   TextInputProps as RNTextInputProps,
+  TextStyle,
   TouchableOpacity,
   View,
+  ViewStyle,
 } from 'react-native';
 import {
   createNumberMask,
@@ -132,6 +134,17 @@ export const TextInput: FC<TextInputProps> = props => {
   );
 };
 
+interface TextInputStyle {
+  'text-input'?: TextStyle;
+  'text-input--with-icon'?: TextStyle;
+  'text-input--disabled'?: TextStyle;
+  'text-input--focused'?: TextStyle;
+  'text-input--error'?: TextStyle;
+  'text-input--multiline'?: TextStyle;
+  'text-input__accessory-right-container'?: ViewStyle;
+  'text-input__icon-container'?: ViewStyle;
+}
+
 export const useTextInputStyles = makeStyles(theme => {
   return StyleSheet.create({
     'text-input': {
@@ -184,7 +197,7 @@ export const useTextInputStyles = makeStyles(theme => {
       alignItems: 'center',
       justifyContent: 'center',
     },
-  });
+  } as TextInputStyle);
 });
 
 export { createNumberMask, Masks };
