@@ -69,10 +69,6 @@ const buildConfig = {
     nodeResolve(),
     commonjs(),
     json(),
-    babel({
-      exclude: 'node_modules/**',
-      presets: ['@babel/env', '@babel/react'],
-    }),
     typescript({
       sourceMap: true,
     }),

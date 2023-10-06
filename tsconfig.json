@@ -1,6 +1,7 @@
 {
   "extends": "@tsconfig/react-native/tsconfig.json",
   "compilerOptions": {
+    "jsx": "react",
     "sourceMap": true,
     "isolatedModules": false,
     "pretty": true,
@@ -13,7 +14,8 @@
     },
     "types": ["node"],
     "declaration": true,
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "rootDir": "./src"
   },
   "include": ["src/**/*", ".storybook/**/*"]
 }
