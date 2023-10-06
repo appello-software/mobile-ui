@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text as RNText, TextProps as RNTextProps } from 'react-native';
+import { StyleSheet, Text as RNText, TextProps as RNTextProps, TextStyle } from 'react-native';
 
 import { useCombinedPropsWithConfig } from '~/hooks/useCombinedPropsWithConfig';
 import { useCombinedStylesWithConfig } from '~/hooks/useCombinedStylesWithConfig';
@@ -64,6 +64,26 @@ export const AppText: React.FC<AppTextProps> = props => {
   );
 };
 
+interface AppTextStyle {
+  'app-text'?: TextStyle;
+  'app-text--h1'?: TextStyle;
+  'app-text--h2'?: TextStyle;
+  'app-text--h3'?: TextStyle;
+  'app-text--h4'?: TextStyle;
+  'app-text--h5'?: TextStyle;
+  'app-text--h6'?: TextStyle;
+  'app-text--p1'?: TextStyle;
+  'app-text--p2'?: TextStyle;
+  'app-text--p3'?: TextStyle;
+  'app-text--p4'?: TextStyle;
+  'app-text--p5'?: TextStyle;
+  'app-text--p6'?: TextStyle;
+  'app-text--light'?: TextStyle;
+  'app-text--regular'?: TextStyle;
+  'app-text--medium'?: TextStyle;
+  'app-text--bold'?: TextStyle;
+}
+
 export const useAppTextStyles = makeStyles(() => {
   return StyleSheet.create({
     'app-text': {},
@@ -121,5 +141,5 @@ export const useAppTextStyles = makeStyles(() => {
     'app-text--regular': {},
     'app-text--medium': {},
     'app-text--bold': {},
-  });
+  } as AppTextStyle);
 });
