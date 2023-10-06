@@ -74,7 +74,7 @@ interface FieldStyle {
   field__error: TextStyle;
 }
 
-export const useFieldStyle = makeStyles((theme) =>
+export const useFieldStyle = makeStyles(theme =>
   StyleSheet.create({
     field: {},
     field__label: {

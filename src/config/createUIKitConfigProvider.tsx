@@ -1,4 +1,9 @@
-import { deepmerge } from 'deepmerge-ts';
+import {
+  deepmerge,
+  DeepMergeBuiltInMetaData,
+  DeepMergeHKT,
+  DeepMergeMergeFunctionsDefaultURIs,
+} from 'deepmerge-ts';
 import React, { ComponentProps, useContext } from 'react';
 import { StyleSheet } from 'react-native';
 
@@ -12,7 +17,11 @@ import NamedStyles = StyleSheet.NamedStyles;
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types,@typescript-eslint/explicit-function-return-type
 export function createUIKitConfigProvider<T extends DeepPartial<UIKitTheme> = UIKitTheme>() {
-  type FullContext = Required<ThemeProviderProps<T>>;
+  type FullContext = Required<
+    ThemeProviderProps<
+      DeepMergeHKT<[UIKitTheme, T], DeepMergeMergeFunctionsDefaultURIs, DeepMergeBuiltInMetaData>
+    >
+  >;
 
   const UIKitConfigProvider: React.FC<React.PropsWithChildren<ThemeProviderProps<T>>> = ({
     children,
@@ -24,7 +33,12 @@ export function createUIKitConfigProvider<T extends DeepPartial<UIKitTheme> = UI
     }, [theme]);
 
     return (
-      <UIKitConfigContext.Provider value={{ theme: mergedTheme, componentsConfig }}>
+      <UIKitConfigContext.Provider
+        value={React.useMemo(
+          () => ({ theme: mergedTheme, componentsConfig }),
+          [mergedTheme, componentsConfig],
+        )}
+      >
         {children}
       </UIKitConfigContext.Provider>
     );
