@@ -7,6 +7,9 @@ import { useUIKitTheme } from '~/config/utils';
 import { DeepPartial } from '~/types';
 
 import NamedStyles = StyleSheet.NamedStyles;
+import { deepmerge } from 'deepmerge-ts';
+
+import { defaultTheme } from '~/__defaults__/defaultTheme';
 
 export const makeStyles =
   <
@@ -30,6 +33,7 @@ export const makeDefaultProps =
     return React.useMemo(() => makeProps(theme), [theme]);
   };
 
-export const makeTheme = <T extends DeepPartial<UIKitTheme>>(theme: T): T => theme;
+export const makeTheme = <T extends DeepPartial<UIKitTheme>>(theme: T): UIKitTheme & T =>
+  deepmerge(defaultTheme, theme) as UIKitTheme & T;
 
 export const chroma = chromaJs;

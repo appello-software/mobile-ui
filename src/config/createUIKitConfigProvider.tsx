@@ -1,14 +1,7 @@
-import {
-  deepmerge,
-  DeepMergeBuiltInMetaData,
-  DeepMergeHKT,
-  DeepMergeMergeFunctionsDefaultURIs,
-} from 'deepmerge-ts';
 import React, { ComponentProps, useContext } from 'react';
 import { StyleSheet } from 'react-native';
 
 import { defaultTheme } from '~/__defaults__/defaultTheme';
-import { DeepPartial } from '~/types';
 
 import { UIKitTheme } from './types';
 import { ThemeProviderProps, UIKitConfigContext } from './UIKitConfigProvider';
@@ -16,27 +9,19 @@ import { ThemeProviderProps, UIKitConfigContext } from './UIKitConfigProvider';
 import NamedStyles = StyleSheet.NamedStyles;
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types,@typescript-eslint/explicit-function-return-type
-export function createUIKitConfigProvider<T extends DeepPartial<UIKitTheme> = UIKitTheme>() {
-  type FullContext = Required<
-    ThemeProviderProps<
-      DeepMergeHKT<[UIKitTheme, T], DeepMergeMergeFunctionsDefaultURIs, DeepMergeBuiltInMetaData>
-    >
-  >;
+export function createUIKitConfigProvider<T extends UIKitTheme = UIKitTheme>() {
+  type FullContext = Required<ThemeProviderProps<T>>;
 
   const UIKitConfigProvider: React.FC<React.PropsWithChildren<ThemeProviderProps<T>>> = ({
     children,
     theme,
     componentsConfig = {},
   }) => {
-    const mergedTheme = React.useMemo<FullContext['theme']>(() => {
-      return (theme ? deepmerge(defaultTheme, theme) : defaultTheme) as FullContext['theme'];
-    }, [theme]);
-
     return (
       <UIKitConfigContext.Provider
         value={React.useMemo(
-          () => ({ theme: mergedTheme, componentsConfig }),
-          [mergedTheme, componentsConfig],
+          () => ({ theme: theme ?? defaultTheme, componentsConfig }),
+          [theme, componentsConfig],
         )}
       >
         {children}
