@@ -6,6 +6,7 @@ import { TextField } from './form/TextField';
 export { AppText, AppTextProps } from './common/AppText';
 export { Button, ButtonProps } from './common/Button';
 export { TextInput, TextInputProps } from './common/TextInput';
+export { Checkbox, CheckboxProps } from './common/Checkbox';
 
 export const Form = {
   Field,
