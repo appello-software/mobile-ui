@@ -1,72 +1,72 @@
 import React from 'react';
 import { Pressable, View } from 'react-native';
+import { SvgProps } from 'react-native-svg';
 
-import { AppText } from '~/components';
+import { useUIKitTheme } from '~/config/utils';
 import { useCombinedPropsWithConfig } from '~/hooks/useCombinedPropsWithConfig';
 import { makeStyles } from '~/utils';
 
 export interface CheckboxProps {
-  label?: string;
   checked: boolean;
   onChange: (checked: boolean) => void;
-  checkIconEl?: React.ReactNode;
+  checkIcon?: React.FC<SvgProps>;
   rounded?: boolean;
   disabled?: boolean;
   activeColor?: string;
+  size?: number;
 }
 
 export const Checkbox: React.FC<CheckboxProps> = props => {
-  const styles = useStyles();
+  const { colors } = useUIKitTheme();
   const {
-    checkIconEl,
+    checkIcon: CheckIcon,
     checked,
     onChange,
     rounded,
     disabled,
-    label,
-    activeColor = '#27AE60',
+    activeColor = colors.success,
+    size = 24,
   } = useCombinedPropsWithConfig('Checkbox', props);
+  const styles = useStyles({ size, activeColor });
 
   return (
-    <Pressable style={styles.container} onPress={() => onChange(!checked)} disabled={disabled}>
+    <Pressable onPress={() => onChange(!checked)} disabled={disabled}>
       <View
         style={[
           styles.box,
-          checked && [styles.activeBox, { backgroundColor: activeColor }],
-          rounded && styles.roundedBox,
-          disabled && checked && styles.disabledActiveBox,
+          checked && styles['box--active'],
+          rounded && styles['box--rounded'],
+          disabled && checked && styles['box--disabled'],
         ]}
       >
-        <View>{checked && checkIconEl}</View>
+        <View>
+          {checked && CheckIcon && <CheckIcon color={colors.white} width={size} height={size} />}
+        </View>
       </View>
-      {label && <AppText style={styles.label}>{label}</AppText>}
     </Pressable>
   );
 };
 
-const useStyles = makeStyles(theme => ({
-  container: {
-    flexDirection: 'row',
-  },
-  box: {
-    width: 24,
-    height: 24,
-    borderWidth: 1,
-    borderColor: theme.colors.gray['4'],
-    borderRadius: 3,
-    backgroundColor: theme.colors.white,
-  },
-  activeBox: {
-    borderWidth: 0,
-  },
-  roundedBox: {
-    borderRadius: 24 / 2,
-  },
-  disabledActiveBox: {
-    borderWidth: 0,
-    backgroundColor: theme.colors.gray['3'],
-  },
-  label: {
-    marginLeft: 10,
-  },
-}));
+const useStyles = makeStyles(
+  (theme, { size, activeColor }: { size: number; activeColor: string }) => ({
+    box: {
+      width: size,
+      height: size,
+      borderWidth: 1,
+      borderColor: theme.colors.gray['4'],
+      borderRadius: 3,
+      backgroundColor: theme.colors.white,
+    },
+    'box--active': {
+      borderWidth: 0,
+      backgroundColor: activeColor,
+    },
+    'box--rounded': {
+      borderRadius: size / 2,
+    },
+    'box--disabled': {
+      borderWidth: 0,
+      backgroundColor: theme.colors.gray['3'],
+    },
+  }),
+);
