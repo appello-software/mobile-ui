@@ -1,6 +1,7 @@
 import { ElementType } from 'react';
 import { ShadowStyleIOS } from 'react-native';
 
+import { Checkbox } from '~/components';
 import { AppText, useAppTextStyles } from '~/components/common/AppText';
 import {
   Button,
@@ -61,6 +62,10 @@ export interface UIComponents {
   };
   PasswordField: {
     defaultProps: DefaultPropsConfig<typeof PasswordField>;
+    styles: never;
+  };
+  Checkbox: {
+    defaultProps: DefaultPropsConfig<typeof Checkbox>;
     styles: never;
   };
 }
