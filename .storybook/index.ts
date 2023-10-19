@@ -1,7 +1,6 @@
 import { getStorybookUI } from '@storybook/react-native';
 
-import './storybook.requires';
-import './doctools';
+import './configs/ondevice/storybook.requires';
 
 export const StorybookUIRoot = getStorybookUI({
   shouldDisableKeyboardAvoidingView: true,

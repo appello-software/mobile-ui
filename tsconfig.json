@@ -17,5 +17,5 @@
     "outDir": "./dist",
     "rootDir": "./src"
   },
-  "include": ["src/**/*", ".storybook/**/*"]
+  "include": ["src/**/*"]
 }
