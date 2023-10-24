@@ -7,9 +7,7 @@
       {
         "root": ["./"],
         "alias": {
-          "~/lib": "./dist",
-          "~/icons": "./icons",
-          "~": "./.storybook"
+          "~": "./src"
         }
       }
     ]

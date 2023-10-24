@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 
-import { TextInput, Field, FieldProps } from '../../../dist';
+import { TextInput, Field, FieldProps } from '../../../src';
 import { CONFIG_CATEGORY } from '../../constants';
 
 const meta: Meta<FieldProps> = {

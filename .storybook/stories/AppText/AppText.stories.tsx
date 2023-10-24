@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react-native';
 
-import { AppText, AppTextProps } from '../../../dist';
+import { AppText, AppTextProps } from '../../../src';
 import { CONFIG_DETAIL } from '../../constants';
 
 enum AppTextVariant {

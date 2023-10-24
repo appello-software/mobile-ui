@@ -2,7 +2,7 @@ import { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 
 import { ChatIcon } from '../../../icons';
-import { Button, ButtonProps } from '../../../dist';
+import { Button, ButtonProps } from '../../../src';
 import { CONFIG_CATEGORY, CONFIG_DETAIL } from '../../constants';
 
 const meta: Meta<ButtonProps & { Icon: boolean }> = {

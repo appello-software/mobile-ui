@@ -3,7 +3,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 
 import { CONFIG_CATEGORY, EXTENDED_CATEGORY } from '../../constants';
-import { PasswordField, PasswordFieldProps } from '../../../dist';
+import { PasswordField, PasswordFieldProps } from '../../../src';
 import { Icons } from '../../../icons';
 
 const meta: Meta<PasswordFieldProps<any>> = {
