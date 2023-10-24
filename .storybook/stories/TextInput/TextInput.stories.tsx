@@ -1,11 +1,10 @@
-import { TextInput, TextInputProps, Button } from '../../../src';
 import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react-native';
 import React, { useState } from 'react';
 
-import PaperPlaneIcon from '../../assets/icons/unicons/paper-plane.svg';
-import AccountIcon from '../../assets/icons/unicons/account.svg';
-import { CONFIG_CATEGORY } from '../../constants';
+import { TextInput, TextInputProps, Button } from '~/lib';
+import { PaperPlaneIcon, AccountIcon } from '~/icons';
+import { CONFIG_CATEGORY } from '~/constants';
 
 const accessoryRightRender = (
   <Button

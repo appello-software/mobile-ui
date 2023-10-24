@@ -1,16 +1,7 @@
-import { Field } from './form/Field';
-import { PasswordField } from './form/PasswordField';
-// import { PhoneNumberField } from './form/PhoneNumberField';
-import { TextField } from './form/TextField';
-
 export { AppText, AppTextProps } from './common/AppText';
 export { Button, ButtonProps } from './common/Button';
-export { TextInput, TextInputProps } from './common/TextInput';
 export { Checkbox, CheckboxProps } from './common/Checkbox';
-
-export const Form = {
-  Field,
-  PasswordField,
-  // PhoneNumberField,
-  TextField,
-};
+export { TextInput, TextInputProps } from './common/TextInput';
+export { Field, FieldProps } from './form/Field';
+export { PasswordField, PasswordFieldProps } from './form/PasswordField';
+export { TextField, TextFieldProps } from './form/TextField';

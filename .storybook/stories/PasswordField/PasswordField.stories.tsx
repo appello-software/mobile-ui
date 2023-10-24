@@ -1,18 +1,16 @@
 import { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
-import { CONFIG_CATEGORY, EXTENDED_CATEGORY } from '../../constants';
-import EyeIcon from '../../assets/icons/unicons/eye.svg';
-import CloseIcon from '../../assets/icons/unicons/close.svg';
 import { useForm } from 'react-hook-form';
-import { PasswordField, PasswordFieldProps } from '~/components/form/PasswordField';
+
+import { CONFIG_CATEGORY, EXTENDED_CATEGORY } from '~/constants';
+import { PasswordField, PasswordFieldProps } from '~/lib';
+import { Icons } from '~/icons';
 
 const meta: Meta<PasswordFieldProps<any>> = {
   title: 'Forms/PasswordField',
   component: PasswordField,
   render: props => {
     const form = useForm<{ password: string }>();
-
-    const foo = <EyeIcon width={20} height={20} />;
 
     return (
       <PasswordField
@@ -21,8 +19,8 @@ const meta: Meta<PasswordFieldProps<any>> = {
         name="password"
         togglePasswordVisibilityIcons={React.useMemo(
           () => ({
-            show: EyeIcon,
-            hide: CloseIcon,
+            show: Icons.EyeIcon,
+            hide: Icons.CloseIcon,
           }),
           [],
         )}

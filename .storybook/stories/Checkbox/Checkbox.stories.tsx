@@ -1,8 +1,9 @@
-import { Checkbox, CheckboxProps } from '../../../src';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React, { useState } from 'react';
-import CheckIcon from '../../assets/icons/unicons/approve-tick-checkmark.svg';
-import { CONFIG_CATEGORY, CONFIG_DETAIL } from '../../constants';
+
+import { CheckmarkIcon } from '~/icons';
+import { Checkbox, CheckboxProps } from '~/lib';
+import { CONFIG_CATEGORY, CONFIG_DETAIL } from '~/constants';
 
 const meta = {
   title: 'Basic/Checkbox',
@@ -13,7 +14,7 @@ const meta = {
     return <Checkbox {...args} checked={value} onChange={setValue} />;
   },
   args: {
-    checkIcon: CheckIcon,
+    checkIcon: CheckmarkIcon,
     checked: false,
     disabled: false,
     rounded: false,

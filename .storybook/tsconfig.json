@@ -8,14 +8,15 @@
     "removeComments": true,
     "noImplicitReturns": true,
     "allowSyntheticDefaultImports": true,
-    "baseUrl": ".",
+    "baseUrl": "..",
     "paths": {
-      "~/*": ["./src/*"]
+      "~/*": ["./.storybook/*"],
+      "~/lib": ["./dist"],
+      "~/icons": ["./icons"],
     },
     "types": ["node"],
-    "declaration": true,
-    "outDir": "./dist",
-    "rootDir": "./src"
+    "noEmit": true,
+    "rootDir": ".."
   },
-  "include": ["src/**/*", "icons"]
+  "include": ["./**/*"]
 }

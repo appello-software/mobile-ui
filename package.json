@@ -21,7 +21,8 @@
   "files": [
     "dist",
     "tsconfig.json",
-    ".storybook"
+    ".storybook",
+    "icons"
   ],
   "peerDependencies": {
     "expo": ">=48.0.0",

@@ -1,8 +1,9 @@
 import { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
-import { TextField, TextFieldProps } from '~/components/form/TextField';
 import { useForm } from 'react-hook-form';
-import { EXTENDED_CATEGORY } from '../../constants';
+
+import { TextField, TextFieldProps } from '~/lib';
+import { EXTENDED_CATEGORY } from '~/constants';
 
 const meta: Meta<TextFieldProps<any>> = {
   title: 'Forms/TextField',
