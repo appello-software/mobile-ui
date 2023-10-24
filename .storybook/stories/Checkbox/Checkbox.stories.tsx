@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React, { useState } from 'react';
 
-import { CheckmarkIcon } from '~/icons';
-import { Checkbox, CheckboxProps } from '~/lib';
-import { CONFIG_CATEGORY, CONFIG_DETAIL } from '~/constants';
+import { CheckmarkIcon } from '../../../icons';
+import { Checkbox, CheckboxProps } from '../../../dist';
+import { CONFIG_CATEGORY, CONFIG_DETAIL } from '../../constants';
 
 const meta = {
   title: 'Basic/Checkbox',

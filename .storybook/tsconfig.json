@@ -9,11 +9,6 @@
     "noImplicitReturns": true,
     "allowSyntheticDefaultImports": true,
     "baseUrl": "..",
-    "paths": {
-      "~/*": ["./.storybook/*"],
-      "~/lib": ["./dist"],
-      "~/icons": ["./icons"],
-    },
     "types": ["node"],
     "noEmit": true,
     "rootDir": ".."

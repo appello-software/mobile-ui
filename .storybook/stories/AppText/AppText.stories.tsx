@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react-native';
 
-import { AppText, AppTextProps } from '~/lib';
-import { CONFIG_DETAIL } from '~/constants';
+import { AppText, AppTextProps } from '../../../dist';
+import { CONFIG_DETAIL } from '../../constants';
 
 enum AppTextVariant {
   H1 = 'h1',

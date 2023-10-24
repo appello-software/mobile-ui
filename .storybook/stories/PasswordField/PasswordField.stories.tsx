@@ -2,9 +2,9 @@ import { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 
-import { CONFIG_CATEGORY, EXTENDED_CATEGORY } from '~/constants';
-import { PasswordField, PasswordFieldProps } from '~/lib';
-import { Icons } from '~/icons';
+import { CONFIG_CATEGORY, EXTENDED_CATEGORY } from '../../constants';
+import { PasswordField, PasswordFieldProps } from '../../../dist';
+import { Icons } from '../../../icons';
 
 const meta: Meta<PasswordFieldProps<any>> = {
   title: 'Forms/PasswordField',

@@ -1,9 +1,9 @@
 import { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 
-import { ChatIcon } from '~/icons';
-import { Button, ButtonProps } from '~/lib';
-import { CONFIG_CATEGORY, CONFIG_DETAIL } from '~/constants';
+import { ChatIcon } from '../../../icons';
+import { Button, ButtonProps } from '../../../dist';
+import { CONFIG_CATEGORY, CONFIG_DETAIL } from '../../constants';
 
 const meta: Meta<ButtonProps & { Icon: boolean }> = {
   title: 'Basic/Button',
