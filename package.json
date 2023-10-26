@@ -19,10 +19,8 @@
   "type": "module",
   "sideEffects": false,
   "files": [
-    "src",
     "dist",
     "tsconfig.json",
-    ".storybook",
     "icons"
   ],
   "peerDependencies": {
