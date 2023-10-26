@@ -69,9 +69,9 @@ export const Field: React.FC<FieldProps> = props => {
 };
 
 interface FieldStyle {
-  field: ViewStyle;
-  field__label: TextStyle;
-  field__error: TextStyle;
+  field?: ViewStyle;
+  field__label?: TextStyle;
+  field__error?: TextStyle;
 }
 
 export const useFieldStyle = makeStyles(theme =>

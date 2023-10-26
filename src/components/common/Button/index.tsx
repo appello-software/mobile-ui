@@ -203,9 +203,9 @@ const commonStyles = StyleSheet.create({
 });
 
 interface ButtonStyle {
-  button: ViewStyle;
-  'button--disabled': ViewStyle;
-  button__label: TextStyle;
+  button?: ViewStyle;
+  'button--disabled'?: ViewStyle;
+  button__label?: TextStyle;
 }
 
 export const usePrimaryButtonStyles = makeStyles(theme =>
