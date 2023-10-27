@@ -59,7 +59,7 @@ export const AppText: React.FC<AppTextProps> = props => {
         !!color && { color },
         uppercase && { textTransform: 'uppercase' },
         underline && { textDecorationLine: 'underline' },
-      ])}
+      ] as TextStyle[])}
     />
   );
 };
@@ -84,9 +84,8 @@ interface AppTextStyle {
   'app-text--bold'?: TextStyle;
 }
 
-export const useAppTextStyles = makeStyles(() => {
-  return StyleSheet.create({
-    'app-text': {},
+export const useAppTextStyles = makeStyles<void, AppTextStyle>(() => {
+  return {
     'app-text--h1': {
       fontSize: 34,
       lineHeight: 48,
@@ -141,5 +140,5 @@ export const useAppTextStyles = makeStyles(() => {
     'app-text--regular': {},
     'app-text--medium': {},
     'app-text--bold': {},
-  } as AppTextStyle);
+  };
 });
