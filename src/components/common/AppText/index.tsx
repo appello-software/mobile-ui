@@ -30,6 +30,8 @@ export interface AppTextProps extends RNTextProps {
   underline?: boolean;
   /** Text weight */
   weight?: 'light' | 'regular' | 'medium' | 'bold';
+  /** Text align */
+  align?: TextStyle['textAlign'];
 }
 
 /**
@@ -45,6 +47,7 @@ export const AppText: React.FC<AppTextProps> = props => {
     uppercase,
     underline,
     style,
+    align,
     ...textProps
   } = useCombinedPropsWithConfig('AppText', props);
 
@@ -57,6 +60,7 @@ export const AppText: React.FC<AppTextProps> = props => {
         styles[`app-text--${weight}`],
         style,
         !!color && { color },
+        !!align && { textAlign: align },
         uppercase && { textTransform: 'uppercase' },
         underline && { textDecorationLine: 'underline' },
       ] as TextStyle[])}
