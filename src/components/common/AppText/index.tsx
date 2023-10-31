@@ -1,5 +1,11 @@
 import React from 'react';
-import { StyleSheet, Text as RNText, TextProps as RNTextProps, TextStyle } from 'react-native';
+import {
+  ColorValue,
+  StyleSheet,
+  Text as RNText,
+  TextProps as RNTextProps,
+  TextStyle,
+} from 'react-native';
 
 import { useCombinedPropsWithConfig } from '~/hooks/useCombinedPropsWithConfig';
 import { useCombinedStylesWithConfig } from '~/hooks/useCombinedStylesWithConfig';
@@ -23,7 +29,7 @@ export interface AppTextProps extends RNTextProps {
   /** Variant of displaying text */
   variant?: TextVariant;
   /** Text color */
-  color?: string;
+  color?: ColorValue;
   /** Should text be in uppercase */
   uppercase?: boolean;
   /** Should text be underlined */

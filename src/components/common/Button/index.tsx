@@ -1,6 +1,7 @@
 import { LinearGradient, LinearGradientProps } from 'expo-linear-gradient';
 import * as React from 'react';
 import {
+  ColorValue,
   Pressable,
   PressableProps,
   StyleProp,
@@ -20,7 +21,7 @@ import { makeStyles } from '~/utils';
 
 export interface ButtonProps extends PressableProps {
   /** Properties of the label text */
-  labelProps?: AppTextProps;
+  labelProps?: AppTextProps & { disabledColor?: ColorValue };
   /** Color of the loader component */
   loaderColor?: string;
   /** Is the Button currently in loading state */
@@ -80,7 +81,9 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> = ({
   const layoutStyles = useLayoutStyles();
   const theme = useUIKitTheme();
 
-  const labelColor = !disabled ? labelProps?.color : theme.colors.gray['3'];
+  const labelColor = !disabled
+    ? labelProps?.color
+    : labelProps?.disabledColor || theme.colors.gray['3'];
   const label =
     typeof children === 'string' ? (
       <View
