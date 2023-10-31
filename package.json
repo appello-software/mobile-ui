@@ -15,7 +15,7 @@
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "unpkg": "dist/index.min.js",
-  "types": "dist/index.d.ts",
+  "types": "dist/src/index.d.ts",
   "type": "module",
   "sideEffects": false,
   "files": [
