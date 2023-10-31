@@ -3,7 +3,7 @@ import { Meta, StoryObj } from '@storybook/react-native';
 import React, { useState } from 'react';
 
 import { TextInput, TextInputProps, Button } from '../../../src';
-import { PaperPlaneIcon, AccountIcon } from '../../../icons';
+import { PaperPlaneIcon, AccountIcon } from './icons';
 import { CONFIG_CATEGORY } from '../../constants';
 
 const accessoryRightRender = (

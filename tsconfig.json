@@ -15,7 +15,7 @@
     "types": ["node"],
     "declaration": true,
     "outDir": "./dist",
-    "rootDir": "./src"
+    "rootDir": "."
   },
-  "include": ["src/**/*", "icons"]
+  "include": ["src/**/*", ".storybook/**/*"]
 }

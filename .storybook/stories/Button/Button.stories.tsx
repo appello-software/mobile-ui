@@ -1,9 +1,18 @@
 import { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
+import Svg, { Path, SvgProps } from 'react-native-svg';
 
-import { ChatIcon } from '../../../icons';
 import { Button, ButtonProps } from '../../../src';
 import { CONFIG_CATEGORY, CONFIG_DETAIL } from '../../constants';
+
+const ChatIcon: React.FC<SvgProps> = props => (
+  <Svg fill="none" viewBox="0 0 24 24" {...props}>
+    <Path
+      fill="currentColor"
+      d="M12 2A10 10 0 0 0 2 12a9.89 9.89 0 0 0 2.26 6.33l-2 2a1 1 0 0 0-.21 1.09A1 1 0 0 0 3 22h9a10 10 0 0 0 0-20Zm0 18H5.41l.93-.93a1 1 0 0 0 0-1.41A8 8 0 1 1 12 20Z"
+    />
+  </Svg>
+);
 
 const meta: Meta<ButtonProps & { Icon: boolean }> = {
   title: 'Basic/Button',

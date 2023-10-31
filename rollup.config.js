@@ -77,11 +77,40 @@ const buildConfig = {
 };
 
 /** @type {import('rollup').RollupOptions} */
+const storybookBuildConfig = {
+  input: '.storybook/index.ts',
+  output: [
+    {
+      dir: 'dist',
+      entryFileNames: '.storybook/[name].js',
+      format: 'esm',
+    },
+  ],
+  plugins: [
+    peerDepsExternal(),
+    nodeResolve(),
+    babel({
+      presets: ['@babel/preset-env', '@babel/preset-react'],
+      include: [
+        'node_modules/react-native-swipe-gestures/**',
+        'node_modules/react-native-modal-selector/**',
+      ],
+    }),
+    commonjs(),
+    json(),
+    typescript({
+      sourceMap: true,
+    }),
+    tscAliasPlugin(),
+  ],
+};
+
+/** @type {import('rollup').RollupOptions} */
 const browserConfig = {
   input: 'dist/index.js',
   output: [
     {
-      file: pkg.unpkg,
+      dir: pkg.unpkg,
       format: 'umd',
       name: '@appello/mobile-ui',
     },
@@ -89,4 +118,4 @@ const browserConfig = {
   plugins: [terser()],
 };
 
-export default [buildConfig, browserConfig];
+export default [buildConfig, browserConfig, storybookBuildConfig];

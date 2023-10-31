@@ -21,7 +21,8 @@
   "files": [
     "dist",
     "tsconfig.json",
-    "icons"
+    "icons",
+    "README.md"
   ],
   "peerDependencies": {
     "expo": ">=48.0.0",
@@ -30,7 +31,9 @@
     "react-dom": "18.2.0",
     "react-hook-form": ">=7.43.5",
     "react-native": ">=0.71.0",
-    "react-native-svg": ">=13.12.0"
+    "react-native-svg": ">=13.12.0",
+    "@storybook/addon-ondevice-actions": "^6.5.6",
+    "@storybook/addon-ondevice-controls": "^6.5.6"
   },
   "devDependencies": {
     "@appello/eslint-config": "^0.1.12",
