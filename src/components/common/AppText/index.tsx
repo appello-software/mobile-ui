@@ -58,11 +58,11 @@ export const AppText: React.FC<AppTextProps> = props => {
         styles['app-text'],
         styles[`app-text--${variant}`],
         styles[`app-text--${weight}`],
-        style,
         !!color && { color },
         !!align && { textAlign: align },
         uppercase && { textTransform: 'uppercase' },
         underline && { textDecorationLine: 'underline' },
+        style,
       ] as TextStyle[])}
     />
   );
