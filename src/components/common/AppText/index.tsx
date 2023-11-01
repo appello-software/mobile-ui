@@ -41,8 +41,52 @@ export interface AppTextProps extends RNTextProps {
 }
 
 /**
+ * When changing something here, don't forget to change the documentation below
+ */
+interface AppTextStyle {
+  'app-text'?: TextStyle;
+  'app-text--h1'?: TextStyle;
+  'app-text--h2'?: TextStyle;
+  'app-text--h3'?: TextStyle;
+  'app-text--h4'?: TextStyle;
+  'app-text--h5'?: TextStyle;
+  'app-text--h6'?: TextStyle;
+  'app-text--p1'?: TextStyle;
+  'app-text--p2'?: TextStyle;
+  'app-text--p3'?: TextStyle;
+  'app-text--p4'?: TextStyle;
+  'app-text--p5'?: TextStyle;
+  'app-text--p6'?: TextStyle;
+  'app-text--light'?: TextStyle;
+  'app-text--regular'?: TextStyle;
+  'app-text--medium'?: TextStyle;
+  'app-text--bold'?: TextStyle;
+}
+
+/**
  * Primary UI component for text displaying.
  * It extends default [RN Text](https://reactnative.dev/docs/text) component and its props.
+ *
+ * Style configuration interface:
+ * ```interface AppTextStyle {
+ *   'app-text'?: TextStyle;
+ *   'app-text--h1'?: TextStyle;
+ *   'app-text--h2'?: TextStyle;
+ *   'app-text--h3'?: TextStyle;
+ *   'app-text--h4'?: TextStyle;
+ *   'app-text--h5'?: TextStyle;
+ *   'app-text--h6'?: TextStyle;
+ *   'app-text--p1'?: TextStyle;
+ *   'app-text--p2'?: TextStyle;
+ *   'app-text--p3'?: TextStyle;
+ *   'app-text--p4'?: TextStyle;
+ *   'app-text--p5'?: TextStyle;
+ *   'app-text--p6'?: TextStyle;
+ *   'app-text--light'?: TextStyle;
+ *   'app-text--regular'?: TextStyle;
+ *   'app-text--medium'?: TextStyle;
+ *   'app-text--bold'?: TextStyle;
+ * }```
  */
 export const AppText: React.FC<AppTextProps> = props => {
   const styles = useCombinedStylesWithConfig('AppText', useAppTextStyles);
@@ -73,26 +117,6 @@ export const AppText: React.FC<AppTextProps> = props => {
     />
   );
 };
-
-interface AppTextStyle {
-  'app-text'?: TextStyle;
-  'app-text--h1'?: TextStyle;
-  'app-text--h2'?: TextStyle;
-  'app-text--h3'?: TextStyle;
-  'app-text--h4'?: TextStyle;
-  'app-text--h5'?: TextStyle;
-  'app-text--h6'?: TextStyle;
-  'app-text--p1'?: TextStyle;
-  'app-text--p2'?: TextStyle;
-  'app-text--p3'?: TextStyle;
-  'app-text--p4'?: TextStyle;
-  'app-text--p5'?: TextStyle;
-  'app-text--p6'?: TextStyle;
-  'app-text--light'?: TextStyle;
-  'app-text--regular'?: TextStyle;
-  'app-text--medium'?: TextStyle;
-  'app-text--bold'?: TextStyle;
-}
 
 export const useAppTextStyles = makeStyles<void, AppTextStyle>(() => {
   return {

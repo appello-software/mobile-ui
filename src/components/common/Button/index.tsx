@@ -45,9 +45,22 @@ export interface ButtonProps extends PressableProps {
   style?: StyleProp<ViewStyle>;
 }
 
+interface ButtonStyle {
+  button?: ViewStyle;
+  'button--disabled'?: ViewStyle;
+  button__label?: TextStyle;
+}
+
 /**
  * Primary UI component for user interaction.
  * It extends default [RN Pressable](https://reactnative.dev/docs/pressable) component and its props.
+ *
+ * Style configuration interface:
+ * ```interface ButtonStyle {
+ *   button?: ViewStyle;
+ *   'button--disabled'?: ViewStyle;
+ *   button__label?: TextStyle;
+ * }```
  */
 export const Button: React.FC<React.PropsWithChildren<ButtonProps>> = ({
   variant = 'primary',
@@ -204,12 +217,6 @@ const commonStyles = StyleSheet.create({
     marginHorizontal: 7,
   },
 });
-
-interface ButtonStyle {
-  button?: ViewStyle;
-  'button--disabled'?: ViewStyle;
-  button__label?: TextStyle;
-}
 
 export const usePrimaryButtonStyles = makeStyles(theme =>
   StyleSheet.create({

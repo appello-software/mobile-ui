@@ -44,10 +44,33 @@ export interface TextInputProps extends RNTextInputProps {
   placeholderFillCharacter?: MaskInputProps['placeholderFillCharacter'];
 }
 
+interface TextInputStyle {
+  'text-input'?: TextStyle;
+  'text-input--with-icon'?: TextStyle;
+  'text-input--disabled'?: TextStyle;
+  'text-input--focused'?: TextStyle;
+  'text-input--error'?: TextStyle;
+  'text-input--multiline'?: TextStyle;
+  'text-input__accessory-right-container'?: ViewStyle;
+  'text-input__icon-container'?: ViewStyle;
+}
+
 /**
  * Primary UI component for inputting text into the app via a keyboard.<br>
  * It extends default [RN TextInput](https://reactnative.dev/docs/textinput) component and its props.<br>
  * It has additional built-in functionality such as icon on the left, any right accessory and mask.
+ *
+ * Style configuration interface:
+ * ```interface TextInputStyle {
+ *   'text-input'?: TextStyle;
+ *   'text-input--with-icon'?: TextStyle;
+ *   'text-input--disabled'?: TextStyle;
+ *   'text-input--focused'?: TextStyle;
+ *   'text-input--error'?: TextStyle;
+ *   'text-input--multiline'?: TextStyle;
+ *   'text-input__accessory-right-container'?: ViewStyle;
+ *   'text-input__icon-container'?: ViewStyle;
+ * }```
  */
 export const TextInput: FC<TextInputProps> = props => {
   const theme = useUIKitTheme();
@@ -133,17 +156,6 @@ export const TextInput: FC<TextInputProps> = props => {
     </TouchableOpacity>
   );
 };
-
-interface TextInputStyle {
-  'text-input'?: TextStyle;
-  'text-input--with-icon'?: TextStyle;
-  'text-input--disabled'?: TextStyle;
-  'text-input--focused'?: TextStyle;
-  'text-input--error'?: TextStyle;
-  'text-input--multiline'?: TextStyle;
-  'text-input__accessory-right-container'?: ViewStyle;
-  'text-input__icon-container'?: ViewStyle;
-}
 
 export const useTextInputStyles = makeStyles(theme => {
   return StyleSheet.create({

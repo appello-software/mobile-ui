@@ -11,3 +11,4 @@ storybook-static/
 !.yarn/sdks
 !.yarn/versions
 .DS_Store
+chromatic.log

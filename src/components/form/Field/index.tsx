@@ -24,8 +24,22 @@ export interface FieldProps extends PropsWithChildren {
   renderError?: (props: React.PropsWithChildren) => React.ReactNode;
 }
 
+interface FieldStyle {
+  field?: ViewStyle;
+  field__label?: TextStyle;
+  field__error?: TextStyle;
+}
+
 /**
- * A common wrapper for form fields, mostly for displaying label and errors
+ * A common wrapper for form fields, mostly for displaying label and errors.
+ *
+ * Style configuration interface:
+ * ```
+ * interface FieldStyle {
+ *   field?: ViewStyle;
+ *   field__label?: TextStyle;
+ *   field__error?: TextStyle;
+ * }```
  */
 export const Field: React.FC<FieldProps> = props => {
   const styles = useCombinedStylesWithConfig('Field', useFieldStyle);
@@ -67,12 +81,6 @@ export const Field: React.FC<FieldProps> = props => {
     </View>
   );
 };
-
-interface FieldStyle {
-  field?: ViewStyle;
-  field__label?: TextStyle;
-  field__error?: TextStyle;
-}
 
 export const useFieldStyle = makeStyles(theme =>
   StyleSheet.create({

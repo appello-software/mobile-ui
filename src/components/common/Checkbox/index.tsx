@@ -16,6 +16,10 @@ export interface CheckboxProps {
   size?: number;
 }
 
+/**
+ * Simple checkbox.<br>
+ * The style isn't configurable
+ */
 export const Checkbox: React.FC<CheckboxProps> = props => {
   const { colors } = useUIKitTheme();
   const {
