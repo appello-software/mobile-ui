@@ -82,8 +82,13 @@ const storybookBuildConfig = {
   output: [
     {
       dir: 'dist',
-      entryFileNames: '.storybook/[name].js',
+      entryFileNames: '.storybook/[name].esm.js',
       format: 'esm',
+    },
+    {
+      dir: 'dist',
+      entryFileNames: '.storybook/[name].js',
+      format: 'cjs',
     },
   ],
   plugins: [
