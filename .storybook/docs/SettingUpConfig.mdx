@@ -1,0 +1,103 @@
+# Setting up UIKit
+Most of the boilerplate for setting up config is already in the Appello RN Boilerplate. You can check it [here](https://bitbucket.org/appello/bp-react-native/src/master/template/src/view/uiKit/).
+Basically, what happens there is we are using `createUIKitConfigProvider` fabric to create correctly typed `UIKitConfigProvider`, as well as some useful functions: `useUIKitTheme`, `makeStyles`, `makeDefaultProps`.
+
+## Setting up Theme
+To change or add new values to the Theme, go to the `/src/view/uiKit/theme.ts` in your project and set up there whatever values you need based on the UI section of the design.
+
+Here is the interface of basic Theme, but you can expand it in any way to use inside the project.
+```tsx
+interface UIKitTheme {
+  colors: {
+    primary: string;
+    secondary?: string;
+    additional?: string;
+    error: string;
+    success: string;
+    white: string;
+    black: Record<1 | 2 | 3, string>;
+    gray: Record<1 | 2 | 3 | 4 | 5 | 6 | 7, string>;
+
+    [key: string]: any;
+  };
+  shadow: Record<1 | 2 | 3 | 4, ShadowStyleIOS & { elevation?: number }>;
+}
+```
+
+By default, UIKit will start using your values instead of default ones. For example, `Button` with the prop `variant="primary"` will now be colored in your `colors.primary` color.
+
+## Configuring the components
+`UIKitProvider` also has `componentsConfig` prop which takes the components config with this interface:
+
+```typescript
+type DefaultPropsConfig<T extends ElementType, TPartialProps = PartialProps<T>> =
+  | TPartialProps
+  | ReturnType<typeof makeDefaultProps<TPartialProps>>;
+
+interface UIComponents {
+  AppText: {
+    defaultProps: DefaultPropsConfig<typeof AppText>;
+    styles: typeof useAppTextStyles;
+  };
+  TextInput: {
+    defaultProps: DefaultPropsConfig<typeof TextInput>;
+    styles: typeof useTextInputStyles;
+  };
+  'Button.Primary': {
+    defaultProps: DefaultPropsConfig<typeof Button>;
+    styles: typeof usePrimaryButtonStyles;
+  };
+  'Button.Secondary': {
+    defaultProps: DefaultPropsConfig<typeof Button>;
+    styles: typeof useSecondaryButtonStyles;
+  };
+  Field: {
+    defaultProps: DefaultPropsConfig<typeof Field>;
+    styles: typeof useFieldStyle;
+  };
+  PasswordField: {
+    defaultProps: DefaultPropsConfig<typeof PasswordField>;
+    styles: never;
+  };
+}
+
+export type ComponentsConfig = { [P in keyof UIComponents]?: Partial<UIComponents[P]> };
+```
+
+As you can see, you can set up each component's additional styles, as well as its default properties.
+Config of every component is optional, but in most cases you will have to config at least some of the components for them to match your project design.
+
+You can find the list of props in the component's documentation. The ones you will probably want to config just once are placed in the category named 'Mostly for config'. You can find there a list of possible style names for the component as well.
+
+```tsx
+import { chroma, ComponentsConfig } from '@appello/mobile-ui';
+import RightArrowIcon from '@appello/mobile-ui/icons/unicons/right-arrow-4.svg';
+
+import { makeDefaultProps, makeStyles } from '~/view/uiKit';
+
+export const ButtonPrimaryConfig: ComponentsConfig['Button.Primary'] = {
+  styles: makeStyles(theme => ({
+    button: {
+      height: 55,
+      borderRadius: 35,
+    },
+    'button--disabled': {
+      opacity: 0.4,
+    },
+    button__label: {
+      fontFamily: theme.fonts.mainMedium,
+    },
+  })),
+  defaultProps: makeDefaultProps(theme => ({
+    backgroundGradient: theme.gradients.primary,
+    pressedOverlayColor: chroma(theme.colors.black['1']).alpha(0.1).hex('rgba'),
+    Icon: RightArrowIcon,
+    iconSize: { width: 18, height: 18 },
+    iconPosition: 'right',
+    labelProps: {
+      color: theme.colors.white,
+      disabledColor: theme.colors.white,
+    },
+  })),
+};
+```

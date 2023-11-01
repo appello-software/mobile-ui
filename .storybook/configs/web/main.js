@@ -2,7 +2,11 @@ const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
 
 module.exports = {
   framework: '@storybook/react-webpack5',
-  stories: ['../../stories/**/*.stories.mdx', '../../stories/**/*.stories.@(js|jsx|ts|tsx)'],
+  stories: [
+    '../../stories/**/*.stories.mdx',
+    '../../stories/**/*.stories.@(js|jsx|ts|tsx)',
+    '../../docs/**/*.mdx',
+  ],
   addons: [
     '@storybook/addon-links',
     '@storybook/addon-essentials',
