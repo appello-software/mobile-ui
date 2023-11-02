@@ -10,7 +10,8 @@
     "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
     "paths": {
-      "~/*": ["./src/*"]
+      "~/*": ["./src/*"],
+      "@appello/mobile-ui/icons/*": ["./icons/*"]
     },
     "types": ["node"],
     "declaration": true,
