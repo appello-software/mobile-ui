@@ -1,14 +1,15 @@
-import BackArrow from '@icons/unicons/left-arrow-3.svg';
 import { HeaderBackContext } from '@react-navigation/elements';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import React from 'react';
 import { StyleSheet, TouchableOpacity, View, ViewStyle } from 'react-native';
 
-import { AppText } from '~/components';
+import { AppText } from '~/components/common/AppText';
 import { useUIKitTheme } from '~/config/utils';
 import { useCombinedPropsWithConfig } from '~/hooks/useCombinedPropsWithConfig';
 import { useCombinedStylesWithConfig } from '~/hooks/useCombinedStylesWithConfig';
 import { makeStyles } from '~/utils';
+
+import BackArrow from '../../../icons/unicons/left-arrow-3.svg';
 
 export interface BasicHeaderProps {
   accessoryRight?: Nullable<React.ReactNode>;
