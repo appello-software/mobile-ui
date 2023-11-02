@@ -11,6 +11,8 @@ import {
 import { TextInput, useTextInputStyles } from '~/components/common/TextInput';
 import { Field, useFieldStyle } from '~/components/form/Field';
 import { PasswordField } from '~/components/form/PasswordField';
+import { BasicHeader, useBasicHeaderStyles } from '~/components/screens/BasicHeader';
+import { ScreenContainer, useScreenContainerStyles } from '~/components/screens/ScreenContainer';
 import { PartialProps } from '~/types';
 import { makeDefaultProps, makeStyles } from '~/utils';
 
@@ -27,7 +29,7 @@ export interface UIKitTheme {
 
     [key: string]: any;
   };
-  shadow: Record<1 | 2 | 3 | 4, ShadowStyleIOS & { elevation?: number }>;
+  shadow: Record<1 | 2 | 3 | 4 | 5, ShadowStyleIOS & { elevation?: number }>;
 }
 
 type DefaultPropsConfig<T extends ElementType, TPartialProps = PartialProps<T>> =
@@ -67,6 +69,14 @@ export interface UIComponents {
   Checkbox: {
     defaultProps: DefaultPropsConfig<typeof Checkbox>;
     styles: never;
+  };
+  ScreenContainer: {
+    defaultProps: DefaultPropsConfig<typeof ScreenContainer>;
+    styles: typeof useScreenContainerStyles;
+  };
+  BasicHeader: {
+    defaultProps: DefaultPropsConfig<typeof BasicHeader>;
+    styles: typeof useBasicHeaderStyles;
   };
 }
 
