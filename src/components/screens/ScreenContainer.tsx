@@ -5,7 +5,6 @@ import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { useCombinedPropsWithConfig } from '~/hooks/useCombinedPropsWithConfig';
 import { useCombinedStylesWithConfig } from '~/hooks/useCombinedStylesWithConfig';
-import { styles } from '~/styles';
 import { makeStyles } from '~/utils';
 
 export interface ScreenContainerProps {
@@ -18,7 +17,8 @@ export interface ScreenContainerProps {
 }
 
 interface ScreenContainerStyles {
-  'content-container'?: ViewStyle;
+  'screen-container'?: ViewStyle;
+  'screen-container__content'?: ViewStyle;
 }
 
 /**
@@ -41,13 +41,13 @@ export const ScreenContainer: React.FC<ScreenContainerProps> = props => {
   return (
     <KeyboardAvoidingView
       behavior={IS_IOS ? 'padding' : undefined}
-      style={[styles.layout.fill]}
+      style={style['screen-container']}
       keyboardVerticalOffset={top + bottom}
     >
       {header}
       <SafeAreaView
         edges={header ? ['bottom'] : ['top', 'bottom']}
-        style={[style['content-container'], contentContainerStyle]}
+        style={[style['screen-container__content'], contentContainerStyle]}
       >
         {children}
       </SafeAreaView>
@@ -56,7 +56,10 @@ export const ScreenContainer: React.FC<ScreenContainerProps> = props => {
 };
 
 export const useScreenContainerStyles = makeStyles<void, ScreenContainerStyles>(() => ({
-  'content-container': {
+  'screen-container': {
+    flex: 1,
+  },
+  'screen-container__content': {
     flex: 1,
   },
 }));

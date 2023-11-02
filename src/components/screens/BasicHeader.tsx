@@ -83,7 +83,7 @@ export const BasicHeader: React.FC<BasicHeaderProps> = props => {
   );
 };
 
-export const useBasicHeaderStyles = makeStyles<void, BasicHeaderStyles>(({ shadow }) => ({
+export const useBasicHeaderStyles = makeStyles<void, BasicHeaderStyles>(() => ({
   'basic-header': {
     flexDirection: 'row',
     alignItems: 'center',
