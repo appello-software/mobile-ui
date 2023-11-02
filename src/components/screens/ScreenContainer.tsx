@@ -45,7 +45,10 @@ export const ScreenContainer: React.FC<ScreenContainerProps> = props => {
       keyboardVerticalOffset={top + bottom}
     >
       {header}
-      <SafeAreaView edges={['bottom']} style={[style['content-container'], contentContainerStyle]}>
+      <SafeAreaView
+        edges={header ? ['bottom'] : ['top', 'bottom']}
+        style={[style['content-container'], contentContainerStyle]}
+      >
         {children}
       </SafeAreaView>
     </KeyboardAvoidingView>

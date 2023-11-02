@@ -1,8 +1,8 @@
-import BackArrow from '@appello/mobile-ui/icons/unicons/left-arrow-3.svg';
 import { HeaderBackContext } from '@react-navigation/elements';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import React from 'react';
 import { StyleSheet, TouchableOpacity, View, ViewStyle } from 'react-native';
+import { SvgProps } from 'react-native-svg';
 
 import { AppText } from '~/components/common/AppText';
 import { useUIKitTheme } from '~/config/utils';
@@ -11,6 +11,11 @@ import { useCombinedStylesWithConfig } from '~/hooks/useCombinedStylesWithConfig
 import { makeStyles } from '~/utils';
 
 export interface BasicHeaderProps {
+  /* Icon of back button */
+  BackButtonIcon?: React.FC<SvgProps>;
+  /* Title to display in the middle of header */
+  title?: string;
+  /* Any element to display in the right part of header */
   accessoryRight?: Nullable<React.ReactNode>;
 }
 
@@ -32,7 +37,10 @@ export const BasicHeader: React.FC<BasicHeaderProps> = props => {
   const navigation = useNavigation();
   const route = useRoute();
 
-  const { accessoryRight } = useCombinedPropsWithConfig('BasicHeader', props);
+  const { BackButtonIcon, accessoryRight, title } = useCombinedPropsWithConfig(
+    'BasicHeader',
+    props,
+  );
   const styles = useCombinedStylesWithConfig('BasicHeader', useBasicHeaderStyles);
 
   const onBackPress = (): void => {
@@ -41,10 +49,10 @@ export const BasicHeader: React.FC<BasicHeaderProps> = props => {
   const backButton = (
     <HeaderBackContext.Consumer>
       {headerBack => {
-        if (headerBack) {
+        if (headerBack && BackButtonIcon) {
           return (
             <TouchableOpacity activeOpacity={0.75} onPress={onBackPress}>
-              <BackArrow color={colors.black[1]} width={24} height={24} />
+              <BackButtonIcon color={colors.black[1]} width={24} height={24} />
             </TouchableOpacity>
           );
         }
@@ -58,7 +66,7 @@ export const BasicHeader: React.FC<BasicHeaderProps> = props => {
     <View style={styles['basic-header']}>
       {backButton}
       <AppText variant="p3" color={colors.black['1']}>
-        {route.name}
+        {title || route.name}
       </AppText>
       <View style={innerStyles['basic-header__right-accessory']}>{accessoryRight}</View>
     </View>
