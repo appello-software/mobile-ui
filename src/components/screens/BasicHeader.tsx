@@ -45,6 +45,7 @@ export const BasicHeader: React.FC<BasicHeaderProps> = props => {
     props,
   );
   const styles = useCombinedStylesWithConfig('BasicHeader', useBasicHeaderStyles);
+  const innerStyles = useInnerStyles();
 
   const onBackPress = (): void => {
     navigation.goBack();
@@ -70,7 +71,7 @@ export const BasicHeader: React.FC<BasicHeaderProps> = props => {
   );
 
   return (
-    <SafeAreaView edges={['top']}>
+    <SafeAreaView edges={['top']} style={innerStyles['basic-header__container']}>
       <View style={styles['basic-header']}>
         {backButton}
         <AppText variant="p3" color={colors.black['1']}>
@@ -89,21 +90,27 @@ export const useBasicHeaderStyles = makeStyles<void, BasicHeaderStyles>(({ shado
     justifyContent: 'space-between',
     paddingVertical: 16,
     paddingHorizontal: 15,
-    ...shadow[1],
   },
 }));
 
-const innerStyles = StyleSheet.create({
-  'basic-button__left-accessory': {
-    alignSelf: 'stretch',
-    alignItems: 'flex-start',
-    justifyContent: 'center',
-    width: '20%',
-  },
-  'basic-header__right-accessory': {
-    alignSelf: 'stretch',
-    alignItems: 'flex-end',
-    justifyContent: 'center',
-    width: '20%',
-  },
-});
+const useInnerStyles = makeStyles(({ shadow, colors }) =>
+  StyleSheet.create({
+    'basic-header__container': {
+      backgroundColor: colors.white,
+      zIndex: 1,
+      ...shadow[1],
+    },
+    'basic-button__left-accessory': {
+      alignSelf: 'stretch',
+      alignItems: 'flex-start',
+      justifyContent: 'center',
+      width: '20%',
+    },
+    'basic-header__right-accessory': {
+      alignSelf: 'stretch',
+      alignItems: 'flex-end',
+      justifyContent: 'center',
+      width: '20%',
+    },
+  }),
+);
