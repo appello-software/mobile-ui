@@ -12,10 +12,7 @@ import { deepmerge } from 'deepmerge-ts';
 import { defaultTheme } from '~/__defaults__/defaultTheme';
 
 export const makeStyles =
-  <
-    TProps extends Record<string, unknown> | void,
-    TStyles extends NamedStyles<TStyles> | NamedStyles<any>,
-  >(
+  <TProps extends object | void, TStyles extends NamedStyles<TStyles> | NamedStyles<any>>(
     styles: ((theme: UIKitTheme, props: TProps) => TStyles) | TStyles,
   ): ((props: TProps) => TStyles) =>
   props => {

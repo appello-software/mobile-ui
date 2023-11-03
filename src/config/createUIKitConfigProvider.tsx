@@ -34,10 +34,7 @@ export function createUIKitConfigProvider<T extends UIKitTheme = UIKitTheme>() {
   }
 
   const makeStyles =
-    <
-      TProps extends Record<string, unknown> | void,
-      TStyles extends NamedStyles<TStyles> | NamedStyles<any>,
-    >(
+    <TProps extends object | void, TStyles extends NamedStyles<TStyles> | NamedStyles<any>>(
       styles: ((theme: FullContext['theme'], props: TProps) => TStyles) | TStyles,
     ): ((props: TProps) => TStyles) =>
     props => {
