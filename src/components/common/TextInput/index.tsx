@@ -73,7 +73,7 @@ interface TextInputStyle {
  * }```
  */
 export const TextInput: FC<TextInputProps> = props => {
-  const theme = useUIKitTheme();
+  const { colors } = useUIKitTheme();
 
   const styles = useCombinedStylesWithConfig('TextInput', useTextInputStyles);
   const {
@@ -90,7 +90,7 @@ export const TextInput: FC<TextInputProps> = props => {
     mask,
     placeholderFillCharacter,
     iconSize = { width: 20, height: 20 },
-    placeholderTextColor = theme.colors.gray['3'],
+    placeholderTextColor = colors.gray['3'],
     ...textInputProps
   } = useCombinedPropsWithConfig('TextInput', props);
 
@@ -140,6 +140,7 @@ export const TextInput: FC<TextInputProps> = props => {
         onBlur={handleBlur}
         editable={!disabled && !onPress}
         multiline={multiline}
+        cursorColor={colors.primary}
       />
       {!multiline && Icon ? (
         <View style={styles['text-input__icon-container']}>

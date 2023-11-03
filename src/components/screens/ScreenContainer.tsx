@@ -12,6 +12,8 @@ export interface ScreenContainerProps {
   header?: React.ReactElement | null;
   /* Screen content */
   children: React.ReactElement | React.ReactElement[];
+  /* Style of the main container */
+  containerStyle?: ViewStyle;
   /* Style of the content container */
   contentContainerStyle?: ViewStyle;
 }
