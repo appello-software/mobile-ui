@@ -141,6 +141,7 @@ export const TextInput: FC<TextInputProps> = props => {
         editable={!disabled && !onPress}
         multiline={multiline}
         cursorColor={colors.primary}
+        selectionColor={colors.primary}
       />
       {!multiline && Icon ? (
         <View style={styles['text-input__icon-container']}>

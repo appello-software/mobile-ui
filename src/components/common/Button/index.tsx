@@ -150,7 +150,7 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> = ({
         disabled && styles['button--disabled'],
         { position: 'relative', overflow: 'hidden' },
       ]),
-    [style],
+    [style, disabled, styles],
   );
 
   return (
