@@ -17,6 +17,7 @@ import {
 } from 'react-native-mask-input';
 import { SvgProps } from 'react-native-svg';
 
+import { AppText } from '~/components';
 import { useUIKitTheme } from '~/config/utils';
 import { useCombinedPropsWithConfig } from '~/hooks/useCombinedPropsWithConfig';
 import { useCombinedStylesWithConfig } from '~/hooks/useCombinedStylesWithConfig';
@@ -51,6 +52,7 @@ interface TextInputStyle {
   'text-input--focused'?: TextStyle;
   'text-input--error'?: TextStyle;
   'text-input--multiline'?: TextStyle;
+  'text-input__counter'?: TextStyle;
   'text-input__accessory-right-container'?: ViewStyle;
   'text-input__icon-container'?: ViewStyle;
 }
@@ -68,6 +70,7 @@ interface TextInputStyle {
  *   'text-input--focused'?: TextStyle;
  *   'text-input--error'?: TextStyle;
  *   'text-input--multiline'?: TextStyle;
+ *   'text-input__counter'?: TextStyle;
  *   'text-input__accessory-right-container'?: ViewStyle;
  *   'text-input__icon-container'?: ViewStyle;
  * }```
@@ -91,6 +94,7 @@ export const TextInput: FC<TextInputProps> = props => {
     placeholderFillCharacter,
     iconSize = { width: 20, height: 20 },
     placeholderTextColor = colors.gray['3'],
+    maxLength,
     ...textInputProps
   } = useCombinedPropsWithConfig('TextInput', props);
 
@@ -142,6 +146,7 @@ export const TextInput: FC<TextInputProps> = props => {
         multiline={multiline}
         cursorColor={colors.primary}
         selectionColor={colors.primary}
+        maxLength={maxLength}
       />
       {!multiline && Icon ? (
         <View style={styles['text-input__icon-container']}>
@@ -155,6 +160,11 @@ export const TextInput: FC<TextInputProps> = props => {
       {!multiline && accessoryRight ? (
         <View style={styles['text-input__accessory-right-container']}>{accessoryRight}</View>
       ) : null}
+      {multiline && !!maxLength && (
+        <AppText variant="p5" color={colors.gray['3']} style={styles['text-input__counter']}>
+          {value?.length || 0}/{maxLength}
+        </AppText>
+      )}
     </TouchableOpacity>
   );
 };
@@ -193,7 +203,14 @@ export const useTextInputStyles = makeStyles(theme => {
     },
     'text-input--multiline': {
       height: 104,
-      paddingHorizontal: 19,
+      paddingHorizontal: 18,
+      paddingTop: 16,
+      paddingBottom: 23,
+    },
+    'text-input__counter': {
+      position: 'absolute',
+      bottom: 9,
+      right: 9,
     },
     'text-input__accessory-right-container': {
       height: '100%',

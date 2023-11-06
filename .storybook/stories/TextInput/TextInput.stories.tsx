@@ -42,6 +42,8 @@ const meta: Meta<TextInputProps> = {
     Icon: false as any,
     onPress: false as any,
     iconSize: { width: 20, height: 20 },
+    multiline: false,
+    maxLength: 0,
   },
   argTypes: {
     accessoryRight: {
