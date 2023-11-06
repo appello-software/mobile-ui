@@ -52,6 +52,7 @@ const getStories = () => {
     "./.storybook/stories/Checkbox/Checkbox.stories.tsx": require("../../stories/Checkbox/Checkbox.stories.tsx"),
     "./.storybook/stories/Field/Field.stories.tsx": require("../../stories/Field/Field.stories.tsx"),
     "./.storybook/stories/PasswordField/PasswordField.stories.tsx": require("../../stories/PasswordField/PasswordField.stories.tsx"),
+    "./.storybook/stories/Radio/Radio.stories.tsx": require("../../stories/Radio/Radio.stories.tsx"),
     "./.storybook/stories/TextField/TextField.stories.tsx": require("../../stories/TextField/TextField.stories.tsx"),
     "./.storybook/stories/TextInput/TextInput.stories.tsx": require("../../stories/TextInput/TextInput.stories.tsx"),
   };

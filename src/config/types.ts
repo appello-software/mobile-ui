@@ -1,7 +1,7 @@
 import { ElementType } from 'react';
 import { ShadowStyleIOS } from 'react-native';
 
-import { Checkbox } from '~/components';
+import { Checkbox, Radio } from '~/components';
 import { AppText, useAppTextStyles } from '~/components/common/AppText';
 import {
   Button,
@@ -58,16 +58,20 @@ export interface UIComponents {
     defaultProps: DefaultPropsConfig<typeof Button>;
     styles: typeof useSecondaryButtonStyles;
   };
+  Checkbox: {
+    defaultProps: DefaultPropsConfig<typeof Checkbox>;
+    styles: never;
+  };
+  Radio: {
+    defaultProps: DefaultPropsConfig<typeof Radio>;
+    styles: never;
+  };
   Field: {
     defaultProps: DefaultPropsConfig<typeof Field>;
     styles: typeof useFieldStyle;
   };
   PasswordField: {
     defaultProps: DefaultPropsConfig<typeof PasswordField>;
-    styles: never;
-  };
-  Checkbox: {
-    defaultProps: DefaultPropsConfig<typeof Checkbox>;
     styles: never;
   };
   ScreenContainer: {

@@ -37,7 +37,7 @@ export const Radio: React.FC<RadioProps> = props => {
     activeColor = colors.primary,
     size = 24,
     style,
-  } = useCombinedPropsWithConfig('Checkbox', props);
+  } = useCombinedPropsWithConfig('Radio', props);
   const active = id === activeId;
   const styles = useStyles({ size, activeColor, active });
 
