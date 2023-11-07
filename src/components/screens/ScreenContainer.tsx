@@ -30,7 +30,8 @@ interface ScreenContainerStyles {
  * Style configuration interface:
  * ```
  * interface ScreenContainerStyles {
- *   'content-container'?: ViewStyle;
+ *   'screen-container'?: ViewStyle;
+ *   'screen-container__content'?: ViewStyle;
  * }```
  */
 export const ScreenContainer: React.FC<ScreenContainerProps> = props => {

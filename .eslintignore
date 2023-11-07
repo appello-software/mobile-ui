@@ -5,3 +5,5 @@ node_modules
 **/*.test.js
 /__tests__
 rollup.config.js
+
+!.storybook
