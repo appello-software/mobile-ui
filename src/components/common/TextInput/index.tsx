@@ -121,13 +121,13 @@ export const TextInput: FC<TextInputProps> = props => {
   };
 
   const {
-    onChangeText: onMaskChangeText,
     value: maskValue,
+    onChangeText: onMaskChangeText,
     placeholder: maskPlaceholder,
   } = useMaskedInputProps({
-    value,
-    onChangeText,
     mask,
+    value,
+    onChangeText: (_, unmasked) => onChangeText?.(unmasked),
     placeholderFillCharacter,
   });
 
