@@ -10,9 +10,9 @@ import { makeStyles } from '~/utils';
 
 export interface ScreenContainerProps {
   /* Header to render on top of the screen */
-  header?: React.ReactElement | null;
+  header?: React.ReactNode;
   /* Screen content */
-  children: React.ReactElement | React.ReactElement[];
+  children: React.ReactNode | React.ReactNode[];
   /* Style of the main container */
   containerStyle?: ViewStyle;
   /* Style of the content container */
