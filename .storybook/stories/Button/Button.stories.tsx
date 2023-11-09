@@ -79,6 +79,7 @@ const meta: Meta<ButtonProps & { Icon: boolean }> = {
   },
   args: {
     children: 'Hello, I am Button!',
+    disabled: false,
   },
 };
 

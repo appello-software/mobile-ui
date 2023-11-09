@@ -2,9 +2,9 @@ import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react-native';
 import React, { useState } from 'react';
 
-import { TextInput, TextInputProps, Button } from '../../../src';
-import { PaperPlaneIcon, AccountIcon } from './icons';
+import { Button, TextInput, TextInputProps } from '../../../src';
 import { CONFIG_CATEGORY } from '../../constants';
+import { AccountIcon, PaperPlaneIcon } from './icons';
 
 const accessoryRightRender = (
   <Button
@@ -19,7 +19,9 @@ const dollarMask = ['$', /\d/, /\d/, '.', /\d/, /\d/];
 const meta: Meta<TextInputProps> = {
   title: 'Basic/TextInput',
   component: TextInput,
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   render: ({ accessoryRight, Icon, mask, onPress, ...args }) => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [value, setValue] = useState('');
 
     return (
@@ -43,7 +45,7 @@ const meta: Meta<TextInputProps> = {
     onPress: false as any,
     iconSize: { width: 20, height: 20 },
     multiline: false,
-    maxLength: 0,
+    // maxLength: undefined,
   },
   argTypes: {
     accessoryRight: {
@@ -66,10 +68,8 @@ const meta: Meta<TextInputProps> = {
         category: CONFIG_CATEGORY,
       },
     },
-    placeholderFillCharacter: {
-      table: {
-        category: CONFIG_CATEGORY,
-      },
+    maxLength: {
+      control: 'number',
     },
   },
 };

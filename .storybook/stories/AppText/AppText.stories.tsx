@@ -24,7 +24,7 @@ const meta: Meta<AppTextProps> = {
   argTypes: {
     variant: {
       options: Object.values(AppTextVariant),
-      control: { type: 'select' },
+      control: 'select',
       table: {
         defaultValue: {
           summary: 'p3',
@@ -33,6 +33,7 @@ const meta: Meta<AppTextProps> = {
       },
     },
     color: {
+      control: 'color',
       table: {
         defaultValue: {
           summary: '-',
