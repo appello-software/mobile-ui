@@ -44,8 +44,8 @@ export const ScreenContainer: React.FC<ScreenContainerProps> = props => {
   return (
     <KeyboardAvoidingView
       behavior={IS_IOS ? 'padding' : undefined}
-      style={[style['screen-container'], containerStyle]}
       contentContainerStyle={[layout.fill]}
+      style={[style['screen-container'], containerStyle]}
     >
       {header}
       <SafeAreaView

@@ -8,7 +8,6 @@ import { ThemeProviderProps, UIKitConfigContext } from './UIKitConfigProvider';
 
 import NamedStyles = StyleSheet.NamedStyles;
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types,@typescript-eslint/explicit-function-return-type
 export function createUIKitConfigProvider<T extends UIKitTheme = UIKitTheme>() {
   type FullContext = Required<ThemeProviderProps<T>>;
 

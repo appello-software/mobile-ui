@@ -34,7 +34,7 @@ export const Checkbox: React.FC<CheckboxProps> = props => {
   const styles = useStyles({ size, activeColor });
 
   return (
-    <Pressable onPress={() => onChange(!checked)} disabled={disabled}>
+    <Pressable disabled={disabled} onPress={() => onChange(!checked)}>
       <View
         style={[
           styles.box,
@@ -44,7 +44,7 @@ export const Checkbox: React.FC<CheckboxProps> = props => {
         ]}
       >
         <View>
-          {checked && CheckIcon && <CheckIcon color={colors.white} width={size} height={size} />}
+          {checked && CheckIcon && <CheckIcon color={colors.white} height={size} width={size} />}
         </View>
       </View>
     </Pressable>

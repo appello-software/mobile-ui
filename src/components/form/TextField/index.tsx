@@ -37,12 +37,12 @@ export const TextField = <TFormValues extends FieldValues>({
   const fieldError = getFieldError(controller);
 
   return (
-    <Field style={style} label={label} error={fieldError}>
+    <Field error={fieldError} label={label} style={style}>
       <TextInput
-        value={controller.field.value}
-        onChangeText={controller.field.onChange}
-        onBlur={controller.field.onBlur}
         error={!!fieldError}
+        value={controller.field.value}
+        onBlur={controller.field.onBlur}
+        onChangeText={controller.field.onChange}
         {...textInputProps}
       />
     </Field>

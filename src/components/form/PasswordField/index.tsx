@@ -33,7 +33,7 @@ export const PasswordField = <TFormValues extends FieldValues>(
     if (!Icon) return null;
 
     return (
-      <TouchableOpacity onPress={togglePasswordVisibility} style={{ marginRight: 18 }}>
+      <TouchableOpacity style={{ marginRight: 18 }} onPress={togglePasswordVisibility}>
         <Icon />
       </TouchableOpacity>
     );
@@ -42,10 +42,10 @@ export const PasswordField = <TFormValues extends FieldValues>(
   return (
     <TextField
       {...textFieldProps}
-      autoComplete="password"
-      autoCapitalize="none"
-      secureTextEntry={!isPasswordVisible}
       accessoryRight={renderAccessoryRight}
+      autoCapitalize="none"
+      autoComplete="password"
+      secureTextEntry={!isPasswordVisible}
     />
   );
 };

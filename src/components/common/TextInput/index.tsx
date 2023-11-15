@@ -135,25 +135,25 @@ export const TextInput: FC<TextInputProps> = props => {
     <TouchableOpacity disabled={disabled || !onPress} onPress={onPress}>
       <RNTextInput
         {...textInputProps}
-        style={fullStyle}
-        placeholderTextColor={placeholderTextColor}
+        cursorColor={colors.primary}
+        editable={!disabled && !onPress}
+        maxLength={maxLength}
+        multiline={multiline}
         placeholder={placeholder ?? maskPlaceholder}
+        placeholderTextColor={placeholderTextColor}
+        selectionColor={colors.primary}
+        style={fullStyle}
         value={maskValue}
+        onBlur={handleBlur}
         onChangeText={onMaskChangeText}
         onFocus={handleFocus}
-        onBlur={handleBlur}
-        editable={!disabled && !onPress}
-        multiline={multiline}
-        cursorColor={colors.primary}
-        selectionColor={colors.primary}
-        maxLength={maxLength}
       />
       {!multiline && Icon ? (
         <View style={styles['text-input__icon-container']}>
           <Icon
             color={'color' in fullStyle ? (fullStyle?.color as ColorValue) : undefined}
-            width={iconSize?.width}
             height={iconSize?.height}
+            width={iconSize?.width}
           />
         </View>
       ) : null}
@@ -161,7 +161,7 @@ export const TextInput: FC<TextInputProps> = props => {
         <View style={styles['text-input__accessory-right-container']}>{accessoryRight}</View>
       ) : null}
       {multiline && !!maxLength && (
-        <AppText variant="p5" color={colors.gray['3']} style={styles['text-input__counter']}>
+        <AppText color={colors.gray['3']} style={styles['text-input__counter']} variant="p5">
           {value?.length || 0}/{maxLength}
         </AppText>
       )}

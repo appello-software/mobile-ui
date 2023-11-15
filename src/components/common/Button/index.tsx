@@ -156,11 +156,11 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> = ({
   return (
     <Pressable
       {...buttonProps}
-      onPressIn={handlePressIn}
-      onPressOut={handlePressOut}
       accessibilityRole="button"
       disabled={disabled || isLoading}
       style={buttonContainerStyle}
+      onPressIn={handlePressIn}
+      onPressOut={handlePressOut}
     >
       {!!pressedOverlayColor && (
         <View style={[layoutStyles.overlay, pressed && { backgroundColor: pressedOverlayColor }]} />
