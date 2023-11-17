@@ -98,7 +98,7 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> = ({
     ? labelProps?.color
     : labelProps?.disabledColor || theme.colors.gray['3'];
   const label =
-    typeof children === 'string' ? (
+    typeof children === 'string' || !children ? (
       <View
         style={[
           layoutStyles.labelContainer,
@@ -111,13 +111,15 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> = ({
         ]}
       >
         {Icon ? <Icon color={labelColor} {...iconSize} /> : null}
-        <AppText
-          {...labelProps}
-          color={labelColor}
-          style={[styles.button__label, labelProps?.style]}
-        >
-          {children}
-        </AppText>
+        {children ? (
+          <AppText
+            {...labelProps}
+            color={labelColor}
+            style={[styles.button__label, labelProps?.style]}
+          >
+            {children}
+          </AppText>
+        ) : null}
         {Icon && (iconPosition === 'right' || iconPosition === 'left') ? (
           <View style={iconSize} />
         ) : null}
