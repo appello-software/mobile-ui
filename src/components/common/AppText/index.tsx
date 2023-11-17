@@ -92,7 +92,7 @@ export const AppText: React.FC<AppTextProps> = props => {
   const styles = useCombinedStylesWithConfig('AppText', useAppTextStyles);
   const {
     variant = 'p3',
-    weight = 'regular',
+    weight,
     color,
     uppercase,
     underline,
@@ -107,7 +107,7 @@ export const AppText: React.FC<AppTextProps> = props => {
       style={StyleSheet.flatten([
         styles['app-text'],
         styles[`app-text--${variant}`],
-        styles[`app-text--${weight}`],
+        !!weight && styles[`app-text--${weight}`],
         !!color && { color },
         !!align && { textAlign: align },
         uppercase && { textTransform: 'uppercase' },
