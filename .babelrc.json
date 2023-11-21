@@ -11,6 +11,12 @@
           "@appello/mobile-ui/icons": "./icons"
         }
       }
+    ],
+    [
+      "react-native-reanimated/plugin",
+      {
+        "relativeSourceLocation": true
+      }
     ]
   ]
 }

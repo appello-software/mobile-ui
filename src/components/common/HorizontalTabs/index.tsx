@@ -37,7 +37,7 @@ export interface HorizontalTabsRefType {
   scrollToIndex: (index: number) => void;
 }
 
-interface HorizontalTabsProps {
+export interface HorizontalTabsProps {
   ref?: Ref<HorizontalTabsRefType>;
   scrollable?: boolean;
   list: { key: string; title: string }[];

@@ -14,17 +14,16 @@ import { useUIKitTheme } from '~/config/utils';
 import { useCombinedPropsWithConfig } from '~/hooks/useCombinedPropsWithConfig';
 import { makeStyles } from '~/utils';
 
+const SIZE = 8;
 const ANIMATION_DURATION = 600;
 
-interface LoaderProps {
+export interface PointsProps {
   color?: string;
   size?: number;
   duration?: number;
 }
 
-const SIZE = 8;
-
-export const Points: FC<LoaderProps> = props => {
+export const Points: FC<PointsProps> = props => {
   const { colors } = useUIKitTheme();
   const {
     size = SIZE,
@@ -72,7 +71,7 @@ export const Points: FC<LoaderProps> = props => {
   );
 };
 
-const useInnerStyles = ({ color, size }: LoaderProps) =>
+const useInnerStyles = ({ color, size }: PointsProps) =>
   makeStyles(() => ({
     container: {
       alignItems: 'center',

@@ -21,12 +21,20 @@ const AnimatedCircle = Animated.createAnimatedComponent(RNCircle);
 export interface CircleProps {
   size?: number;
   duration?: number;
+  color?: string;
+  colorBack?: string;
 }
 
 export const Circle: FC<CircleProps> = props => {
-  const { size = 24, duration = ANIMATION_DURATION } = useCombinedPropsWithConfig('Circle', props);
-
   const theme = useUIKitTheme();
+
+  const {
+    size = 24,
+    duration = ANIMATION_DURATION,
+    colorBack = theme.colors.gray['4'],
+    color = theme.colors.primary,
+  } = useCombinedPropsWithConfig('Circle', props);
+
   const progress = useSharedValue(0);
   const rotate = useSharedValue(0);
   const strokeWidth = size > 25 ? 4 : 3;
@@ -76,7 +84,7 @@ export const Circle: FC<CircleProps> = props => {
           cy={center}
           fill="transparent"
           r={radius}
-          stroke={theme.colors.gray['1']}
+          stroke={colorBack}
           strokeWidth={strokeWidth}
         />
         <AnimatedCircle
@@ -85,7 +93,7 @@ export const Circle: FC<CircleProps> = props => {
           cy={center}
           fill="transparent"
           r={radius}
-          stroke={theme.colors.primary}
+          stroke={color}
           strokeDasharray={circleLength}
           strokeLinecap="round"
           strokeWidth={strokeWidth}
