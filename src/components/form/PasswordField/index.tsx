@@ -1,4 +1,4 @@
-import { useSwitchValue } from '@appello/common/lib/hooks';
+import { useSwitchValue } from '@appello/common';
 import React from 'react';
 import { FieldValues } from 'react-hook-form';
 import { TouchableOpacity } from 'react-native';

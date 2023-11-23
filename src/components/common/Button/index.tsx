@@ -10,9 +10,9 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import { Flow } from 'react-native-animated-spinkit';
 import { SvgProps } from 'react-native-svg';
 
+import { Points } from '~/components';
 import { AppText, AppTextProps } from '~/components/common/AppText';
 import { useUIKitTheme } from '~/config/utils';
 import { useCombinedPropsWithConfig } from '~/hooks/useCombinedPropsWithConfig';
@@ -165,7 +165,7 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> = ({
       {!!pressedOverlayColor && (
         <View style={[layoutStyles.overlay, pressed && { backgroundColor: pressedOverlayColor }]} />
       )}
-      {!isLoading ? label : <Flow color={loaderColor} size={40} />}
+      {!isLoading ? label : <Points size={30} />}
       {backgroundGradient ? (
         <LinearGradient
           {...backgroundGradient}

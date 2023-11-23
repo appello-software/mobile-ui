@@ -16,12 +16,17 @@ import { useUIKitTheme } from '~/config/utils';
 import { useCombinedPropsWithConfig } from '~/hooks/useCombinedPropsWithConfig';
 
 const ANIMATION_DURATION = 1300;
+
 const AnimatedCircle = Animated.createAnimatedComponent(RNCircle);
 
 export interface CircleProps {
+  /** Size for loader */
   size?: number;
+  /** Duration for loader */
   duration?: number;
+  /** Color spinner */
   color?: string;
+  /** Color background circle */
   colorBack?: string;
 }
 

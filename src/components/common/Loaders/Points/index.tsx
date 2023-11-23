@@ -18,9 +18,12 @@ const SIZE = 8;
 const ANIMATION_DURATION = 600;
 
 export interface PointsProps {
-  color?: string;
+  /** Size for loader */
   size?: number;
+  /** Duration for loader */
   duration?: number;
+  /** Color points */
+  color?: string;
 }
 
 export const Points: FC<PointsProps> = props => {

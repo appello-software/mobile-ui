@@ -1,4 +1,4 @@
-import { AnyObject } from '@appello/common/lib/types';
+import { mergeCollectionByKey } from '@appello/common';
 import React, {
   FC,
   forwardRef,
@@ -38,32 +38,27 @@ export interface HorizontalTabsRefType {
 }
 
 export interface HorizontalTabsProps {
+  /** Ref component for calling methods */
   ref?: Ref<HorizontalTabsRefType>;
+  /** Adds the ability to scroll elements; if false, then all elements will stretch to the full width provided to them */
   scrollable?: boolean;
+  /** Array of tabs */
   list: { key: string; title: string }[];
+  /** Current active tab */
   tab: string;
+  /** Callback for changing the active tab */
   setTab: (v: string) => void;
+  /** Tab height (default value 52) */
   tabHeight?: number;
+  /** Additional content near the inscription (Suppose you need to show the number of elements) */
   tabContent?: (key: string) => ReactElement;
+  /** If you want additional content (from tabContent) to be render on the left */
   tabContentReverse?: boolean;
+  /** Text variant (from theme) */
   tabTextVariant?: AppTextProps['variant'];
 }
 
 const DEFAULT_TAB_HEIGHT = 52;
-
-// Cool method for unit two collection by key
-// @TODO: move it to @appello/common
-export const mergeArraysByUniqKey = <T extends AnyObject>(
-  arr1: T[],
-  arr2: T[],
-  key: string | ((item: T) => string | number) = 'id',
-): T[] => {
-  const map = new Map();
-  const getKey = (item: T) => (typeof key === 'string' ? item[key] : key(item));
-  arr1.forEach(item => map.set(getKey(item), item));
-  arr2.forEach(item => map.set(getKey(item), { ...map.get(getKey(item)), ...item }));
-  return Array.from(map.values());
-};
 
 export const HorizontalTabs = forwardRef<HorizontalTabsRefType, HorizontalTabsProps>(
   (props, ref) => {
@@ -146,7 +141,7 @@ export const HorizontalTabs = forwardRef<HorizontalTabsRefType, HorizontalTabsPr
                 },
               }) => {
                 setLeftOffsetItems(prevState => {
-                  return [...mergeArraysByUniqKey([{ key, x, width }], prevState, 'key')];
+                  return mergeCollectionByKey(prevState, [{ key, x, width }], 'push', 'key');
                 });
               }}
               onPress={() => setTab(key)}
