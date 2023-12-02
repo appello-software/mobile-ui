@@ -262,6 +262,8 @@ export const usePlainButtonStyles = makeStyles(() =>
       flexDirection: 'row',
     },
     'button--disabled': {},
-    button__label: {},
+    button__label: {
+      ...commonStyles.button__label,
+    },
   } as ButtonStyle),
 );
