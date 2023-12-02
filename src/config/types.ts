@@ -58,6 +58,10 @@ export interface UIComponents {
     defaultProps: DefaultPropsConfig<typeof Button>;
     styles: typeof useSecondaryButtonStyles;
   };
+  'Button.Plain': {
+    defaultProps: DefaultPropsConfig<typeof Button>;
+    styles: never;
+  };
   Checkbox: {
     defaultProps: DefaultPropsConfig<typeof Checkbox>;
     styles: never;

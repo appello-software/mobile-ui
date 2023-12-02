@@ -27,7 +27,7 @@ export interface ButtonProps extends PressableProps {
   /** Is the Button currently in loading state */
   isLoading?: boolean;
   /** Variant of displaying the button */
-  variant?: 'primary' | 'secondary';
+  variant?: 'primary' | 'secondary' | 'plain';
   /** Color of the overlay when the Button is pressed */
   pressedOverlayColor?: string;
   /** Use it only if the Button should have gradient background */
@@ -86,12 +86,14 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> = ({
   } = {
     primary: useCombinedPropsWithConfig('Button.Primary', props),
     secondary: useCombinedPropsWithConfig('Button.Secondary', props),
+    plain: useCombinedPropsWithConfig('Button.Plain', props),
   }[variant];
   const styles = {
     primary: useCombinedStylesWithConfig('Button.Primary', usePrimaryButtonStyles),
     secondary: useCombinedStylesWithConfig('Button.Secondary', useSecondaryButtonStyles),
+    plain: usePlainButtonStyles(),
   }[variant];
-  const layoutStyles = useLayoutStyles();
+  const innerStyles = useInnerStyles();
   const theme = useUIKitTheme();
 
   const labelColor = !disabled
@@ -101,13 +103,13 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> = ({
     typeof children === 'string' || !children ? (
       <View
         style={[
-          layoutStyles.labelContainer,
+          innerStyles.labelContainer,
           Icon &&
             (iconPosition === 'left' || iconPosition === 'right') &&
-            layoutStyles.labelContainerSides,
+            innerStyles.labelContainerSides,
           Icon &&
             (iconPosition === 'right' || iconPosition === 'center-right') &&
-            layoutStyles.labelContainerRight,
+            innerStyles.labelContainerRight,
         ]}
       >
         {Icon ? <Icon color={labelColor} {...iconSize} /> : null}
@@ -165,20 +167,20 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> = ({
       style={buttonContainerStyle}
     >
       {!!pressedOverlayColor && (
-        <View style={[layoutStyles.overlay, pressed && { backgroundColor: pressedOverlayColor }]} />
+        <View style={[innerStyles.overlay, pressed && { backgroundColor: pressedOverlayColor }]} />
       )}
       {!isLoading ? label : <Flow color={loaderColor} size={40} />}
       {backgroundGradient ? (
         <LinearGradient
           {...backgroundGradient}
-          style={[layoutStyles.overlay, layoutStyles.gradientBg]}
+          style={[innerStyles.overlay, innerStyles.gradientBg]}
         />
       ) : null}
     </Pressable>
   );
 };
 
-const useLayoutStyles = makeStyles(() => ({
+const useInnerStyles = makeStyles(() => ({
   labelContainer: {
     flex: 1,
     flexDirection: 'row',
@@ -249,5 +251,17 @@ export const useSecondaryButtonStyles = makeStyles(theme =>
     button__label: {
       ...commonStyles.button__label,
     },
+  } as ButtonStyle),
+);
+
+export const usePlainButtonStyles = makeStyles(() =>
+  StyleSheet.create({
+    button: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      flexDirection: 'row',
+    },
+    'button--disabled': {},
+    button__label: {},
   } as ButtonStyle),
 );
