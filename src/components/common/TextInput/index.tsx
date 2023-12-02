@@ -206,6 +206,7 @@ export const useTextInputStyles = makeStyles(theme => {
       paddingHorizontal: 18,
       paddingTop: 16,
       paddingBottom: 23,
+      textAlignVertical: 'top',
     },
     'text-input__counter': {
       position: 'absolute',
