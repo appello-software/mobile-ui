@@ -15,7 +15,10 @@ import Svg, { Circle as RNCircle } from 'react-native-svg';
 import { useUIKitTheme } from '~/config/utils';
 import { useCombinedPropsWithConfig } from '~/hooks/useCombinedPropsWithConfig';
 
-const ANIMATION_DURATION = 1300;
+export const DEFAULT_SIZE = 25;
+export const ANIMATION_DURATION = 1300;
+const STROKE_BOLD = 4;
+const STROKE_LIGHT = 3;
 
 const AnimatedCircle = Animated.createAnimatedComponent(RNCircle);
 
@@ -34,7 +37,7 @@ export const Circle: FC<CircleProps> = props => {
   const theme = useUIKitTheme();
 
   const {
-    size = 24,
+    size = DEFAULT_SIZE,
     duration = ANIMATION_DURATION,
     colorBack = theme.colors.gray['4'],
     color = theme.colors.primary,
@@ -42,7 +45,7 @@ export const Circle: FC<CircleProps> = props => {
 
   const progress = useSharedValue(0);
   const rotate = useSharedValue(0);
-  const strokeWidth = size > 25 ? 4 : 3;
+  const strokeWidth = size >= DEFAULT_SIZE ? STROKE_BOLD : STROKE_LIGHT;
 
   const { center, circleLength, radius } = useMemo(() => {
     const center = size / 2;

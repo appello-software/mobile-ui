@@ -34,15 +34,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@appello/common@npm:^2.0.11":
-  version: 2.0.11
-  resolution: "@appello/common@npm:2.0.11"
+"@appello/common@npm:^2.0.12":
+  version: 2.0.12
+  resolution: "@appello/common@npm:2.0.12"
   dependencies:
     date-fns: "npm:~2.29.1"
     dot-path-value: "npm:^0.0.10"
+    lodash.debounce: "npm:^4.0.8"
   peerDependencies:
     react: ^17 || ^18
-  checksum: c112fe0f738a366949254b7d79dbadf7097d5e946256ef2b85400d07921d3dbe73c07ed181e4ede2c8b474e758fd1f161a538b1c80029fcca40864384e39c6ad
+  checksum: 4d1792c7427b0f496308cb1b2fda9898337334ca35215207579ffb3617a42f2332e36af038a349b7f82865fca8463be3670689c0d97213087189b49679df65eb
   languageName: node
   linkType: hard
 
@@ -57,7 +58,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@appello/mobile-ui@workspace:."
   dependencies:
-    "@appello/common": "npm:^2.0.11"
+    "@appello/common": "npm:^2.0.12"
     "@appello/eslint-config": "npm:^0.1.16"
     "@appello/mobile": "npm:^0.1.8"
     "@babel/core": "npm:^7.23.0"

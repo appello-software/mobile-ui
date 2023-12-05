@@ -1,2 +1,2 @@
-export * from './Circle';
-export * from './Points';
+export { Circle, CircleProps } from './Circle';
+export { Points, PointsProps } from './Points';

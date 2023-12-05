@@ -19,6 +19,8 @@ import { useCombinedPropsWithConfig } from '~/hooks/useCombinedPropsWithConfig';
 import { useCombinedStylesWithConfig } from '~/hooks/useCombinedStylesWithConfig';
 import { makeStyles } from '~/utils';
 
+const DEFAULT_LOADER_SIZE = 40;
+
 export interface ButtonProps extends PressableProps {
   /** Properties of the label text */
   labelProps?: AppTextProps & { disabledColor?: ColorValue };
@@ -165,7 +167,7 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> = ({
       {!!pressedOverlayColor && (
         <View style={[layoutStyles.overlay, pressed && { backgroundColor: pressedOverlayColor }]} />
       )}
-      {!isLoading ? label : <Points size={30} />}
+      {!isLoading ? label : <Points color={loaderColor} size={DEFAULT_LOADER_SIZE} />}
       {backgroundGradient ? (
         <LinearGradient
           {...backgroundGradient}

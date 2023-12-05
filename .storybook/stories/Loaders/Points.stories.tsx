@@ -1,35 +1,45 @@
 import { Meta, StoryObj } from '@storybook/react-native';
-import React from 'react';
+
+import { colors } from '~/__defaults__/defaultTheme';
+import { ANIMATION_DURATION, DEFAULT_SIZE } from '~/components/common/Loaders/Points';
 
 import { Points, PointsProps } from '../../../src';
-import { CONFIG_CATEGORY } from '../../constants';
+import { CONFIG_CATEGORY, CONFIG_DETAIL } from '../../constants';
 
 const meta: Meta<PointsProps> = {
-  title: 'Basic/Points',
+  title: 'Basic/Loaders/Points',
   component: Points,
-  render: ({ ...args }) => {
-    return <Points {...args} />;
-  },
   argTypes: {
-    duration: {
-      table: {
-        category: CONFIG_CATEGORY,
-      },
-    },
     size: {
       table: {
         category: CONFIG_CATEGORY,
+        defaultValue: {
+          summary: DEFAULT_SIZE,
+        },
+      },
+    },
+    duration: {
+      table: {
+        category: CONFIG_CATEGORY,
+        defaultValue: {
+          summary: ANIMATION_DURATION,
+        },
       },
     },
     color: {
       table: {
         category: CONFIG_CATEGORY,
+        defaultValue: {
+          summary: 'theme.colors.primary',
+          detail: CONFIG_DETAIL,
+        },
       },
     },
   },
   args: {
-    size: 20,
-    color: '#000',
+    size: DEFAULT_SIZE,
+    duration: ANIMATION_DURATION,
+    color: colors.primary,
   },
 };
 

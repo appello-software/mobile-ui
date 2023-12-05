@@ -14,8 +14,8 @@ import { useUIKitTheme } from '~/config/utils';
 import { useCombinedPropsWithConfig } from '~/hooks/useCombinedPropsWithConfig';
 import { makeStyles } from '~/utils';
 
-const SIZE = 8;
-const ANIMATION_DURATION = 600;
+export const DEFAULT_SIZE = 8;
+export const ANIMATION_DURATION = 600;
 
 export interface PointsProps {
   /** Size for loader */
@@ -29,7 +29,7 @@ export interface PointsProps {
 export const Points: FC<PointsProps> = props => {
   const { colors } = useUIKitTheme();
   const {
-    size = SIZE,
+    size = DEFAULT_SIZE,
     color = colors.primary,
     duration = ANIMATION_DURATION,
   } = useCombinedPropsWithConfig('Points', props);

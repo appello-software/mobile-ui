@@ -1,29 +1,55 @@
 import { Meta, StoryObj } from '@storybook/react-native';
-import React from 'react';
+
+import { colors } from '~/__defaults__/defaultTheme';
+import { ANIMATION_DURATION, DEFAULT_SIZE } from '~/components/common/Loaders/Circle';
 
 import { Circle, CircleProps } from '../../../src';
-import { CONFIG_CATEGORY } from '../../constants';
+import { CONFIG_CATEGORY, CONFIG_DETAIL } from '../../constants';
 
 const meta: Meta<CircleProps> = {
-  title: 'Basic/Circle',
+  title: 'Basic/Loaders/Circle',
   component: Circle,
-  render: ({ ...args }) => {
-    return <Circle {...args} />;
-  },
   argTypes: {
-    duration: {
-      table: {
-        category: CONFIG_CATEGORY,
-      },
-    },
     size: {
       table: {
         category: CONFIG_CATEGORY,
+        defaultValue: {
+          summary: DEFAULT_SIZE,
+        },
+      },
+    },
+    duration: {
+      table: {
+        category: CONFIG_CATEGORY,
+        defaultValue: {
+          summary: ANIMATION_DURATION,
+        },
+      },
+    },
+    color: {
+      control: 'color',
+      table: {
+        defaultValue: {
+          summary: 'theme.colors.primary',
+          detail: CONFIG_DETAIL,
+        },
+      },
+    },
+    colorBack: {
+      control: 'color',
+      table: {
+        defaultValue: {
+          summary: "theme.colors.gray['4']",
+          detail: CONFIG_DETAIL,
+        },
       },
     },
   },
   args: {
-    size: 40,
+    size: DEFAULT_SIZE,
+    duration: ANIMATION_DURATION,
+    color: colors.primary,
+    colorBack: colors.gray['4'],
   },
 };
 

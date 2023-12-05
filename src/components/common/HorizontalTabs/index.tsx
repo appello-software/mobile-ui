@@ -21,6 +21,9 @@ import { useCombinedPropsWithConfig } from '~/hooks/useCombinedPropsWithConfig';
 import { useCombinedStylesWithConfig } from '~/hooks/useCombinedStylesWithConfig';
 import { makeStyles } from '~/utils';
 
+const DEFAULT_ITEM_SPACING = 16;
+export const DEFAULT_TAB_HEIGHT = 52;
+
 interface HorizontalTabsStyles {
   'horizontal-tabs'?: ViewStyle;
   'horizontal-tabs__text'?: ViewStyle;
@@ -52,13 +55,11 @@ export interface HorizontalTabsProps {
   tabHeight?: number;
   /** Additional content near the inscription (Suppose you need to show the number of elements) */
   tabContent?: (key: string) => ReactElement;
-  /** If you want additional content (from tabContent) to be render on the left */
+  /** If you want additional content (from tabContent) to be rendered on the left */
   tabContentReverse?: boolean;
   /** Text variant (from theme) */
   tabTextVariant?: AppTextProps['variant'];
 }
-
-const DEFAULT_TAB_HEIGHT = 52;
 
 export const HorizontalTabs = forwardRef<HorizontalTabsRefType, HorizontalTabsProps>(
   (props, ref) => {
@@ -130,8 +131,8 @@ export const HorizontalTabs = forwardRef<HorizontalTabsRefType, HorizontalTabsPr
                 {
                   height: tabHeight,
                   flexDirection: tabContentReverse ? 'row-reverse' : 'row',
-                  paddingHorizontal: scrollable ? 16 : 'none',
-                  marginRight: list.length - 1 !== index ? 16 : undefined,
+                  paddingHorizontal: scrollable ? DEFAULT_ITEM_SPACING : 'none',
+                  marginRight: list.length - 1 !== index ? DEFAULT_ITEM_SPACING : undefined,
                 },
                 styles['horizontal-tabs__item'],
               ]}
