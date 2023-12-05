@@ -1,13 +1,15 @@
 import { ElementType } from 'react';
 import { ShadowStyleIOS } from 'react-native';
 
-import { Checkbox, Radio } from '~/components';
+import { Checkbox, Points, Radio } from '~/components';
 import { AppText, useAppTextStyles } from '~/components/common/AppText';
 import {
   Button,
   usePrimaryButtonStyles,
   useSecondaryButtonStyles,
 } from '~/components/common/Button';
+import { HorizontalTabs, useHorizontalTabsStyles } from '~/components/common/HorizontalTabs';
+import { Circle } from '~/components/common/Loaders/Circle';
 import { TextInput, useTextInputStyles } from '~/components/common/TextInput';
 import { Field, useFieldStyle } from '~/components/form/Field';
 import { PasswordField } from '~/components/form/PasswordField';
@@ -85,6 +87,18 @@ export interface UIComponents {
   BasicHeader: {
     defaultProps: DefaultPropsConfig<typeof BasicHeader>;
     styles: typeof useBasicHeaderStyles;
+  };
+  HorizontalTabs: {
+    defaultProps: DefaultPropsConfig<typeof HorizontalTabs>;
+    styles: typeof useHorizontalTabsStyles;
+  };
+  Circle: {
+    defaultProps: DefaultPropsConfig<typeof Circle>;
+    styles: never;
+  };
+  Points: {
+    defaultProps: DefaultPropsConfig<typeof Points>;
+    styles: never;
   };
 }
 

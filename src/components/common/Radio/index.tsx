@@ -42,7 +42,7 @@ export const Radio: React.FC<RadioProps> = props => {
   const styles = useStyles({ size, activeColor, active });
 
   return (
-    <Pressable onPress={() => onChange(id)} disabled={disabled} style={style}>
+    <Pressable disabled={disabled} style={style} onPress={() => onChange(id)}>
       <View
         style={[
           styles.radio,

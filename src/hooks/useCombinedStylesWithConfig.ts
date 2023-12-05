@@ -1,4 +1,4 @@
-import { keys } from '@appello/common/lib/utils/object';
+import { keys } from '@appello/common';
 import { StyleSheet } from 'react-native';
 import NamedStyles = StyleSheet.NamedStyles;
 

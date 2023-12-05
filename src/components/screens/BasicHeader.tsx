@@ -50,6 +50,7 @@ export const BasicHeader: React.FC<BasicHeaderProps> = props => {
   const onBackPress = (): void => {
     navigation.goBack();
   };
+
   const backButton = (
     <HeaderBackContext.Consumer>
       {headerBack => {
@@ -57,10 +58,10 @@ export const BasicHeader: React.FC<BasicHeaderProps> = props => {
           return (
             <TouchableOpacity
               activeOpacity={0.75}
-              onPress={onBackPress}
               style={innerStyles['basic-button__left-accessory']}
+              onPress={onBackPress}
             >
-              <BackButtonIcon color={colors.black[1]} width={24} height={24} />
+              <BackButtonIcon color={colors.black[1]} height={24} width={24} />
             </TouchableOpacity>
           );
         }
@@ -74,7 +75,7 @@ export const BasicHeader: React.FC<BasicHeaderProps> = props => {
     <SafeAreaView edges={['top']} style={innerStyles['basic-header__container']}>
       <View style={styles['basic-header']}>
         {backButton}
-        <AppText variant="p3" color={colors.black['1']}>
+        <AppText color={colors.black['1']} variant="p3">
           {title || route.name}
         </AppText>
         <View style={innerStyles['basic-header__right-accessory']}>{accessoryRight}</View>
