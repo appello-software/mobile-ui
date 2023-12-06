@@ -4,6 +4,8 @@ import { FieldValues } from 'react-hook-form';
 import { TouchableOpacity } from 'react-native';
 import { SvgProps } from 'react-native-svg';
 
+import { makeStyles } from '~/utils';
+
 import { TextField, TextFieldProps } from '../TextField';
 
 export interface PasswordFieldProps<TFormValues extends FieldValues>
@@ -14,6 +16,8 @@ export interface PasswordFieldProps<TFormValues extends FieldValues>
   };
 }
 
+const ICON_SIZE = 20;
+
 /**
  * Password field with functionality to show and hide the password value.<br>
  * Extends the UIKit TextField and all of its props.<br>
@@ -23,8 +27,9 @@ export const PasswordField = <TFormValues extends FieldValues>(
 ): React.ReactElement => {
   const { value: isPasswordVisible, toggle: togglePasswordVisibility } = useSwitchValue(false);
 
-  const { togglePasswordVisibilityIcons, ...textFieldProps } = props;
+  const { togglePasswordVisibilityIcons, inputStyle, ...textFieldProps } = props;
 
+  const styles = useStyles();
   const renderAccessoryRight = React.useMemo(() => {
     const Icon = isPasswordVisible
       ? togglePasswordVisibilityIcons?.hide
@@ -33,8 +38,8 @@ export const PasswordField = <TFormValues extends FieldValues>(
     if (!Icon) return null;
 
     return (
-      <TouchableOpacity style={{ marginRight: 18 }} onPress={togglePasswordVisibility}>
-        <Icon />
+      <TouchableOpacity style={styles.iconContainer} onPress={togglePasswordVisibility}>
+        <Icon height={ICON_SIZE} width={ICON_SIZE} />
       </TouchableOpacity>
     );
   }, [togglePasswordVisibilityIcons, togglePasswordVisibility, isPasswordVisible]);
@@ -45,7 +50,17 @@ export const PasswordField = <TFormValues extends FieldValues>(
       accessoryRight={renderAccessoryRight}
       autoCapitalize="none"
       autoComplete="password"
+      inputStyle={[styles.input, inputStyle]}
       secureTextEntry={!isPasswordVisible}
     />
   );
 };
+
+const useStyles = makeStyles(() => ({
+  iconContainer: {
+    marginRight: 18,
+  },
+  input: {
+    paddingRight: ICON_SIZE + 18 + 10,
+  },
+}));
