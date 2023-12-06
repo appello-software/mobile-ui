@@ -124,7 +124,7 @@ __metadata:
     react-hook-form: "npm:^7.43.5"
     react-native: "npm:^0.71.4"
     react-native-mask-input: "npm:^1.2.3"
-    react-native-reanimated: "npm:^3.5.4"
+    react-native-reanimated: "npm:^3.6.1"
     react-native-safe-area-context: "npm:^4.7.4"
     react-native-svg: "npm:>=13.12.0"
     react-native-web: "npm:^0.19.8"
@@ -17539,9 +17539,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-reanimated@npm:^3.5.4":
-  version: 3.5.4
-  resolution: "react-native-reanimated@npm:3.5.4"
+"react-native-reanimated@npm:^3.6.1":
+  version: 3.6.1
+  resolution: "react-native-reanimated@npm:3.6.1"
   dependencies:
     "@babel/plugin-transform-object-assign": "npm:^7.16.7"
     "@babel/preset-typescript": "npm:^7.16.7"
@@ -17556,7 +17556,7 @@ __metadata:
     "@babel/plugin-transform-template-literals": ^7.0.0-0
     react: "*"
     react-native: "*"
-  checksum: 68182fdc5725bee1220f06a850eb94d81f119d8e661d55be601d83ebfd01268e84529ab5677691dc3d5f408378b30ef059834f8859c3e4584c5e97754619d3f5
+  checksum: 9cf65e62a32b49e2c3452850b01f3365dfb90c74f9e219058cb6d41d6833866051fcc192d9baa5559dcd84cbe9127d1d7911667e7878dbb0152cfe675e4be22c
   languageName: node
   linkType: hard
 
