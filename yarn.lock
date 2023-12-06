@@ -123,8 +123,8 @@ __metadata:
     react-dom: "npm:18.2.0"
     react-hook-form: "npm:^7.43.5"
     react-native: "npm:^0.71.4"
+    react-native-animated-spinkit: "npm:^1.5.2"
     react-native-mask-input: "npm:^1.2.3"
-    react-native-reanimated: "npm:^3.6.1"
     react-native-safe-area-context: "npm:^4.7.4"
     react-native-svg: "npm:>=13.12.0"
     react-native-web: "npm:^0.19.8"
@@ -1329,17 +1329,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/plugin-transform-object-assign@npm:^7.16.7":
-  version: 7.23.3
-  resolution: "@babel/plugin-transform-object-assign@npm:7.23.3"
-  dependencies:
-    "@babel/helper-plugin-utils": "npm:^7.22.5"
-  peerDependencies:
-    "@babel/core": ^7.0.0-0
-  checksum: 44467e8bd8eaae3fe54834dac9d1647d2b2598529a90722281832f6905d485c05e37b5fbd6fd7660c5d2e32e6f005824cda8a9321ddac2e2d619536fafc9783c
-  languageName: node
-  linkType: hard
-
 "@babel/plugin-transform-object-rest-spread@npm:^7.23.3":
   version: 7.23.4
   resolution: "@babel/plugin-transform-object-rest-spread@npm:7.23.4"
@@ -1810,7 +1799,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/preset-typescript@npm:^7.12.7, @babel/preset-typescript@npm:^7.13.0, @babel/preset-typescript@npm:^7.16.7, @babel/preset-typescript@npm:^7.21.0, @babel/preset-typescript@npm:^7.23.0":
+"@babel/preset-typescript@npm:^7.12.7, @babel/preset-typescript@npm:^7.13.0, @babel/preset-typescript@npm:^7.21.0, @babel/preset-typescript@npm:^7.23.0":
   version: 7.23.3
   resolution: "@babel/preset-typescript@npm:7.23.3"
   dependencies:
@@ -17489,6 +17478,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-native-animated-spinkit@npm:^1.5.2":
+  version: 1.5.2
+  resolution: "react-native-animated-spinkit@npm:1.5.2"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 5534e7111f31c560822481204149d7a08fa2bac10d4fc2391fd569d90635e4bc7e4327a9ce87aeda42faad764fb85fcc9c5ebcd594e904b62ea9bd4ccc6e2761
+  languageName: node
+  linkType: hard
+
 "react-native-codegen@npm:^0.71.6":
   version: 0.71.6
   resolution: "react-native-codegen@npm:0.71.6"
@@ -17536,27 +17535,6 @@ __metadata:
   dependencies:
     prop-types: "npm:^15.5.10"
   checksum: 651c6b6b0f1c2d82e372f3188ad5a8eb478728135a05b1c97315646f4fdbee446a0dd5bc8f79a96e7ab379a08c0a04bcdb2911f7dcf3bb6511f0cced7d55f0f0
-  languageName: node
-  linkType: hard
-
-"react-native-reanimated@npm:^3.6.1":
-  version: 3.6.1
-  resolution: "react-native-reanimated@npm:3.6.1"
-  dependencies:
-    "@babel/plugin-transform-object-assign": "npm:^7.16.7"
-    "@babel/preset-typescript": "npm:^7.16.7"
-    convert-source-map: "npm:^2.0.0"
-    invariant: "npm:^2.2.4"
-  peerDependencies:
-    "@babel/core": ^7.0.0-0
-    "@babel/plugin-proposal-nullish-coalescing-operator": ^7.0.0-0
-    "@babel/plugin-proposal-optional-chaining": ^7.0.0-0
-    "@babel/plugin-transform-arrow-functions": ^7.0.0-0
-    "@babel/plugin-transform-shorthand-properties": ^7.0.0-0
-    "@babel/plugin-transform-template-literals": ^7.0.0-0
-    react: "*"
-    react-native: "*"
-  checksum: 9cf65e62a32b49e2c3452850b01f3365dfb90c74f9e219058cb6d41d6833866051fcc192d9baa5559dcd84cbe9127d1d7911667e7878dbb0152cfe675e4be22c
   languageName: node
   linkType: hard
 
