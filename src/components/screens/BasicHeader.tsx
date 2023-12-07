@@ -2,7 +2,7 @@ import { HeaderBackContext } from '@react-navigation/elements';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import React from 'react';
 import { StyleSheet, TouchableOpacity, View, ViewStyle } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaView, SafeAreaViewProps } from 'react-native-safe-area-context';
 import { SvgProps } from 'react-native-svg';
 
 import { AppText } from '~/components/common/AppText';
@@ -20,6 +20,8 @@ export interface BasicHeaderProps {
   title?: string;
   /* Any element to display in the right part of header */
   accessoryRight?: Nullable<React.ReactNode>;
+  /* Container style */
+  containerStyle?: SafeAreaViewProps['style'];
 }
 
 interface BasicHeaderStyles {
@@ -40,10 +42,8 @@ export const BasicHeader: React.FC<BasicHeaderProps> = props => {
   const navigation = useNavigation();
   const route = useRoute();
 
-  const { BackButtonIcon, hideBackButton, accessoryRight, title } = useCombinedPropsWithConfig(
-    'BasicHeader',
-    props,
-  );
+  const { BackButtonIcon, hideBackButton, accessoryRight, title, containerStyle } =
+    useCombinedPropsWithConfig('BasicHeader', props);
   const styles = useCombinedStylesWithConfig('BasicHeader', useBasicHeaderStyles);
   const innerStyles = useInnerStyles();
 
@@ -72,7 +72,7 @@ export const BasicHeader: React.FC<BasicHeaderProps> = props => {
   );
 
   return (
-    <SafeAreaView edges={['top']} style={innerStyles['basic-header__container']}>
+    <SafeAreaView edges={['top']} style={[innerStyles['basic-header__container'], containerStyle]}>
       <View style={styles['basic-header']}>
         {backButton}
         <AppText color={colors.black['1']} variant="p3">
