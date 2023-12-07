@@ -1,7 +1,7 @@
 import { HeaderBackContext } from '@react-navigation/elements';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import React from 'react';
-import { StyleSheet, TouchableOpacity, View, ViewStyle } from 'react-native';
+import { ColorValue, StyleSheet, TouchableOpacity, View, ViewStyle } from 'react-native';
 import { SafeAreaView, SafeAreaViewProps } from 'react-native-safe-area-context';
 import { SvgProps } from 'react-native-svg';
 
@@ -22,6 +22,8 @@ export interface BasicHeaderProps {
   accessoryRight?: Nullable<React.ReactNode>;
   /* Container style */
   containerStyle?: SafeAreaViewProps['style'];
+  /* Container style */
+  textColor?: ColorValue;
 }
 
 interface BasicHeaderStyles {
@@ -42,8 +44,14 @@ export const BasicHeader: React.FC<BasicHeaderProps> = props => {
   const navigation = useNavigation();
   const route = useRoute();
 
-  const { BackButtonIcon, hideBackButton, accessoryRight, title, containerStyle } =
-    useCombinedPropsWithConfig('BasicHeader', props);
+  const {
+    BackButtonIcon,
+    hideBackButton,
+    accessoryRight,
+    title,
+    containerStyle,
+    textColor = colors.black['1'],
+  } = useCombinedPropsWithConfig('BasicHeader', props);
   const styles = useCombinedStylesWithConfig('BasicHeader', useBasicHeaderStyles);
   const innerStyles = useInnerStyles();
 
@@ -61,7 +69,7 @@ export const BasicHeader: React.FC<BasicHeaderProps> = props => {
               style={innerStyles['basic-button__left-accessory']}
               onPress={onBackPress}
             >
-              <BackButtonIcon color={colors.black[1]} height={24} width={24} />
+              <BackButtonIcon color={textColor} height={24} width={24} />
             </TouchableOpacity>
           );
         }
@@ -75,7 +83,7 @@ export const BasicHeader: React.FC<BasicHeaderProps> = props => {
     <SafeAreaView edges={['top']} style={[innerStyles['basic-header__container'], containerStyle]}>
       <View style={styles['basic-header']}>
         {backButton}
-        <AppText color={colors.black['1']} variant="p3">
+        <AppText color={textColor} variant="p3">
           {title || route.name}
         </AppText>
         <View style={innerStyles['basic-header__right-accessory']}>{accessoryRight}</View>
