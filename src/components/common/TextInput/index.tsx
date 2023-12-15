@@ -103,9 +103,9 @@ export const TextInput: FC<TextInputProps> = props => {
 
   const fullStyle = StyleSheet.flatten([
     styles['text-input'],
-    style,
     multiline && styles['text-input--multiline'],
     !multiline && !!Icon && styles['text-input--with-icon'],
+    style,
     disabled && styles['text-input--disabled'],
     !disabled && error && styles['text-input--error'],
     !disabled && !error && isFocused && styles['text-input--focused'],

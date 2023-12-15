@@ -1,5 +1,5 @@
 import React from 'react';
-import { Pressable, View } from 'react-native';
+import { Pressable, TouchableOpacity, View } from 'react-native';
 import { SvgProps } from 'react-native-svg';
 
 import { useUIKitTheme } from '~/config/utils';
@@ -34,7 +34,7 @@ export const Checkbox: React.FC<CheckboxProps> = props => {
   const styles = useStyles({ size, activeColor });
 
   return (
-    <Pressable disabled={disabled} onPress={() => onChange(!checked)}>
+    <TouchableOpacity disabled={disabled} onPress={() => onChange(!checked)}>
       <View
         style={[
           styles.box,
@@ -47,7 +47,7 @@ export const Checkbox: React.FC<CheckboxProps> = props => {
           {checked && CheckIcon && <CheckIcon color={colors.white} height={size} width={size} />}
         </View>
       </View>
-    </Pressable>
+    </TouchableOpacity>
   );
 };
 

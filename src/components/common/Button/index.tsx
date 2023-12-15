@@ -169,7 +169,13 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> = ({
       {!!pressedOverlayColor && (
         <View style={[innerStyles.overlay, pressed && { backgroundColor: pressedOverlayColor }]} />
       )}
-      {!isLoading ? label : <Flow color={loaderColor} size={40} />}
+      {!isLoading ? (
+        label
+      ) : (
+        <View style={innerStyles.labelContainer}>
+          <Flow color={loaderColor} size={40} />
+        </View>
+      )}
       {backgroundGradient ? (
         <LinearGradient
           {...backgroundGradient}
