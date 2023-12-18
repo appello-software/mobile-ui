@@ -68,6 +68,7 @@ __metadata:
     "@babel/preset-typescript": "npm:^7.23.0"
     "@babel/runtime": "npm:^7.23.1"
     "@react-native-community/eslint-config": "npm:^3.2.0"
+    "@react-native-community/hooks": "npm:^3.0.0"
     "@react-native-community/slider": "npm:^4.4.3"
     "@react-navigation/elements": "npm:^1.3.21"
     "@react-navigation/native": "npm:^6.1.9"
@@ -3736,6 +3737,16 @@ __metadata:
   version: 1.3.0
   resolution: "@react-native-community/eslint-plugin@npm:1.3.0"
   checksum: f08f662d45e4a001bb04f1534fcb3f3c4a9c7b043f60ecf159b4aa0040b388103e034af3de3d1c64d6aa18a3af5ddbfbd5312a67f619aaec41ed3a677efa5abf
+  languageName: node
+  linkType: hard
+
+"@react-native-community/hooks@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "@react-native-community/hooks@npm:3.0.0"
+  peerDependencies:
+    react: ">=17.0.2"
+    react-native: ">=0.65"
+  checksum: 19e38adfadc7f03080dff2bebf6bfc20c8efd9cb664a6c893ab42f2c82ebd1e0871dcb27652d77006dbe544bfeac07b4cf64da8c005d66b3ddfc1edb9d70a734
   languageName: node
   linkType: hard
 
