@@ -83,7 +83,7 @@ export const BasicHeader: React.FC<BasicHeaderProps> = props => {
     <SafeAreaView edges={['top']} style={[innerStyles['basic-header__container'], containerStyle]}>
       <View style={styles['basic-header']}>
         {backButton}
-        <AppText color={textColor} variant="p3">
+        <AppText color={textColor} numberOfLines={2} variant="p3">
           {title || route.name}
         </AppText>
         <View style={innerStyles['basic-header__right-accessory']}>{accessoryRight}</View>
@@ -113,13 +113,13 @@ const useInnerStyles = makeStyles(({ shadow, colors }) =>
       alignSelf: 'stretch',
       alignItems: 'flex-start',
       justifyContent: 'center',
-      width: '20%',
+      width: '25%',
     },
     'basic-header__right-accessory': {
       alignSelf: 'stretch',
       alignItems: 'flex-end',
       justifyContent: 'center',
-      width: '20%',
+      width: '25%',
     },
   }),
 );
