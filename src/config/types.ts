@@ -4,7 +4,7 @@ import { ShadowStyleIOS } from 'react-native';
 import { Checkbox, Radio } from '~/components';
 import { AppText, useAppTextStyles } from '~/components/common/AppText';
 import {
-  Button,
+  Button, useNegativeButtonStyles,
   usePrimaryButtonStyles,
   useSecondaryButtonStyles,
 } from '~/components/common/Button';
@@ -57,6 +57,10 @@ export interface UIComponents {
   'Button.Secondary': {
     defaultProps: DefaultPropsConfig<typeof Button>;
     styles: typeof useSecondaryButtonStyles;
+  };
+  'Button.Negative': {
+    defaultProps: DefaultPropsConfig<typeof Button>;
+    styles: typeof useNegativeButtonStyles;
   };
   'Button.Plain': {
     defaultProps: DefaultPropsConfig<typeof Button>;

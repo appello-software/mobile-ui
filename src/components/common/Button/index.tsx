@@ -19,7 +19,7 @@ import { useCombinedPropsWithConfig } from '~/hooks/useCombinedPropsWithConfig';
 import { useCombinedStylesWithConfig } from '~/hooks/useCombinedStylesWithConfig';
 import { makeStyles } from '~/utils';
 
-export interface ButtonProps extends PressableProps {
+export interface ButtonProps extends React.PropsWithChildren<PressableProps> {
   /** Properties of the label text */
   labelProps?: AppTextProps & { disabledColor?: ColorValue };
   /** Color of the loader component */
@@ -27,7 +27,7 @@ export interface ButtonProps extends PressableProps {
   /** Is the Button currently in loading state */
   isLoading?: boolean;
   /** Variant of displaying the button */
-  variant?: 'primary' | 'secondary' | 'plain';
+  variant?: 'primary' | 'secondary' | 'negative' | 'plain';
   /** Color of the overlay when the Button is pressed */
   pressedOverlayColor?: string;
   /** Use it only if the Button should have gradient background */
@@ -62,10 +62,7 @@ interface ButtonStyle {
  *   button__label?: TextStyle;
  * }```
  */
-export const Button: React.FC<React.PropsWithChildren<ButtonProps>> = ({
-  variant = 'primary',
-  ...props
-}) => {
+export const Button: React.FC<ButtonProps> = ({ variant = 'primary', ...props }) => {
   const [pressed, setPressed] = React.useState(false);
 
   const {
@@ -86,11 +83,13 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> = ({
   } = {
     primary: useCombinedPropsWithConfig('Button.Primary', props),
     secondary: useCombinedPropsWithConfig('Button.Secondary', props),
+    negative: useCombinedPropsWithConfig('Button.Negative', props),
     plain: useCombinedPropsWithConfig('Button.Plain', props),
   }[variant];
   const styles = {
     primary: useCombinedStylesWithConfig('Button.Primary', usePrimaryButtonStyles),
     secondary: useCombinedStylesWithConfig('Button.Secondary', useSecondaryButtonStyles),
+    negative: useCombinedStylesWithConfig('Button.Negative', useNegativeButtonStyles),
     plain: usePlainButtonStyles(),
   }[variant];
   const innerStyles = useInnerStyles();
@@ -252,6 +251,24 @@ export const useSecondaryButtonStyles = makeStyles(theme =>
       borderWidth: 1,
     },
     'button--disabled': {
+      backgroundColor: theme.colors.gray['5'],
+    },
+    button__label: {
+      ...commonStyles.button__label,
+    },
+  } as ButtonStyle),
+);
+
+export const useNegativeButtonStyles = makeStyles(theme =>
+  StyleSheet.create({
+    button: {
+      ...commonStyles.button,
+      backgroundColor: theme.colors.white,
+      borderColor: theme.colors.error,
+      borderWidth: 1,
+    },
+    'button--disabled': {
+      borderColor: theme.colors.gray['5'],
       backgroundColor: theme.colors.gray['5'],
     },
     button__label: {
