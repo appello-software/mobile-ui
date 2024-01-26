@@ -1,5 +1,4 @@
 import { IS_IOS } from '@appello/mobile/lib/constants/platform';
-import { useKeyboard } from '@react-native-community/hooks';
 import React, { useMemo } from 'react';
 import { KeyboardAvoidingView, ViewStyle } from 'react-native';
 import { Edge, SafeAreaView } from 'react-native-safe-area-context';
@@ -36,7 +35,6 @@ interface ScreenContainerStyles {
  * }```
  */
 export const ScreenContainer: React.FC<ScreenContainerProps> = props => {
-  const { keyboardShown } = useKeyboard();
   const { header, children, containerStyle, contentContainerStyle } = useCombinedPropsWithConfig(
     'ScreenContainer',
     props,
@@ -52,12 +50,11 @@ export const ScreenContainer: React.FC<ScreenContainerProps> = props => {
       {header}
       <SafeAreaView
         edges={useMemo(() => {
-          const edges: Edge[] = [];
+          const edges: Edge[] = ['bottom'];
           if (!header) edges.push('top');
-          if (!keyboardShown) edges.push('bottom');
 
           return edges;
-        }, [header, keyboardShown])}
+        }, [header])}
         style={[style['screen-container__content'], contentContainerStyle]}
       >
         {children}
