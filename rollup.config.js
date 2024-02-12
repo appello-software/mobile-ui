@@ -123,4 +123,4 @@ const browserConfig = {
   plugins: [terser()],
 };
 
-export default [buildConfig, browserConfig, storybookBuildConfig];
+export default [buildConfig, browserConfig];
