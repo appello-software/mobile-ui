@@ -90,6 +90,8 @@
     "eslint-plugin-unused-imports": "^3.0.0",
     "expo": "^48.0.19",
     "expo-linear-gradient": "~12.1.2",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.2",
     "node-polyfill-webpack-plugin": "^2.0.1",
     "prettier": "^3.0.3",
     "react": "18.2.0",
@@ -126,7 +128,9 @@
     "build-storybook": "storybook build --config-dir .storybook/configs/web",
     "storybook-generate": "sb-rn-get-stories --config-path .storybook/configs/ondevice",
     "storybook-watch": "sb-rn-watcher --config-path .storybook/configs/ondevice",
-    "chromatic": "npx chromatic --project-token=chpt_49fa6c8161a42b3"
+    "chromatic": "npx chromatic --project-token=chpt_49fa6c8161a42b3",
+    "check-types": "tsc -p tsconfig.json --noEmit",
+    "prepare": "husky"
   },
   "dependencies": {
     "@appello/common": "^2.0.12",
@@ -144,5 +148,14 @@
     "react-native-mask-input": "^1.2.3",
     "react-native-svg": ">=13.12.0",
     "react-native-wheely": "^0.6.0"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "prettier --write",
+      "eslint --ext .ts --ext .tsx"
+    ],
+    "*.{json,js}": [
+      "prettier --write"
+    ]
   }
 }
