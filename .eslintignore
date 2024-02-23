@@ -6,4 +6,4 @@ node_modules
 /__tests__
 rollup.config.js
 
-!.storybook
+.storybook/configs

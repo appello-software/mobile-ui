@@ -48,11 +48,14 @@ try {
 const getStories = () => {
   return {
     "./.storybook/stories/AppText/AppText.stories.tsx": require("../../stories/AppText/AppText.stories.tsx"),
+    "./.storybook/stories/BottomSheet/BottomSheet.stories.tsx": require("../../stories/BottomSheet/BottomSheet.stories.tsx"),
     "./.storybook/stories/Button/Button.stories.tsx": require("../../stories/Button/Button.stories.tsx"),
     "./.storybook/stories/Checkbox/Checkbox.stories.tsx": require("../../stories/Checkbox/Checkbox.stories.tsx"),
     "./.storybook/stories/Field/Field.stories.tsx": require("../../stories/Field/Field.stories.tsx"),
+    "./.storybook/stories/MultiRollerPicker/MultiRollerPicker.stories.tsx": require("../../stories/MultiRollerPicker/MultiRollerPicker.stories.tsx"),
     "./.storybook/stories/PasswordField/PasswordField.stories.tsx": require("../../stories/PasswordField/PasswordField.stories.tsx"),
     "./.storybook/stories/Radio/Radio.stories.tsx": require("../../stories/Radio/Radio.stories.tsx"),
+    "./.storybook/stories/RollerPicker/RollerPicker.stories.tsx": require("../../stories/RollerPicker/RollerPicker.stories.tsx"),
     "./.storybook/stories/ScreenContainer/ScreenContainer.stories.tsx": require("../../stories/ScreenContainer/ScreenContainer.stories.tsx"),
     "./.storybook/stories/TextField/TextField.stories.tsx": require("../../stories/TextField/TextField.stories.tsx"),
     "./.storybook/stories/TextInput/TextInput.stories.tsx": require("../../stories/TextInput/TextInput.stories.tsx"),

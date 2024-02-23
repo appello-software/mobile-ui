@@ -10,7 +10,20 @@ module.exports = {
   addons: [
     '@storybook/addon-links',
     '@storybook/addon-essentials',
-    '@storybook/addon-react-native-web',
+    {
+      name: '@storybook/addon-react-native-web',
+      options: {
+        modulesToTranspile: [
+          'react-native-reanimated',
+          '@gorhom/bottom-sheet',
+          'react-native-wheely',
+        ],
+        babelPlugins: [
+          '@babel/plugin-proposal-export-namespace-from',
+          'react-native-reanimated/plugin',
+        ],
+      },
+    },
   ],
   docs: {
     autodocs: true,

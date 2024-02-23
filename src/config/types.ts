@@ -3,11 +3,14 @@ import { ShadowStyleIOS } from 'react-native';
 
 import { Checkbox, Radio } from '~/components';
 import { AppText, useAppTextStyles } from '~/components/common/AppText';
+import { BottomSheet, useBottomSheetStyles } from '~/components/common/BottomSheet';
 import {
-  Button, useNegativeButtonStyles,
+  Button,
+  useNegativeButtonStyles,
   usePrimaryButtonStyles,
   useSecondaryButtonStyles,
 } from '~/components/common/Button';
+import { MultiRollerPicker } from '~/components/common/MultiRollerPicker';
 import { TextInput, useTextInputStyles } from '~/components/common/TextInput';
 import { Field, useFieldStyle } from '~/components/form/Field';
 import { PasswordField } from '~/components/form/PasswordField';
@@ -89,6 +92,14 @@ export interface UIComponents {
   BasicHeader: {
     defaultProps: DefaultPropsConfig<typeof BasicHeader>;
     styles: typeof useBasicHeaderStyles;
+  };
+  BottomSheet: {
+    defaultProps: DefaultPropsConfig<typeof BottomSheet>;
+    styles: typeof useBottomSheetStyles;
+  };
+  MultiRollerPicker: {
+    defaultProps: DefaultPropsConfig<typeof MultiRollerPicker>;
+    styles: never;
   };
 }
 
