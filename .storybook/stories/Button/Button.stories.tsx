@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/react-native';
+import { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import Svg, { Path, SvgProps } from 'react-native-svg';
 
@@ -14,12 +14,12 @@ const ChatIcon: React.FC<SvgProps> = props => (
   </Svg>
 );
 
-const meta: Meta<ButtonProps & { Icon: boolean }> = {
+const meta: Meta<ButtonProps> = {
   title: 'Basic/Button',
   component: Button,
   render: ({ Icon, children, ...args }) => {
     return (
-      <Button Icon={(Icon as boolean) ? ChatIcon : undefined} {...(args as ButtonProps)}>
+      <Button Icon={Icon ? ChatIcon : undefined} {...(args as ButtonProps)}>
         {children as any}
       </Button>
     );

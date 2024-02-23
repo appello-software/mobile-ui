@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/react-native';
+import { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
 import { TextInput, Field, FieldProps } from '../../../src';

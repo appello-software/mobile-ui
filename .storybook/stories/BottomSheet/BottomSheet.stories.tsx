@@ -1,5 +1,5 @@
 import { BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet';
-import type { Meta, StoryObj } from '@storybook/react-native';
+import type { Meta, StoryObj } from '@storybook/react';
 import React, { useRef } from 'react';
 import { View } from 'react-native';
 

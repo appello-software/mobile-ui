@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/react-native';
+import { Meta, StoryObj } from '@storybook/react';
 
 import { AppText, AppTextProps } from '../../../src';
 import { CONFIG_DETAIL } from '../../constants';

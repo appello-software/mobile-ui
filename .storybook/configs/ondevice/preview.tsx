@@ -1,7 +1,9 @@
-import { CenterView } from '../../components/CenterView';
+import type { Preview } from '@storybook/react';
 import React from 'react';
 
-export const parameters = {
+import { CenterView } from '../../components/CenterView';
+
+const parameters: Preview['parameters'] = {
   controls: {
     matchers: {
       color: /(background|color)$/i,
@@ -10,7 +12,7 @@ export const parameters = {
   },
 };
 
-export const decorators = [
+const decorators: Preview['decorators'] = [
   (Story: React.FC) => {
     return (
       <CenterView>
@@ -19,3 +21,10 @@ export const decorators = [
     );
   },
 ];
+
+const preview: Preview = {
+  decorators,
+  parameters,
+};
+
+export default preview;
