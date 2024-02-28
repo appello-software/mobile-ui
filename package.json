@@ -127,6 +127,7 @@
     "react-native-reanimated": "^3.6.1",
     "react-native-safe-area-context": "^4.7.4",
     "react-native-web": "^0.19.8",
+    "release-it": "^17.1.1",
     "rollup": "^3.12.1",
     "rollup-plugin-copy": "^3.5.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
@@ -153,7 +154,8 @@
     "storybook-generate": "sb-rn-get-stories --config-path .storybook/configs/ondevice",
     "storybook-watch": "sb-rn-watcher --config-path .storybook/configs/ondevice",
     "chromatic": "npx chromatic --project-token=chpt_49fa6c8161a42b3",
-    "check-types": "tsc -p tsconfig.json --noEmit"
+    "check-types": "tsc -p tsconfig.json --noEmit",
+    "release": "release-it"
   },
   "resolutions": {
     "react-docgen-typescript": "2.2.2"
@@ -180,5 +182,10 @@
       "module",
       "typescript"
     ]
+  },
+  "release-it": {
+    "github": {
+      "release": true
+    }
   }
 }
