@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
-import { TextInput, Field, FieldProps } from '../../../src';
+import { TextInput, Field, FieldProps } from '@appello/mobile-ui';
 import { CONFIG_CATEGORY } from '../../constants';
 
 const meta: Meta<FieldProps> = {

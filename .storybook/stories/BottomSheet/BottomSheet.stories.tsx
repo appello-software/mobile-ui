@@ -3,9 +3,9 @@ import type { Meta, StoryObj } from '@storybook/react';
 import React, { useRef } from 'react';
 import { View } from 'react-native';
 
-import { AppText } from '~/components';
-import { BottomSheet, BottomSheetProps } from '~/components/common/BottomSheet';
-import { Button } from '~/components/common/Button';
+import { AppText } from '@appello/mobile-ui';
+import { BottomSheet, BottomSheetProps } from '@appello/mobile-ui';
+import { Button } from '@appello/mobile-ui';
 
 /* eslint-disable react-hooks/rules-of-hooks */
 const meta = {

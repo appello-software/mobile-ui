@@ -1,4 +1,5 @@
 const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
+const path = require('path');
 
 module.exports = {
   framework: '@storybook/react-webpack5',
@@ -29,6 +30,14 @@ module.exports = {
     autodocs: true,
   },
   webpackFinal: config => {
+    config.resolve = {
+      ...config.resolve,
+      alias: {
+        ...config.resolve?.alias,
+        '@appello/mobile-ui': path.resolve(__dirname, '../../../src'),
+      },
+    };
+
     const fileLoaderRule = config.module.rules.find(rule => rule.test.test('.svg'));
     fileLoaderRule.exclude = /\.svg$/;
     config.module.rules.push({

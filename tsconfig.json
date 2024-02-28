@@ -11,12 +11,13 @@
     "baseUrl": ".",
     "paths": {
       "~/*": ["./src/*"],
+      "@appello/mobile-ui": ["./src"],
       "@appello/mobile-ui/icons/*": ["./icons/*"]
     },
     "types": ["node"],
     "declaration": true,
-    "outDir": "./dist",
+    "noEmit": false,
     "rootDir": "."
   },
-  "include": ["src/**/*", ".storybook/**/*"]
+  "include": ["src/**/*"]
 }

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
-import { Radio, RadioProps } from '../../../src';
+import { Radio, RadioProps } from '@appello/mobile-ui';
 import { CONFIG_CATEGORY, CONFIG_DETAIL } from '../../constants';
 
 const meta = {

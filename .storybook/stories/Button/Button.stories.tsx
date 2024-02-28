@@ -2,7 +2,7 @@ import { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import Svg, { Path, SvgProps } from 'react-native-svg';
 
-import { Button, ButtonProps } from '../../../src';
+import { Button, ButtonProps } from '@appello/mobile-ui';
 import { CONFIG_CATEGORY, CONFIG_DETAIL } from '../../constants';
 
 const ChatIcon: React.FC<SvgProps> = props => (

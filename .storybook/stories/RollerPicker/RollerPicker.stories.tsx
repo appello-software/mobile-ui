@@ -2,9 +2,9 @@ import { BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet
 import type { Meta, StoryObj } from '@storybook/react';
 import React, { useRef, useState } from 'react';
 
-import { Button } from '~/components/common/Button';
-import { Option, Value } from '~/components/common/MultiRollerPicker';
-import { RollerPicker, RollerPickerProps } from '~/components/common/RollerPicker';
+import { Button } from '@appello/mobile-ui';
+import { Option, Value } from '@appello/mobile-ui';
+import { RollerPicker, RollerPickerProps } from '@appello/mobile-ui';
 
 import { EXTENDED_CATEGORY } from '../../constants';
 

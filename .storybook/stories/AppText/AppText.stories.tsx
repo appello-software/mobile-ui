@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 
-import { AppText, AppTextProps } from '../../../src';
+import { AppText, AppTextProps } from '@appello/mobile-ui';
 import { CONFIG_DETAIL } from '../../constants';
 
 enum AppTextVariant {

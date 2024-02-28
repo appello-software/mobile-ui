@@ -2,7 +2,7 @@ import { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 
-import { TextField, TextFieldProps } from '../../../src';
+import { TextField, TextFieldProps } from '@appello/mobile-ui';
 import { EXTENDED_CATEGORY } from '../../constants';
 
 const meta: Meta<TextFieldProps<any>> = {

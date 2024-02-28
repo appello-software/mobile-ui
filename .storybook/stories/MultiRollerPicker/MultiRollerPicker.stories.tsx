@@ -2,13 +2,8 @@ import { BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet
 import type { Meta, StoryObj } from '@storybook/react';
 import React, { useMemo, useRef, useState } from 'react';
 
-import { Button } from '~/components/common/Button';
-import {
-  MultiRollerPicker,
-  MultiRollerPickerProps,
-  Option,
-  Value,
-} from '~/components/common/MultiRollerPicker';
+import { Button } from '@appello/mobile-ui';
+import { MultiRollerPicker, MultiRollerPickerProps, Option, Value } from '@appello/mobile-ui';
 
 const dateOptions: Option[] = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'].map(value => ({
   value,

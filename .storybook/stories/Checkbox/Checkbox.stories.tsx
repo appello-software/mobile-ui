@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React, { useState } from 'react';
 
-import { Checkbox, CheckboxProps } from '../../../src';
+import { Checkbox, CheckboxProps } from '@appello/mobile-ui';
 import { CONFIG_CATEGORY, CONFIG_DETAIL } from '../../constants';
 
 import Svg, { SvgProps, Path } from 'react-native-svg';
