@@ -13,7 +13,7 @@ export type Value = string | number | null;
 
 export interface Option<TValue extends NonNullable<Value> = NonNullable<Value>> {
   value: TValue;
-  title: string;
+  label: string;
 }
 
 export interface MultiRollerPickerProps {
@@ -98,7 +98,7 @@ export const MultiRollerPicker = forwardRef<BottomSheetModal, MultiRollerPickerP
               itemHeight={40}
               itemTextStyle={styles.pickerItemText}
               key={index}
-              options={options.map(option => option.title)}
+              options={options.map(option => option.label)}
               selectedIndex={selectedIndexes[index]}
               selectedIndicatorStyle={styles.selectedIndicator}
               visibleRest={2}

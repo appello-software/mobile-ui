@@ -3,11 +3,16 @@ import type { Meta, StoryObj } from '@storybook/react';
 import React, { useMemo, useRef, useState } from 'react';
 
 import { Button } from '@appello/mobile-ui';
-import { MultiRollerPicker, MultiRollerPickerProps, Option, Value } from '@appello/mobile-ui';
+import {
+  MultiRollerPicker,
+  MultiRollerPickerProps,
+  Option,
+  Value,
+} from '@appello/mobile-ui/components/common/MultiRollerPicker';
 
 const dateOptions: Option[] = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'].map(value => ({
   value,
-  title: value,
+  label: value,
 }));
 const monthOptions: Option[] = [
   'January',
@@ -22,11 +27,11 @@ const monthOptions: Option[] = [
   'October',
   'November',
   'December',
-].map(value => ({ value, title: value }));
+].map(value => ({ value, label: value }));
 const yearOptions: Option[] = ['2024', '2025', '2026', '2027', '2028', '2029', '2030'].map(
   value => ({
     value,
-    title: value,
+    label: value,
   }),
 );
 

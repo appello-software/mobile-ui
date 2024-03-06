@@ -12,6 +12,7 @@
     "paths": {
       "~/*": ["./src/*"],
       "@appello/mobile-ui": ["./src"],
+      "@appello/mobile-ui/*": ["./src/*"],
       "@appello/mobile-ui/icons/*": ["./icons/*"]
     },
     "types": ["node"],
