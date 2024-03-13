@@ -1,0 +1,21 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+      <item name="android:editTextBackground">@drawable/rn_edit_text_material</item>
+
+      <!-- Make status & navigation bar translucent -->
+      <item name="android:navigationBarColor">@android:color/transparent</item>
+      <item name="android:windowTranslucentNavigation">true</item>
+      <item name="android:windowTranslucentStatus">true</item>
+    </style>
+
+    <!-- BootTheme should inherit from Theme.BootSplash or Theme.BootSplash.EdgeToEdge -->
+    <style name="BootTheme" parent="Theme.BootSplash">
+      <item name="bootSplashBackground">@color/bootsplash_background</item>
+      <item name="bootSplashLogo">@drawable/bootsplash_logo</item>
+      <item name="postBootSplashTheme">@style/AppTheme</item>
+    </style>
+
+</resources>

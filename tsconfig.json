@@ -11,14 +11,17 @@
     "baseUrl": ".",
     "paths": {
       "~/*": ["./src/*"],
+      "~/storybook": ["./.storybook"],
       "@appello/mobile-ui": ["./src"],
       "@appello/mobile-ui/*": ["./src/*"],
-      "@appello/mobile-ui/icons/*": ["./icons/*"]
+      "@appello/mobile-ui/icons/*": ["./icons/*"],
+      "@appello/mobile-ui/.storybook": ["./.storybook"],
+      "@appello/mobile-ui/.storybook/*": ["./.storybook/*"]
     },
     "types": ["node"],
     "declaration": true,
     "noEmit": false,
     "rootDir": "."
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*", "example/src/**/*", "example/scripts/**/*", "example/*.config.ts"]
 }
