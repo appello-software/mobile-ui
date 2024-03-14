@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 
 import { Button, TextInput, TextInputProps } from '@appello/mobile-ui';
 import { CONFIG_CATEGORY } from '../../constants';
-import { AccountIcon, PaperPlaneIcon } from './icons';
+import { AccountIcon, PaperPlaneIcon } from '../../components/icons';
 
 const accessoryRightRender = (
   <Button
