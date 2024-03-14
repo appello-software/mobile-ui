@@ -10,14 +10,16 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import { Flow } from 'react-native-animated-spinkit';
 import { SvgProps } from 'react-native-svg';
 
+import { Points } from '~/components';
 import { AppText, AppTextProps } from '~/components/common/AppText';
 import { useUIKitTheme } from '~/config/utils';
 import { useCombinedPropsWithConfig } from '~/hooks/useCombinedPropsWithConfig';
 import { useCombinedStylesWithConfig } from '~/hooks/useCombinedStylesWithConfig';
 import { makeStyles } from '~/utils';
+
+const DEFAULT_LOADER_SIZE = 40;
 
 export interface ButtonProps extends React.PropsWithChildren<PressableProps> {
   /** Properties of the label text */
@@ -168,13 +170,7 @@ export const Button: React.FC<ButtonProps> = ({ variant = 'primary', ...props })
       {!!pressedOverlayColor && (
         <View style={[innerStyles.overlay, pressed && { backgroundColor: pressedOverlayColor }]} />
       )}
-      {!isLoading ? (
-        label
-      ) : (
-        <View style={innerStyles.labelContainer}>
-          <Flow color={loaderColor} size={40} />
-        </View>
-      )}
+      {!isLoading ? label : <Points color={loaderColor} size={DEFAULT_LOADER_SIZE} />}
       {backgroundGradient ? (
         <LinearGradient
           {...backgroundGradient}

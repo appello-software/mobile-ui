@@ -1,5 +1,5 @@
 import React from 'react';
-import { Pressable, TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import { SvgProps } from 'react-native-svg';
 
 import { useUIKitTheme } from '~/config/utils';
