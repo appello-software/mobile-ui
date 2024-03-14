@@ -2,6 +2,7 @@ import { ElementType } from 'react';
 import { ShadowStyleIOS } from 'react-native';
 
 import { Checkbox, Radio } from '~/components';
+import { ActionSheet, useActionSheetStyles } from '~/components/common/ActionSheet';
 import { AppText, useAppTextStyles } from '~/components/common/AppText';
 import { BottomSheet, useBottomSheetStyles } from '~/components/common/BottomSheet';
 import {
@@ -100,6 +101,10 @@ export interface UIComponents {
   MultiRollerPicker: {
     defaultProps: DefaultPropsConfig<typeof MultiRollerPicker>;
     styles: never;
+  };
+  ActionSheet: {
+    defaultProps: DefaultPropsConfig<typeof ActionSheet>;
+    styles: typeof useActionSheetStyles;
   };
 }
 

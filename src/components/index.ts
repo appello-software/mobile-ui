@@ -1,3 +1,4 @@
+export { ActionSheet, ActionSheetProps } from './common/ActionSheet';
 export { AppText, AppTextProps } from './common/AppText';
 export { BottomSheet, BottomSheetProps } from './common/BottomSheet';
 export { Button, ButtonProps } from './common/Button';
