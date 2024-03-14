@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
   main: {
     flex: 1,
     padding: 40,
+    minHeight: 500,
     justifyContent: 'center',
     backgroundColor: '#F5FCFF',
   },

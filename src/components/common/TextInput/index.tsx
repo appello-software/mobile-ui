@@ -82,6 +82,7 @@ export const TextInput: FC<TextInputProps> = props => {
   const {
     error,
     disabled,
+    editable,
     onPress,
     multiline,
     style,
@@ -102,9 +103,9 @@ export const TextInput: FC<TextInputProps> = props => {
 
   const fullStyle = StyleSheet.flatten([
     styles['text-input'],
-    style,
     multiline && styles['text-input--multiline'],
     !multiline && !!Icon && styles['text-input--with-icon'],
+    style,
     disabled && styles['text-input--disabled'],
     !disabled && error && styles['text-input--error'],
     !disabled && !error && isFocused && styles['text-input--focused'],
@@ -133,38 +134,40 @@ export const TextInput: FC<TextInputProps> = props => {
 
   return (
     <TouchableOpacity disabled={disabled || !onPress} onPress={onPress}>
-      <RNTextInput
-        {...textInputProps}
-        cursorColor={colors.primary}
-        editable={!disabled && !onPress}
-        maxLength={maxLength}
-        multiline={multiline}
-        placeholder={placeholder ?? maskPlaceholder}
-        placeholderTextColor={placeholderTextColor}
-        selectionColor={colors.primary}
-        style={fullStyle}
-        value={maskValue}
-        onBlur={handleBlur}
-        onChangeText={onMaskChangeText}
-        onFocus={handleFocus}
-      />
-      {!multiline && Icon ? (
-        <View style={styles['text-input__icon-container']}>
-          <Icon
-            color={'color' in fullStyle ? (fullStyle?.color as ColorValue) : undefined}
-            height={iconSize?.height}
-            width={iconSize?.width}
-          />
-        </View>
-      ) : null}
-      {!multiline && accessoryRight ? (
-        <View style={styles['text-input__accessory-right-container']}>{accessoryRight}</View>
-      ) : null}
-      {multiline && !!maxLength && (
-        <AppText color={colors.gray['3']} style={styles['text-input__counter']} variant="p5">
-          {value?.length || 0}/{maxLength}
-        </AppText>
-      )}
+      <View pointerEvents={onPress ? 'none' : 'auto'}>
+        <RNTextInput
+          {...textInputProps}
+          cursorColor={colors.primary}
+          editable={editable || (!disabled && !onPress)}
+          maxLength={maxLength}
+          multiline={multiline}
+          placeholder={placeholder ?? maskPlaceholder}
+          placeholderTextColor={placeholderTextColor}
+          selectionColor={colors.primary}
+          style={fullStyle}
+          value={maskValue}
+          onBlur={handleBlur}
+          onChangeText={onMaskChangeText}
+          onFocus={handleFocus}
+        />
+        {!multiline && Icon ? (
+          <View style={styles['text-input__icon-container']}>
+            <Icon
+              color={'color' in fullStyle ? (fullStyle?.color as ColorValue) : undefined}
+              height={iconSize?.height}
+              width={iconSize?.width}
+            />
+          </View>
+        ) : null}
+        {!multiline && accessoryRight ? (
+          <View style={styles['text-input__accessory-right-container']}>{accessoryRight}</View>
+        ) : null}
+        {multiline && !!maxLength && (
+          <AppText color={colors.gray['3']} style={styles['text-input__counter']} variant="p5">
+            {value?.length || 0}/{maxLength}
+          </AppText>
+        )}
+      </View>
     </TouchableOpacity>
   );
 };
@@ -206,6 +209,7 @@ export const useTextInputStyles = makeStyles(theme => {
       paddingHorizontal: 18,
       paddingTop: 16,
       paddingBottom: 23,
+      textAlignVertical: 'top',
     },
     'text-input__counter': {
       position: 'absolute',

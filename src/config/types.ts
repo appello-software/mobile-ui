@@ -2,14 +2,18 @@ import { ElementType } from 'react';
 import { ShadowStyleIOS } from 'react-native';
 
 import { Checkbox, Points, Radio } from '~/components';
+import { ActionSheet, useActionSheetStyles } from '~/components/common/ActionSheet';
 import { AppText, useAppTextStyles } from '~/components/common/AppText';
+import { BottomSheet, useBottomSheetStyles } from '~/components/common/BottomSheet';
 import {
   Button,
+  useNegativeButtonStyles,
   usePrimaryButtonStyles,
   useSecondaryButtonStyles,
 } from '~/components/common/Button';
 import { HorizontalTabs, useHorizontalTabsStyles } from '~/components/common/HorizontalTabs';
 import { Circle } from '~/components/common/Loaders/Circle';
+import { MultiRollerPicker } from '~/components/common/MultiRollerPicker';
 import { TextInput, useTextInputStyles } from '~/components/common/TextInput';
 import { Field, useFieldStyle } from '~/components/form/Field';
 import { PasswordField } from '~/components/form/PasswordField';
@@ -60,6 +64,14 @@ export interface UIComponents {
     defaultProps: DefaultPropsConfig<typeof Button>;
     styles: typeof useSecondaryButtonStyles;
   };
+  'Button.Negative': {
+    defaultProps: DefaultPropsConfig<typeof Button>;
+    styles: typeof useNegativeButtonStyles;
+  };
+  'Button.Plain': {
+    defaultProps: DefaultPropsConfig<typeof Button>;
+    styles: never;
+  };
   Checkbox: {
     defaultProps: DefaultPropsConfig<typeof Checkbox>;
     styles: never;
@@ -95,6 +107,18 @@ export interface UIComponents {
   Points: {
     defaultProps: DefaultPropsConfig<typeof Points>;
     styles: never;
+  };
+  BottomSheet: {
+    defaultProps: DefaultPropsConfig<typeof BottomSheet>;
+    styles: typeof useBottomSheetStyles;
+  };
+  MultiRollerPicker: {
+    defaultProps: DefaultPropsConfig<typeof MultiRollerPicker>;
+    styles: never;
+  };
+  ActionSheet: {
+    defaultProps: DefaultPropsConfig<typeof ActionSheet>;
+    styles: typeof useActionSheetStyles;
   };
 }
 

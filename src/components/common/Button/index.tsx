@@ -21,7 +21,7 @@ import { makeStyles } from '~/utils';
 
 const DEFAULT_LOADER_SIZE = 40;
 
-export interface ButtonProps extends PressableProps {
+export interface ButtonProps extends React.PropsWithChildren<PressableProps> {
   /** Properties of the label text */
   labelProps?: AppTextProps & { disabledColor?: ColorValue };
   /** Color of the loader component */
@@ -29,7 +29,7 @@ export interface ButtonProps extends PressableProps {
   /** Is the Button currently in loading state */
   isLoading?: boolean;
   /** Variant of displaying the button */
-  variant?: 'primary' | 'secondary';
+  variant?: 'primary' | 'secondary' | 'negative' | 'plain';
   /** Color of the overlay when the Button is pressed */
   pressedOverlayColor?: string;
   /** Use it only if the Button should have gradient background */
@@ -64,10 +64,7 @@ interface ButtonStyle {
  *   button__label?: TextStyle;
  * }```
  */
-export const Button: React.FC<React.PropsWithChildren<ButtonProps>> = ({
-  variant = 'primary',
-  ...props
-}) => {
+export const Button: React.FC<ButtonProps> = ({ variant = 'primary', ...props }) => {
   const [pressed, setPressed] = React.useState(false);
 
   const {
@@ -88,38 +85,44 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> = ({
   } = {
     primary: useCombinedPropsWithConfig('Button.Primary', props),
     secondary: useCombinedPropsWithConfig('Button.Secondary', props),
+    negative: useCombinedPropsWithConfig('Button.Negative', props),
+    plain: useCombinedPropsWithConfig('Button.Plain', props),
   }[variant];
   const styles = {
     primary: useCombinedStylesWithConfig('Button.Primary', usePrimaryButtonStyles),
     secondary: useCombinedStylesWithConfig('Button.Secondary', useSecondaryButtonStyles),
+    negative: useCombinedStylesWithConfig('Button.Negative', useNegativeButtonStyles),
+    plain: usePlainButtonStyles(),
   }[variant];
-  const layoutStyles = useLayoutStyles();
+  const innerStyles = useInnerStyles();
   const theme = useUIKitTheme();
 
   const labelColor = !disabled
     ? labelProps?.color
     : labelProps?.disabledColor || theme.colors.gray['3'];
   const label =
-    typeof children === 'string' ? (
+    typeof children === 'string' || !children ? (
       <View
         style={[
-          layoutStyles.labelContainer,
+          innerStyles.labelContainer,
           Icon &&
             (iconPosition === 'left' || iconPosition === 'right') &&
-            layoutStyles.labelContainerSides,
+            innerStyles.labelContainerSides,
           Icon &&
             (iconPosition === 'right' || iconPosition === 'center-right') &&
-            layoutStyles.labelContainerRight,
+            innerStyles.labelContainerRight,
         ]}
       >
         {Icon ? <Icon color={labelColor} {...iconSize} /> : null}
-        <AppText
-          {...labelProps}
-          color={labelColor}
-          style={[styles.button__label, labelProps?.style]}
-        >
-          {children}
-        </AppText>
+        {children ? (
+          <AppText
+            {...labelProps}
+            color={labelColor}
+            style={[styles.button__label, labelProps?.style]}
+          >
+            {children}
+          </AppText>
+        ) : null}
         {Icon && (iconPosition === 'right' || iconPosition === 'left') ? (
           <View style={iconSize} />
         ) : null}
@@ -165,20 +168,20 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> = ({
       onPressOut={handlePressOut}
     >
       {!!pressedOverlayColor && (
-        <View style={[layoutStyles.overlay, pressed && { backgroundColor: pressedOverlayColor }]} />
+        <View style={[innerStyles.overlay, pressed && { backgroundColor: pressedOverlayColor }]} />
       )}
       {!isLoading ? label : <Points color={loaderColor} size={DEFAULT_LOADER_SIZE} />}
       {backgroundGradient ? (
         <LinearGradient
           {...backgroundGradient}
-          style={[layoutStyles.overlay, layoutStyles.gradientBg]}
+          style={[innerStyles.overlay, innerStyles.gradientBg]}
         />
       ) : null}
     </Pressable>
   );
 };
 
-const useLayoutStyles = makeStyles(() => ({
+const useInnerStyles = makeStyles(() => ({
   labelContainer: {
     flex: 1,
     flexDirection: 'row',
@@ -246,6 +249,38 @@ export const useSecondaryButtonStyles = makeStyles(theme =>
     'button--disabled': {
       backgroundColor: theme.colors.gray['5'],
     },
+    button__label: {
+      ...commonStyles.button__label,
+    },
+  } as ButtonStyle),
+);
+
+export const useNegativeButtonStyles = makeStyles(theme =>
+  StyleSheet.create({
+    button: {
+      ...commonStyles.button,
+      backgroundColor: theme.colors.white,
+      borderColor: theme.colors.error,
+      borderWidth: 1,
+    },
+    'button--disabled': {
+      borderColor: theme.colors.gray['5'],
+      backgroundColor: theme.colors.gray['5'],
+    },
+    button__label: {
+      ...commonStyles.button__label,
+    },
+  } as ButtonStyle),
+);
+
+export const usePlainButtonStyles = makeStyles(() =>
+  StyleSheet.create({
+    button: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      flexDirection: 'row',
+    },
+    'button--disabled': {},
     button__label: {
       ...commonStyles.button__label,
     },

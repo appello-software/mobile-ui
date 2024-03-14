@@ -1,7 +1,13 @@
-import { getStorybookUI } from '@storybook/react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import './configs/ondevice/storybook.requires';
+import { view } from './configs/ondevice/storybook.requires';
 
-export const StorybookUIRoot = getStorybookUI({
+const StorybookUIRoot = view.getStorybookUI({
   shouldDisableKeyboardAvoidingView: true,
+  storage: {
+    getItem: AsyncStorage.getItem,
+    setItem: AsyncStorage.setItem,
+  },
 });
+
+export default StorybookUIRoot;

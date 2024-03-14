@@ -1,10 +1,10 @@
 import { SafeAreaProviderCompat } from '@react-navigation/elements';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Meta, StoryObj } from '@storybook/react-native';
+import { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
-import { AppText, BasicHeader, ScreenContainer, ScreenContainerProps } from '../../../src';
+import { AppText, BasicHeader, ScreenContainer, ScreenContainerProps } from '@appello/mobile-ui';
 
 const StoryStack = createNativeStackNavigator();
 

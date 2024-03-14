@@ -1,10 +1,10 @@
 import { action } from '@storybook/addon-actions';
-import { Meta, StoryObj } from '@storybook/react-native';
+import { Meta, StoryObj } from '@storybook/react';
 import React, { useState } from 'react';
 
-import { Button, TextInput, TextInputProps } from '../../../src';
+import { Button, TextInput, TextInputProps } from '@appello/mobile-ui';
 import { CONFIG_CATEGORY } from '../../constants';
-import { AccountIcon, PaperPlaneIcon } from './icons';
+import { AccountIcon, PaperPlaneIcon } from '../../components/icons';
 
 const accessoryRightRender = (
   <Button

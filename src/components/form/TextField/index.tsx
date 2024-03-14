@@ -12,6 +12,7 @@ export interface TextFieldProps<TFormValues extends FieldValues>
   control: Control<TFormValues>;
   label?: string;
   style?: StyleProp<ViewStyle>;
+  inputStyle?: TextInputProps['style'];
 }
 
 /**
@@ -31,6 +32,7 @@ export const TextField = <TFormValues extends FieldValues>({
   control,
   label,
   style,
+  inputStyle,
   ...textInputProps
 }: TextFieldProps<TFormValues>): React.ReactElement => {
   const controller = useController({ name, control });
@@ -40,6 +42,7 @@ export const TextField = <TFormValues extends FieldValues>({
     <Field error={fieldError} label={label} style={style}>
       <TextInput
         error={!!fieldError}
+        style={inputStyle}
         value={controller.field.value}
         onBlur={controller.field.onBlur}
         onChangeText={controller.field.onChange}
