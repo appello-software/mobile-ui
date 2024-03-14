@@ -9,7 +9,12 @@ export {
   HorizontalTabsRefType,
 } from './common/HorizontalTabs';
 export { Circle, CircleProps, Points, PointsProps } from './common/Loaders';
-export { MultiRollerPicker, MultiRollerPickerProps } from './common/MultiRollerPicker';
+export {
+  MultiRollerPicker,
+  MultiRollerPickerProps,
+  Option,
+  Value,
+} from './common/MultiRollerPicker';
 export { Radio, RadioProps } from './common/Radio';
 export { RollerPicker, RollerPickerProps } from './common/RollerPicker';
 export { TextInput, TextInputProps } from './common/TextInput';

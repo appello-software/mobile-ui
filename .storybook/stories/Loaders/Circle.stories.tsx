@@ -1,9 +1,8 @@
-import { Meta, StoryObj } from '@storybook/react-native';
+import { Meta, StoryObj } from '@storybook/react';
 
 import { colors } from '~/__defaults__/defaultTheme';
-import { ANIMATION_DURATION, DEFAULT_SIZE } from '~/components/common/Loaders/Circle';
+import { ANIMATION_DURATION, DEFAULT_SIZE, Circle, CircleProps } from '@appello/mobile-ui/components/common/Loaders/Circle';
 
-import { Circle, CircleProps } from '../../../src';
 import { CONFIG_CATEGORY, CONFIG_DETAIL } from '../../constants';
 
 const meta: Meta<CircleProps> = {

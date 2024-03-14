@@ -43,7 +43,10 @@ export interface HorizontalTabsRefType {
 export interface HorizontalTabsProps {
   /** Ref component for calling methods */
   ref?: Ref<HorizontalTabsRefType>;
-  /** Adds the ability to scroll elements; if false, then all elements will stretch to the full width provided to them */
+  /** Adds the ability to scroll elements; if false, then all elements will stretch to the full width provided to them
+   *
+   * @default false
+   * */
   scrollable?: boolean;
   /** Array of tabs */
   list: { key: string; title: string }[];
@@ -51,13 +54,19 @@ export interface HorizontalTabsProps {
   tab: string;
   /** Callback for changing the active tab */
   setTab: (v: string) => void;
-  /** Tab height (default value 52) */
+  /** Tab height
+   *
+   * @default 52
+   * */
   tabHeight?: number;
   /** Additional content near the inscription (Suppose you need to show the number of elements) */
   tabContent?: (key: string) => ReactElement;
   /** If you want additional content (from tabContent) to be rendered on the left */
   tabContentReverse?: boolean;
-  /** Text variant (from theme) */
+  /** Text variant (from theme)
+   *
+   * @default "p1"
+   * */
   tabTextVariant?: AppTextProps['variant'];
 }
 
@@ -174,7 +183,9 @@ export const HorizontalTabs = forwardRef<HorizontalTabsRefType, HorizontalTabsPr
         ) : (
           <>{renderTabs()}</>
         )}
-        <View style={[innerStyles['horizontal-tabs__underline'], animatedStyleUnderline]} />
+        <Animated.View
+          style={[innerStyles['horizontal-tabs__underline'], animatedStyleUnderline]}
+        />
       </View>
     );
   },

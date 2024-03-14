@@ -1,10 +1,10 @@
-import { Meta, StoryObj } from '@storybook/react-native';
+import type { Meta, StoryObj } from '@storybook/react';
 import React, { useState } from 'react';
 
-import { DEFAULT_TAB_HEIGHT } from '~/components/common/HorizontalTabs';
+import { DEFAULT_TAB_HEIGHT } from '@appello/mobile-ui/components/common/HorizontalTabs';
 
-import { HorizontalTabs, HorizontalTabsProps } from '../../../src';
-import { CONFIG_CATEGORY, CONFIG_DETAIL } from '../../constants';
+import { HorizontalTabs, HorizontalTabsProps } from '@appello/mobile-ui';
+import { CONFIG_CATEGORY } from '../../constants';
 
 const meta: Meta<HorizontalTabsProps> = {
   title: 'Basic/HorizontalTabs',
@@ -18,45 +18,21 @@ const meta: Meta<HorizontalTabsProps> = {
     tabTextVariant: {
       table: {
         category: CONFIG_CATEGORY,
-        defaultValue: {
-          summary: 'p1',
-        },
       },
     },
     scrollable: {
       table: {
         category: CONFIG_CATEGORY,
-        defaultValue: {
-          summary: false,
-        },
-      },
-    },
-    tabContent: {
-      table: {
-        defaultValue: {
-          summary: 'undefined',
-          detail: CONFIG_DETAIL,
-        },
       },
     },
     tabHeight: {
       table: {
-        defaultValue: {
-          summary: DEFAULT_TAB_HEIGHT,
-          detail: CONFIG_DETAIL,
-        },
-      },
-    },
-    tabContentReverse: {
-      table: {
-        defaultValue: {
-          summary: false,
-          detail: CONFIG_DETAIL,
-        },
+        category: CONFIG_CATEGORY,
       },
     },
   },
   args: {
+    tabHeight: DEFAULT_TAB_HEIGHT,
     list: [
       {
         key: 'Key1',
@@ -71,8 +47,9 @@ const meta: Meta<HorizontalTabsProps> = {
         title: 'Tab 3',
       },
     ],
+    scrollable: false,
   },
-};
+} satisfies Meta<HorizontalTabsProps>;
 
 type Story = StoryObj<typeof HorizontalTabs>;
 

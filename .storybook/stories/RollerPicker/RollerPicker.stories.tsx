@@ -2,15 +2,13 @@ import { BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet
 import type { Meta, StoryObj } from '@storybook/react';
 import React, { useRef, useState } from 'react';
 
-import { Button } from '@appello/mobile-ui';
-import { Option, Value } from '@appello/mobile-ui';
-import { RollerPicker, RollerPickerProps } from '@appello/mobile-ui';
+import { Button, Option, Value, RollerPicker, RollerPickerProps } from '@appello/mobile-ui';
 
 import { EXTENDED_CATEGORY } from '../../constants';
 
 const options: Option[] = ['0.5L', '1L', '2L', '5L', '10L', '50L', '100L'].map(value => ({
   value,
-  title: value,
+  label: value,
 }));
 
 /* eslint-disable react-hooks/rules-of-hooks */
