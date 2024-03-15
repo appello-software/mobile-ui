@@ -19,6 +19,7 @@ import { BasicHeader, useBasicHeaderStyles } from '~/components/screens/BasicHea
 import { ScreenContainer, useScreenContainerStyles } from '~/components/screens/ScreenContainer';
 import { PartialProps } from '~/types';
 import { makeDefaultProps, makeStyles } from '~/utils';
+import { Dropdown } from '~/components/common/Dropdown';
 
 export interface UIKitTheme {
   colors: {
@@ -104,6 +105,10 @@ export interface UIComponents {
   };
   ActionSheet: {
     defaultProps: DefaultPropsConfig<typeof ActionSheet>;
+    styles: typeof useActionSheetStyles;
+  };
+  Dropdown: {
+    defaultProps: DefaultPropsConfig<typeof Dropdown>;
     styles: typeof useActionSheetStyles;
   };
 }
