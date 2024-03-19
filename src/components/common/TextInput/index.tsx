@@ -34,7 +34,10 @@ export interface TextInputProps extends RNTextInputProps {
   accessoryRight?: React.ReactNode;
   /** Icon component to display on the left of the TextInput */
   Icon?: React.FC<SvgProps>;
-  /** Size of the Icon component */
+  /** Size of the Icon component
+   *
+   * @default { width: 20, height: 20 }
+   * */
   iconSize?: {
     width: number;
     height: number;

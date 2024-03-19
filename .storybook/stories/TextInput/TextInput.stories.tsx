@@ -1,4 +1,4 @@
-import { action } from '@storybook/addon-actions';
+// import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 import React, { useState } from 'react';
 
@@ -10,7 +10,7 @@ const accessoryRightRender = (
   <Button
     variant="primary"
     style={{ width: 36, height: 36, marginRight: 7, borderRadius: 6 }}
-    onPress={action('pressed-accessory')}
+    // onPress={action('pressed-accessory')}
   >
     <PaperPlaneIcon color="white" width={20} height={20} />
   </Button>
@@ -29,7 +29,7 @@ const meta: Meta<TextInputProps> = {
         value={value}
         onChangeText={setValue}
         accessoryRight={accessoryRight ? accessoryRightRender : null}
-        onPress={onPress ? action('text-input-press') : undefined}
+        // onPress={onPress ? action('text-input-press') : undefined}
         Icon={Icon ? AccountIcon : undefined}
         mask={mask ? dollarMask : undefined}
         {...args}

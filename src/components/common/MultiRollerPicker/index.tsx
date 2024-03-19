@@ -27,7 +27,7 @@ export interface MultiRollerPickerProps extends Pick<BottomSheetModalProps, 'onD
    *  The title of the button to save the value
    *  @default Done
    *  */
-  buttonTitle?: string;
+  saveButtonLabel?: string;
   /**
    *  The array of option lists to display on the picker.
    *  */
@@ -41,7 +41,7 @@ export interface MultiRollerPickerProps extends Pick<BottomSheetModalProps, 'onD
    *  */
   onChange?: (value: NonNullable<Value>[]) => void;
   /**
-   *  Callback called on the button press
+   *  Callback called on the save button press
    *  */
   onSave: (value: NonNullable<Value>[]) => void;
 }
@@ -53,7 +53,7 @@ export const MultiRollerPicker = forwardRef<BottomSheetModal, MultiRollerPickerP
   (props, ref) => {
     const {
       title = 'Options',
-      buttonTitle = 'Done',
+      saveButtonLabel = 'Done',
       options,
       values,
       onChange,
@@ -94,7 +94,7 @@ export const MultiRollerPicker = forwardRef<BottomSheetModal, MultiRollerPickerP
         <View style={styles.header}>
           <AppText>{title}</AppText>
           <Button style={styles.saveButton} variant="plain" onPress={handleSave}>
-            {buttonTitle}
+            {saveButtonLabel}
           </Button>
         </View>
         <View style={styles.pickerContainer}>

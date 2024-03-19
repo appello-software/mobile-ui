@@ -14,7 +14,13 @@ export interface RollerPickerProps
   value: Value;
   /* List of options for the picker */
   options: Option[];
+  /**
+   *  Callback called on the value change
+   *  */
   onChange?: (value: Value) => void;
+  /**
+   *  Callback called on the save button press
+   *  */
   onSave: (value: Value) => void;
 }
 

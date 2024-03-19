@@ -37,7 +37,7 @@ export const Dropdown: React.FC<DropdownProps> = props => {
     options,
     onChange,
     onSave,
-    buttonTitle,
+    saveButtonLabel,
     title,
     arrowIndicatesOpening = true,
     disabled,
@@ -114,9 +114,9 @@ export const Dropdown: React.FC<DropdownProps> = props => {
         {...textInputProps}
       />
       <RollerPicker
-        buttonTitle={buttonTitle}
         options={options}
         ref={pickerRef}
+        saveButtonLabel={saveButtonLabel}
         title={title}
         value={value}
         onChange={onChange}

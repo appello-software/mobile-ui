@@ -80,7 +80,7 @@ const meta = {
   },
   args: {
     title: 'Options',
-    buttonTitle: 'Done',
+    saveButtonLabel: 'Done',
   },
   argTypes: {
     options: {

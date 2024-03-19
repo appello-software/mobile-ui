@@ -40,7 +40,7 @@ const meta = {
   },
   args: {
     title: 'Options',
-    buttonTitle: 'Done',
+    saveButtonLabel: 'Done',
     options,
   },
   argTypes: {
@@ -49,10 +49,13 @@ const meta = {
         category: EXTENDED_CATEGORY,
       },
     },
-    buttonTitle: {
+    saveButtonLabel: {
       table: {
         category: EXTENDED_CATEGORY,
       },
+    },
+    value: {
+      control: false,
     },
     onChange: {
       control: false,

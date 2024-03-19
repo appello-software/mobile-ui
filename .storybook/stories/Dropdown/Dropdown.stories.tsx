@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 
 import { Dropdown, DropdownProps } from '@appello/mobile-ui';
 import { Option, Value } from '@appello/mobile-ui/components/common/MultiRollerPicker';
-import { CONFIG_CATEGORY } from '../../constants';
+import { CONFIG_CATEGORY, EXTENDED_CATEGORY } from '../../constants';
 import { AccountIcon } from '../../components/icons';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 
@@ -39,14 +39,62 @@ const meta: Meta<DropdownProps> = {
     Icon: false as any,
     iconSize: { width: 20, height: 20 },
     options,
+    saveButtonLabel: 'Done',
+    title: 'Options',
   },
   argTypes: {
     Icon: {
       control: 'boolean',
+      table: {
+        category: EXTENDED_CATEGORY,
+      },
     },
     iconSize: {
       table: {
         category: CONFIG_CATEGORY,
+      },
+    },
+    value: {
+      control: false,
+      table: {
+        category: EXTENDED_CATEGORY,
+      },
+    },
+    options: {
+      table: {
+        category: EXTENDED_CATEGORY,
+      },
+    },
+    error: {
+      table: {
+        category: EXTENDED_CATEGORY,
+      },
+    },
+    disabled: {
+      table: {
+        category: EXTENDED_CATEGORY,
+      },
+    },
+    title: {
+      table: {
+        category: EXTENDED_CATEGORY,
+      },
+    },
+    saveButtonLabel: {
+      table: {
+        category: EXTENDED_CATEGORY,
+      },
+    },
+    onChange: {
+      control: false,
+      table: {
+        category: EXTENDED_CATEGORY,
+      },
+    },
+    onSave: {
+      control: false,
+      table: {
+        category: EXTENDED_CATEGORY,
       },
     },
   },
