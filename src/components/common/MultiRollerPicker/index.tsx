@@ -93,7 +93,7 @@ export const MultiRollerPicker = forwardRef<BottomSheetModal, MultiRollerPickerP
       <BottomSheet enableContentPanningGesture={false} height={250} ref={ref} {...modalProps}>
         <View style={styles.header}>
           <AppText>{title}</AppText>
-          <Button variant="plain" onPress={handleSave}>
+          <Button style={styles.saveButton} variant="plain" onPress={handleSave}>
             {buttonTitle}
           </Button>
         </View>
@@ -128,6 +128,9 @@ const useStyles = makeStyles(({ colors }) => ({
 
     borderBottomWidth: 1,
     borderBottomColor: colors.gray['5'],
+  },
+  saveButton: {
+    flexDirection: 'column',
   },
   pickerContainer: {
     flexDirection: 'row',

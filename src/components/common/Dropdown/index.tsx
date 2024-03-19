@@ -1,7 +1,7 @@
 import RightArrowIcon from '@appello/mobile-ui/icons/unicons/right-arrow.svg';
 import { BottomSheetModal } from '@gorhom/bottom-sheet';
-import React, { useCallback, useMemo, useRef, useState } from 'react';
-import { LayoutAnimation, Platform, StyleSheet, UIManager } from 'react-native';
+import React, { useCallback, useMemo, useRef } from 'react';
+import { Animated, Platform, StyleSheet, UIManager } from 'react-native';
 
 import { RollerPicker, RollerPickerProps, TextInput, TextInputProps } from '~/components';
 import { useUIKitTheme } from '~/config/utils';
@@ -14,15 +14,23 @@ if (Platform.OS === 'android') {
   }
 }
 
-type Props = RollerPickerProps &
+export type DropdownProps = RollerPickerProps &
   Pick<
     TextInputProps,
     'error' | 'disabled' | 'Icon' | 'iconSize' | 'placeholder' | 'placeholderTextColor' | 'style'
   > & {
+    /**
+     * Should arrow look down when the dropdown is open
+     *
+     * @default true
+     * */
     arrowIndicatesOpening?: boolean;
   };
 
-export const Dropdown: React.FC<Props> = props => {
+/**
+ * A common dropdown component. It combines TextInput and RollerPicker with most of their props.
+ */
+export const Dropdown: React.FC<DropdownProps> = props => {
   const pickerRef = useRef<BottomSheetModal>(null);
   const {
     value,
@@ -31,42 +39,77 @@ export const Dropdown: React.FC<Props> = props => {
     onSave,
     buttonTitle,
     title,
-    arrowIndicatesOpening,
+    arrowIndicatesOpening = true,
+    disabled,
     ...textInputProps
   } = useCombinedPropsWithConfig('Dropdown', props);
 
-  const [isOpen, setIsOpen] = useState(false);
+  const rotation = useRef(new Animated.Value(0)).current;
+  const animateArrow = useCallback((isOpen: boolean) => {
+    Animated.timing(rotation, {
+      toValue: isOpen ? 90 : 0,
+      duration: 200,
+      useNativeDriver: true,
+    }).start();
+  }, []);
 
   const handleOpen = useCallback(() => {
-    LayoutAnimation.configureNext(LayoutAnimation.Presets.linear);
-    setIsOpen(true);
+    animateArrow(true);
     pickerRef.current?.present();
-  }, []);
+  }, [animateArrow]);
 
   const handleDismiss = useCallback(() => {
-    LayoutAnimation.configureNext(LayoutAnimation.Presets.linear);
-    setIsOpen(false);
-  }, []);
+    animateArrow(false);
+  }, [animateArrow]);
+
+  const handleSave = useCallback<RollerPickerProps['onSave']>(
+    value => {
+      onSave(value);
+      pickerRef.current?.dismiss();
+    },
+    [onSave],
+  );
+
+  const labelValue = useMemo(
+    () => options.find(option => option.value === value)?.label,
+    [options, value],
+  );
 
   const styles = useStyles();
   const { colors } = useUIKitTheme();
   const arrowIndicator = useMemo(() => {
     return (
-      <RightArrowIcon
-        color={colors.black['1']}
-        height={24}
-        style={arrowIndicatesOpening && isOpen && styles['arrow--down']}
-        width={24}
-      />
+      <Animated.View
+        style={[
+          styles.arrow,
+          {
+            transform: [
+              {
+                rotate: rotation.interpolate({
+                  inputRange: [0, 90],
+                  outputRange: ['0deg', '90deg'],
+                }),
+              },
+            ],
+          },
+        ]}
+      >
+        <RightArrowIcon
+          fill={!disabled ? colors.black['1'] : colors.gray['3']}
+          height={24}
+          width={24}
+        />
+      </Animated.View>
     );
-  }, [arrowIndicatesOpening, isOpen, colors, styles]);
+  }, [arrowIndicatesOpening, disabled, colors, styles]);
 
   return (
     <>
       <TextInput
         accessoryRight={arrowIndicator}
+        disabled={disabled}
         editable={false}
-        value={value?.toString()}
+        value={labelValue}
         onPress={handleOpen}
         {...textInputProps}
       />
@@ -78,7 +121,7 @@ export const Dropdown: React.FC<Props> = props => {
         value={value}
         onChange={onChange}
         onDismiss={handleDismiss}
-        onSave={onSave}
+        onSave={handleSave}
       />
     </>
   );
@@ -86,8 +129,11 @@ export const Dropdown: React.FC<Props> = props => {
 
 const useStyles = makeStyles(() =>
   StyleSheet.create({
+    arrow: {
+      marginRight: 15,
+    },
     'arrow--down': {
-      transform: [{ rotateX: '45deg' }],
+      transform: [{ rotate: '90deg' }],
     },
   }),
 );

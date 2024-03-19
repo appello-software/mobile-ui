@@ -3,6 +3,7 @@ export { AppText, AppTextProps } from './common/AppText';
 export { BottomSheet, BottomSheetProps } from './common/BottomSheet';
 export { Button, ButtonProps } from './common/Button';
 export { Checkbox, CheckboxProps } from './common/Checkbox';
+export { Dropdown, DropdownProps } from './common/Dropdown';
 export { MultiRollerPicker, MultiRollerPickerProps } from './common/MultiRollerPicker';
 export { Radio, RadioProps } from './common/Radio';
 export { RollerPicker, RollerPickerProps } from './common/RollerPicker';
