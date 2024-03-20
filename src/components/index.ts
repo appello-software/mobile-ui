@@ -8,6 +8,7 @@ export { MultiRollerPicker, MultiRollerPickerProps } from './common/MultiRollerP
 export { Radio, RadioProps } from './common/Radio';
 export { RollerPicker, RollerPickerProps } from './common/RollerPicker';
 export { TextInput, TextInputProps } from './common/TextInput';
+export { DropdownField, DropdownFieldProps } from './form/DropdownField';
 export { Field, FieldProps } from './form/Field';
 export { PasswordField, PasswordFieldProps } from './form/PasswordField';
 export { TextField, TextFieldProps } from './form/TextField';
