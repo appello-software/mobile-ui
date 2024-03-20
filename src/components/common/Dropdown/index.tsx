@@ -1,7 +1,7 @@
 import RightArrowIcon from '@appello/mobile-ui/icons/unicons/right-arrow.svg';
 import { BottomSheetModal } from '@gorhom/bottom-sheet';
 import React, { useCallback, useMemo, useRef } from 'react';
-import { Animated, Platform, StyleSheet, UIManager } from 'react-native';
+import { Animated, Platform, StyleSheet, TextInput as RNTextInput, UIManager } from 'react-native';
 
 import { RollerPicker, RollerPickerProps, TextInput, TextInputProps } from '~/components';
 import { useUIKitTheme } from '~/config/utils';
@@ -31,6 +31,7 @@ export type DropdownProps = RollerPickerProps &
  * A common dropdown component. It combines TextInput and RollerPicker with most of their props.
  */
 export const Dropdown: React.FC<DropdownProps> = props => {
+  const inputRef = useRef<RNTextInput>(null);
   const pickerRef = useRef<BottomSheetModal>(null);
   const {
     value,
@@ -56,10 +57,12 @@ export const Dropdown: React.FC<DropdownProps> = props => {
   const handleOpen = useCallback(() => {
     animateArrow(true);
     pickerRef.current?.present();
+    inputRef.current?.focus();
   }, [animateArrow]);
 
   const handleDismiss = useCallback(() => {
     animateArrow(false);
+    inputRef.current?.blur();
   }, [animateArrow]);
 
   const handleSave = useCallback<RollerPickerProps['onSave']>(
@@ -108,7 +111,6 @@ export const Dropdown: React.FC<DropdownProps> = props => {
       <TextInput
         accessoryRight={arrowIndicator}
         disabled={disabled}
-        editable={false}
         value={labelValue}
         onPress={handleOpen}
         {...textInputProps}

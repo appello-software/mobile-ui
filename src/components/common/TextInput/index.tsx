@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { forwardRef } from 'react';
 import {
   ColorValue,
   StyleSheet,
@@ -78,7 +78,7 @@ interface TextInputStyle {
  *   'text-input__icon-container'?: ViewStyle;
  * }```
  */
-export const TextInput: FC<TextInputProps> = props => {
+export const TextInput = forwardRef<RNTextInput, TextInputProps>((props, ref) => {
   const { colors } = useUIKitTheme();
 
   const styles = useCombinedStylesWithConfig('TextInput', useTextInputStyles);
@@ -146,6 +146,7 @@ export const TextInput: FC<TextInputProps> = props => {
           multiline={multiline}
           placeholder={placeholder ?? maskPlaceholder}
           placeholderTextColor={placeholderTextColor}
+          ref={ref}
           selectionColor={colors.primary}
           style={fullStyle}
           value={maskValue}
@@ -173,7 +174,7 @@ export const TextInput: FC<TextInputProps> = props => {
       </View>
     </TouchableOpacity>
   );
-};
+});
 
 export const useTextInputStyles = makeStyles(theme => {
   return StyleSheet.create({
