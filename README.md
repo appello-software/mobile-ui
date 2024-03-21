@@ -4,21 +4,16 @@ Appello Mobile UIKit.
 
 # Install
 
-With `npm`:
-
-```
-npm install @appello/mobile-ui react-hook-form react-native-svg
-
-npx expo install expo-linear-gradient
-```
-
-With `yarn`:
-
 ```
 yarn add @appello/mobile-ui react-hook-form react-native-svg
 
 npx expo install expo-linear-gradient
+
+npx pod-install
 ```
+
+You should also install `@gorhom/bottom-sheet`. To correctly do this follow its' [installation instructions](https://ui.gorhom.dev/components/bottom-sheet/#installation).
+
 
 # Documentation
 
