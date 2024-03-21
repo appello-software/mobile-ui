@@ -20,8 +20,8 @@
     },
     "types": ["node"],
     "declaration": true,
-    "noEmit": false,
+    "noEmit": true,
     "rootDir": "."
   },
-  "include": ["src/**/*", "example/src/**/*", "example/scripts/**/*", "example/*.config.ts"]
+  "include": ["src/**/*", ".storybook/**/*", "example/src/**/*", "example/scripts/**/*", "example/*.config.ts"],
 }
