@@ -72,7 +72,7 @@ export const MultiRollerPicker = forwardRef<BottomSheetModal, MultiRollerPickerP
 
     const handlePickerChange = useCallback(
       (pickerIndex: number, selectedIndex: number) => {
-        const newValues = [...internalValues] as NonNullable<Value>[];
+        const newValues = internalValues.map((value, index) => value ?? options[index][0].value);
         newValues[pickerIndex] = options[pickerIndex][selectedIndex].value;
 
         if (onChange) {
@@ -85,8 +85,10 @@ export const MultiRollerPicker = forwardRef<BottomSheetModal, MultiRollerPickerP
     );
 
     const handleSave = useCallback(() => {
-      onSave(internalValues as NonNullable<Value>[]);
-    }, [internalValues, onSave]);
+      const filledValues = internalValues.map((value, index) => value ?? options[index][0].value);
+
+      onSave(filledValues);
+    }, [internalValues, options, onSave]);
 
     const styles = useStyles();
     return (
