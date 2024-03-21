@@ -26,6 +26,11 @@ export interface BottomSheetProps extends BottomSheetModalProps {
    * @default 'close'
    */
   backdropPressBehavior?: React.ComponentProps<typeof BottomSheetBackdrop>['pressBehavior'];
+  /**
+   * Should display default bottom sheet handle when no `handleComponent` passed
+   * @default false
+   */
+  displayHandle?: boolean;
 }
 
 /**
@@ -43,6 +48,7 @@ export const BottomSheet = forwardRef<BottomSheetModal, BottomSheetProps>((props
   const {
     height = 250,
     backdropPressBehavior = 'close',
+    displayHandle = false,
     ...restProps
   } = useCombinedPropsWithConfig('BottomSheet', props);
 
@@ -64,7 +70,7 @@ export const BottomSheet = forwardRef<BottomSheetModal, BottomSheetProps>((props
       enableDismissOnClose
       backdropComponent={renderBackdrop}
       backgroundStyle={styles['bottom-sheet']}
-      handleComponent={null}
+      handleComponent={displayHandle ? undefined : null}
       index={0}
       ref={ref}
       snapPoints={useMemo(() => [height], [height])}

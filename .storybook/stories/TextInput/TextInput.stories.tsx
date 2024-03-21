@@ -1,37 +1,31 @@
-import { action } from '@storybook/addon-actions';
+import { Button, TextInput, TextInputProps } from '@appello/mobile-ui';
 import { Meta, StoryObj } from '@storybook/react';
 import React, { useState } from 'react';
 
-import { Button, TextInput, TextInputProps } from '@appello/mobile-ui';
+import { AccountIcon, PaperPlaneIcon } from '../../components/icons';
 import { CONFIG_CATEGORY } from '../../constants';
-import { AccountIcon, PaperPlaneIcon } from './icons';
 
 const accessoryRightRender = (
-  <Button
-    variant="primary"
-    style={{ width: 36, height: 36, marginRight: 7, borderRadius: 6 }}
-    onPress={action('pressed-accessory')}
-  >
-    <PaperPlaneIcon color="white" width={20} height={20} />
+  <Button style={{ width: 36, height: 36, marginRight: 7, borderRadius: 6 }} variant="primary">
+    <PaperPlaneIcon color="white" height={20} width={20} />
   </Button>
 );
 const dollarMask = ['$', /\d/, /\d/, '.', /\d/, /\d/];
 const meta: Meta<TextInputProps> = {
   title: 'Basic/TextInput',
   component: TextInput,
-  // eslint-disable-next-line @typescript-eslint/naming-convention
+
   render: ({ accessoryRight, Icon, mask, onPress, ...args }) => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [value, setValue] = useState('');
 
     return (
       <TextInput
+        Icon={Icon ? AccountIcon : undefined}
+        accessoryRight={accessoryRight ? accessoryRightRender : null}
+        mask={mask ? dollarMask : undefined}
         value={value}
         onChangeText={setValue}
-        accessoryRight={accessoryRight ? accessoryRightRender : null}
-        onPress={onPress ? action('text-input-press') : undefined}
-        Icon={Icon ? AccountIcon : undefined}
-        mask={mask ? dollarMask : undefined}
         {...args}
       />
     );

@@ -14,7 +14,13 @@ export interface RollerPickerProps
   value: Value;
   /* List of options for the picker */
   options: Option[];
-  onChange: (value: Value) => void;
+  /**
+   *  Callback called on the value change
+   *  */
+  onChange?: (value: Value) => void;
+  /**
+   *  Callback called on the save button press
+   *  */
   onSave: (value: Value) => void;
 }
 
@@ -23,10 +29,13 @@ export interface RollerPickerProps
  * */
 export const RollerPicker = forwardRef<BottomSheetModal, RollerPickerProps>(
   ({ value, options, onChange, onSave, ...restProps }, ref) => {
-    const handleChange = useCallback<MultiRollerPickerProps['onChange']>(
-      values => {
-        onChange(values[0]);
-      },
+    const handleChange = useMemo<MultiRollerPickerProps['onChange']>(
+      () =>
+        onChange
+          ? values => {
+              onChange(values[0]);
+            }
+          : undefined,
       [onChange],
     );
 

@@ -2,6 +2,7 @@ import { ElementType } from 'react';
 import { ShadowStyleIOS } from 'react-native';
 
 import { Checkbox, Radio } from '~/components';
+import { ActionSheet, useActionSheetStyles } from '~/components/common/ActionSheet';
 import { AppText, useAppTextStyles } from '~/components/common/AppText';
 import { BottomSheet, useBottomSheetStyles } from '~/components/common/BottomSheet';
 import {
@@ -18,6 +19,7 @@ import { BasicHeader, useBasicHeaderStyles } from '~/components/screens/BasicHea
 import { ScreenContainer, useScreenContainerStyles } from '~/components/screens/ScreenContainer';
 import { PartialProps } from '~/types';
 import { makeDefaultProps, makeStyles } from '~/utils';
+import { Dropdown } from '~/components/common/Dropdown';
 
 export interface UIKitTheme {
   colors: {
@@ -100,6 +102,14 @@ export interface UIComponents {
   MultiRollerPicker: {
     defaultProps: DefaultPropsConfig<typeof MultiRollerPicker>;
     styles: never;
+  };
+  ActionSheet: {
+    defaultProps: DefaultPropsConfig<typeof ActionSheet>;
+    styles: typeof useActionSheetStyles;
+  };
+  Dropdown: {
+    defaultProps: DefaultPropsConfig<typeof Dropdown>;
+    styles: typeof useActionSheetStyles;
   };
 }
 

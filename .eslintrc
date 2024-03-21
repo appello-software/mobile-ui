@@ -2,6 +2,7 @@
   "extends": ["@react-native-community", "@appello/eslint-config"],
   "rules": {
     "react/no-unused-prop-types": "off",
-    "import/no-default-export": "off"
+    "import/no-default-export": "off",
+    "import/no-extraneous-dependencies": "warn"
   }
 }
