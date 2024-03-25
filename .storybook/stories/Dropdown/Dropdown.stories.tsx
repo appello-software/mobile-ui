@@ -1,5 +1,4 @@
-import { Dropdown, DropdownProps } from '@appello/mobile-ui';
-import { Option, Value } from '@appello/mobile-ui/components/common/MultiRollerPicker';
+import { Dropdown, DropdownProps, Option, Value } from '@appello/mobile-ui';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { Meta, StoryObj } from '@storybook/react';
 import React, { useState } from 'react';

@@ -1,12 +1,10 @@
 {
   "name": "@appello/mobile-ui",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Appello Software mobile UIKit",
   "main": "dist/commonjs/index.js",
   "module": "dist/module/index.js",
   "types": "dist/typescript/src/index.d.ts",
-  "react-native": "src",
-  "source": "src",
   "type": "module",
   "sideEffects": false,
   "files": [
