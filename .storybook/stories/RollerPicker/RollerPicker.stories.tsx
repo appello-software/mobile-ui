@@ -1,9 +1,7 @@
+import { Button, Option, RollerPicker, RollerPickerProps, Value } from '@appello/mobile-ui';
 import { BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import type { Meta, StoryObj } from '@storybook/react';
 import React, { useRef, useState } from 'react';
-
-import { Button, RollerPicker, RollerPickerProps } from '@appello/mobile-ui';
-import { Option, Value } from '@appello/mobile-ui/components/common/MultiRollerPicker';
 
 import { EXTENDED_CATEGORY } from '../../constants';
 

@@ -98,7 +98,7 @@ export const Dropdown: React.FC<DropdownProps> = props => {
         ]}
       >
         <RightArrowIcon
-          fill={!disabled ? colors.black['1'] : colors.gray['3']}
+          color={!disabled ? colors.black['1'] : colors.gray['3']}
           height={24}
           width={24}
         />
