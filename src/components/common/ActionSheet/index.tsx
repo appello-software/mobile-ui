@@ -4,13 +4,13 @@ import { TouchableOpacity, View, ViewStyle } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { SvgProps } from 'react-native-svg';
 
-import { AppText, AppTextProps } from '~/components/common/AppText';
-import { BottomSheet } from '~/components/common/BottomSheet';
-import { useUIKitTheme } from '~/config/utils';
-import { useCombinedPropsWithConfig } from '~/hooks/useCombinedPropsWithConfig';
-import { useCombinedStylesWithConfig } from '~/hooks/useCombinedStylesWithConfig';
-import { layout } from '~/styles/layout';
-import { makeStyles } from '~/utils';
+import { useUIKitTheme } from '../../../config/utils';
+import { useCombinedPropsWithConfig } from '../../../hooks/useCombinedPropsWithConfig';
+import { useCombinedStylesWithConfig } from '../../../hooks/useCombinedStylesWithConfig';
+import { layout } from '../../../styles/layout';
+import { makeStyles } from '../../../utils';
+import { AppText, AppTextProps } from '../AppText';
+import { BottomSheet } from '../BottomSheet';
 
 export interface Action {
   label: string;

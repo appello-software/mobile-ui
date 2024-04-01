@@ -7,9 +7,9 @@ import {
   TextStyle,
 } from 'react-native';
 
-import { useCombinedPropsWithConfig } from '~/hooks/useCombinedPropsWithConfig';
-import { useCombinedStylesWithConfig } from '~/hooks/useCombinedStylesWithConfig';
-import { makeStyles } from '~/utils';
+import { useCombinedPropsWithConfig } from '../../../hooks/useCombinedPropsWithConfig';
+import { useCombinedStylesWithConfig } from '../../../hooks/useCombinedStylesWithConfig';
+import { makeStyles } from '../../../utils';
 
 type TextVariant =
   | 'h1'

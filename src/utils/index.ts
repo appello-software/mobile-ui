@@ -2,14 +2,14 @@ import chromaJs from 'chroma-js';
 import React, { ComponentProps } from 'react';
 import { StyleSheet } from 'react-native';
 
-import { UIKitTheme } from '~/config/types';
-import { useUIKitTheme } from '~/config/utils';
-import { DeepPartial } from '~/types';
+import { UIKitTheme } from '../config/types';
+import { useUIKitTheme } from '../config/utils';
+import { DeepPartial } from '../types';
 
 import NamedStyles = StyleSheet.NamedStyles;
 import { deepmerge } from 'deepmerge-ts';
 
-import { defaultTheme } from '~/__defaults__/defaultTheme';
+import { defaultTheme } from '../__defaults__/defaultTheme';
 
 export const makeStyles =
   <TProps extends object | void, TStyles extends NamedStyles<TStyles> | NamedStyles<any>>(

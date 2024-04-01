@@ -10,8 +10,6 @@
     "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
     "paths": {
-      "~/*": ["./src/*"],
-      "~/storybook": ["./.storybook"],
       "@appello/mobile-ui": ["./src"],
       "@appello/mobile-ui/*": ["./src/*"],
       "@appello/mobile-ui/icons/*": ["./icons/*"],
@@ -23,5 +21,11 @@
     "noEmit": true,
     "rootDir": "."
   },
-  "include": ["src/**/*", ".storybook/**/*", "example/src/**/*", "example/scripts/**/*", "example/*.config.ts"],
+  "include": [
+    "src/**/*",
+    ".storybook/**/*",
+    "example/src/**/*",
+    "example/scripts/**/*",
+    "example/*.config.ts"
+  ]
 }

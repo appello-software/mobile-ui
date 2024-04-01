@@ -1,10 +1,10 @@
 import React from 'react';
-import { Pressable, TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import { SvgProps } from 'react-native-svg';
 
-import { useUIKitTheme } from '~/config/utils';
-import { useCombinedPropsWithConfig } from '~/hooks/useCombinedPropsWithConfig';
-import { makeStyles } from '~/utils';
+import { useUIKitTheme } from '../../../config/utils';
+import { useCombinedPropsWithConfig } from '../../../hooks/useCombinedPropsWithConfig';
+import { makeStyles } from '../../../utils';
 
 export interface CheckboxProps {
   checked: boolean;

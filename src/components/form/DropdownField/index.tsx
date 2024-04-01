@@ -2,9 +2,9 @@ import React from 'react';
 import { Control, FieldPath, FieldValues, useController } from 'react-hook-form';
 import { StyleProp, ViewStyle } from 'react-native';
 
-import { Dropdown, DropdownProps } from '~/components/common/Dropdown';
-import { Field } from '~/components/form/Field';
-import { getFieldError } from '~/components/form/utils';
+import { Dropdown, DropdownProps } from '../../common/Dropdown';
+import { Field } from '../Field';
+import { getFieldError } from '../utils';
 
 export interface DropdownFieldProps<TFormValues extends FieldValues>
   extends Omit<DropdownProps, 'style' | 'value' | 'onSave'> {

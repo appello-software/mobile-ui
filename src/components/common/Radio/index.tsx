@@ -1,9 +1,9 @@
 import React from 'react';
 import { ColorValue, Pressable, View, ViewStyle } from 'react-native';
 
-import { useUIKitTheme } from '~/config/utils';
-import { useCombinedPropsWithConfig } from '~/hooks/useCombinedPropsWithConfig';
-import { makeStyles } from '~/utils';
+import { useUIKitTheme } from '../../../config/utils';
+import { useCombinedPropsWithConfig } from '../../../hooks/useCombinedPropsWithConfig';
+import { makeStyles } from '../../../utils';
 
 type Id = number | string;
 export interface RadioProps {

@@ -3,10 +3,10 @@ import React, { useMemo } from 'react';
 import { KeyboardAvoidingView, ViewStyle } from 'react-native';
 import { Edge, SafeAreaView } from 'react-native-safe-area-context';
 
-import { useCombinedPropsWithConfig } from '~/hooks/useCombinedPropsWithConfig';
-import { useCombinedStylesWithConfig } from '~/hooks/useCombinedStylesWithConfig';
-import { layout } from '~/styles/layout';
-import { makeStyles } from '~/utils';
+import { useCombinedPropsWithConfig } from '../../../hooks/useCombinedPropsWithConfig';
+import { useCombinedStylesWithConfig } from '../../../hooks/useCombinedStylesWithConfig';
+import { layout } from '../../../styles/layout';
+import { makeStyles } from '../../../utils';
 
 export interface ScreenContainerProps {
   /* Header to render on top of the screen */

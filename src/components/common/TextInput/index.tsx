@@ -17,11 +17,11 @@ import {
 } from 'react-native-mask-input';
 import { SvgProps } from 'react-native-svg';
 
-import { AppText } from '~/components';
-import { useUIKitTheme } from '~/config/utils';
-import { useCombinedPropsWithConfig } from '~/hooks/useCombinedPropsWithConfig';
-import { useCombinedStylesWithConfig } from '~/hooks/useCombinedStylesWithConfig';
-import { makeStyles } from '~/utils';
+import { useUIKitTheme } from '../../../config/utils';
+import { useCombinedPropsWithConfig } from '../../../hooks/useCombinedPropsWithConfig';
+import { useCombinedStylesWithConfig } from '../../../hooks/useCombinedStylesWithConfig';
+import { makeStyles } from '../../../utils';
+import { AppText } from '../AppText';
 
 export interface TextInputProps extends RNTextInputProps {
   /** Should TextInput have an error state */

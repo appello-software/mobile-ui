@@ -1,12 +1,7 @@
 import { BottomSheetModal } from '@gorhom/bottom-sheet';
 import React, { forwardRef, useCallback, useMemo } from 'react';
 
-import {
-  MultiRollerPicker,
-  MultiRollerPickerProps,
-  Option,
-  Value,
-} from '~/components/common/MultiRollerPicker';
+import { MultiRollerPicker, MultiRollerPickerProps, Option, Value } from '../MultiRollerPicker';
 
 export interface RollerPickerProps
   extends Omit<MultiRollerPickerProps, 'values' | 'options' | 'onChange' | 'onSave'> {
