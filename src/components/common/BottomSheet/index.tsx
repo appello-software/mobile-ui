@@ -7,9 +7,9 @@ import {
 import React, { forwardRef, useCallback, useMemo } from 'react';
 import { StyleSheet } from 'react-native';
 
-import { useCombinedPropsWithConfig } from '~/hooks/useCombinedPropsWithConfig';
-import { useCombinedStylesWithConfig } from '~/hooks/useCombinedStylesWithConfig';
-import { makeStyles } from '~/utils';
+import { useCombinedPropsWithConfig } from '../../../hooks/useCombinedPropsWithConfig';
+import { useCombinedStylesWithConfig } from '../../../hooks/useCombinedStylesWithConfig';
+import { makeStyles } from '../../../utils';
 
 export interface BottomSheetProps extends BottomSheetModalProps {
   /**

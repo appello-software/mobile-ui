@@ -13,11 +13,11 @@ import {
 import { Flow } from 'react-native-animated-spinkit';
 import { SvgProps } from 'react-native-svg';
 
-import { AppText, AppTextProps } from '~/components/common/AppText';
-import { useUIKitTheme } from '~/config/utils';
-import { useCombinedPropsWithConfig } from '~/hooks/useCombinedPropsWithConfig';
-import { useCombinedStylesWithConfig } from '~/hooks/useCombinedStylesWithConfig';
-import { makeStyles } from '~/utils';
+import { useUIKitTheme } from '../../../config/utils';
+import { useCombinedPropsWithConfig } from '../../../hooks/useCombinedPropsWithConfig';
+import { useCombinedStylesWithConfig } from '../../../hooks/useCombinedStylesWithConfig';
+import { makeStyles } from '../../../utils';
+import { AppText, AppTextProps } from '../AppText';
 
 export interface ButtonProps extends React.PropsWithChildren<PressableProps> {
   /** Properties of the label text */

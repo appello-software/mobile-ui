@@ -4,8 +4,7 @@ import { FieldValues } from 'react-hook-form';
 import { TouchableOpacity } from 'react-native';
 import { SvgProps } from 'react-native-svg';
 
-import { makeStyles } from '~/utils';
-
+import { makeStyles } from '../../../utils';
 import { TextField, TextFieldProps } from '../TextField';
 
 export interface PasswordFieldProps<TFormValues extends FieldValues>

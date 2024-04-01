@@ -2,10 +2,10 @@ import React, { ComponentProps, PropsWithChildren, ReactNode } from 'react';
 import { FieldError } from 'react-hook-form';
 import { StyleProp, StyleSheet, TextStyle, View, ViewStyle } from 'react-native';
 
-import { AppText } from '~/components/common/AppText';
-import { useCombinedPropsWithConfig } from '~/hooks/useCombinedPropsWithConfig';
-import { useCombinedStylesWithConfig } from '~/hooks/useCombinedStylesWithConfig';
-import { makeStyles } from '~/utils';
+import { useCombinedPropsWithConfig } from '../../../hooks/useCombinedPropsWithConfig';
+import { useCombinedStylesWithConfig } from '../../../hooks/useCombinedStylesWithConfig';
+import { makeStyles } from '../../../utils';
+import { AppText } from '../../common/AppText';
 
 export interface FieldProps extends PropsWithChildren {
   /** A form component that is being wrapped */

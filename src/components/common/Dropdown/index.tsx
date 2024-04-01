@@ -3,10 +3,11 @@ import { BottomSheetModal } from '@gorhom/bottom-sheet';
 import React, { useCallback, useMemo, useRef } from 'react';
 import { Animated, Platform, StyleSheet, TextInput as RNTextInput, UIManager } from 'react-native';
 
-import { RollerPicker, RollerPickerProps, TextInput, TextInputProps } from '~/components';
-import { useUIKitTheme } from '~/config/utils';
-import { useCombinedPropsWithConfig } from '~/hooks/useCombinedPropsWithConfig';
-import { makeStyles } from '~/utils';
+import { useUIKitTheme } from '../../../config/utils';
+import { useCombinedPropsWithConfig } from '../../../hooks/useCombinedPropsWithConfig';
+import { makeStyles } from '../../../utils';
+import { RollerPicker, RollerPickerProps } from '../RollerPicker';
+import { TextInput, TextInputProps } from '../TextInput';
 
 if (Platform.OS === 'android') {
   if (UIManager.setLayoutAnimationEnabledExperimental) {

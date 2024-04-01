@@ -1,8 +1,7 @@
 import React, { ComponentProps, useContext } from 'react';
 import { StyleSheet } from 'react-native';
 
-import { defaultTheme } from '~/__defaults__/defaultTheme';
-
+import { defaultTheme } from '../__defaults__/defaultTheme';
 import { UIKitTheme } from './types';
 import { ThemeProviderProps, UIKitConfigContext } from './UIKitConfigProvider';
 

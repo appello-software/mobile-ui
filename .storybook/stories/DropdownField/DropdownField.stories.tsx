@@ -1,10 +1,8 @@
-import { DropdownField, DropdownFieldProps } from '@appello/mobile-ui';
+import { DropdownField, DropdownFieldProps, Option } from '@appello/mobile-ui';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import { useForm } from 'react-hook-form';
-
-import { Option } from '~/components/common/MultiRollerPicker';
 
 import { EXTENDED_CATEGORY } from '../../constants';
 

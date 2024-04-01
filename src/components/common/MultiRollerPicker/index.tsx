@@ -3,12 +3,12 @@ import React, { forwardRef, useCallback, useMemo } from 'react';
 import { View } from 'react-native';
 import WheelPicker from 'react-native-wheely';
 
-import { AppText } from '~/components/common/AppText';
-import { BottomSheet } from '~/components/common/BottomSheet';
-import { Button } from '~/components/common/Button';
-import { useCombinedPropsWithConfig } from '~/hooks/useCombinedPropsWithConfig';
-import { useInternalState } from '~/hooks/useInternalState';
-import { makeStyles } from '~/utils';
+import { useCombinedPropsWithConfig } from '../../../hooks/useCombinedPropsWithConfig';
+import { useInternalState } from '../../../hooks/useInternalState';
+import { makeStyles } from '../../../utils';
+import { AppText } from '../AppText';
+import { BottomSheet } from '../BottomSheet';
+import { Button } from '../Button';
 
 export type Value = string | number | null;
 

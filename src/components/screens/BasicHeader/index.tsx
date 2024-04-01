@@ -5,11 +5,11 @@ import { ColorValue, StyleSheet, TouchableOpacity, View, ViewStyle } from 'react
 import { SafeAreaView, SafeAreaViewProps } from 'react-native-safe-area-context';
 import { SvgProps } from 'react-native-svg';
 
-import { AppText } from '~/components/common/AppText';
-import { useUIKitTheme } from '~/config/utils';
-import { useCombinedPropsWithConfig } from '~/hooks/useCombinedPropsWithConfig';
-import { useCombinedStylesWithConfig } from '~/hooks/useCombinedStylesWithConfig';
-import { makeStyles } from '~/utils';
+import { useUIKitTheme } from '../../../config/utils';
+import { useCombinedPropsWithConfig } from '../../../hooks/useCombinedPropsWithConfig';
+import { useCombinedStylesWithConfig } from '../../../hooks/useCombinedStylesWithConfig';
+import { makeStyles } from '../../../utils';
+import { AppText } from '../../common/AppText';
 
 export interface BasicHeaderProps {
   /* Icon of back button */
