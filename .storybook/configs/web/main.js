@@ -34,6 +34,7 @@ module.exports = {
       ...config.resolve,
       alias: {
         ...config.resolve?.alias,
+        '@appello/mobile-ui/icons': path.resolve(__dirname, '../../../icons'),
         '@appello/mobile-ui': path.resolve(__dirname, '../../../src'),
       },
     };
