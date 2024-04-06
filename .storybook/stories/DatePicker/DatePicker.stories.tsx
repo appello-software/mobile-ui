@@ -11,13 +11,13 @@ const meta: Meta<DatePickerProps> = {
 
   render: props => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [values, setValues] = useState<DatePickerProps['values']>();
+    const [value, setValue] = useState<DatePickerProps['value']>();
 
     return (
       <BottomSheetModalProvider>
         {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
         {/* @ts-ignore */}
-        <DatePicker {...props} values={values} onChange={setValues} />
+        <DatePicker {...props} value={value} onChange={setValue} />
       </BottomSheetModalProvider>
     );
   },
@@ -39,7 +39,7 @@ const meta: Meta<DatePickerProps> = {
     onChange: {
       control: false,
     },
-    values: {
+    value: {
       control: false,
     },
     Icon: {

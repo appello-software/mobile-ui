@@ -17,12 +17,6 @@ import { getDateValue } from '../../../utils/dateTime';
 import { Dropdown, DropdownInputProps, DropdownOwnProps, DropdownProps } from '../Dropdown';
 import { MultiRollerPicker, MultiRollerPickerProps, Option } from '../MultiRollerPicker';
 
-type InputDatePickerValues =
-  | undefined
-  | [Nullable<number>]
-  | [Nullable<number>, Nullable<number>]
-  | [Nullable<number>, Nullable<number>, Nullable<number>];
-
 type OutputDatePickerValues = [number] | [number, number] | [number, number, number];
 
 export type DatePickerProps = Pick<MultiRollerPickerProps, 'title' | 'saveButtonLabel'> &
@@ -45,56 +39,34 @@ export type DatePickerProps = Pick<MultiRollerPickerProps, 'title' | 'saveButton
     /**
      * Callback called on the save button press
      * */
-    onChange: (values: OutputDatePickerValues) => void;
+    onChange: (value: number) => void;
     /**
      * Function to get text value from picker values
      *
-     * @default Function that formats in:
-     * "d LLLL y"
+     * @default format(value, 'd LLLL y')
      * */
-    getInputValue?: (values?: InputDatePickerValues) => string;
-  } & (
-    | {
-        /**
-         * List of values in format of [day, month, year], where each item is Timestamp
-         * */
-        values?: [Nullable<number>, Nullable<number>, Nullable<number>];
-        /**
-         * Minimal unit to display (day, month or year).
-         *
-         * @default day
-         * */
-        minUnit?: 'day' | undefined;
-      }
-    | {
-        values?: [Nullable<number>, Nullable<number>];
-        minUnit: 'month';
-      }
-    | {
-        values?: [Nullable<number>];
-        minUnit: 'year';
-      }
-  );
+    getInputValue?: (value?: Date | number) => string;
+    /**
+     * Value of the picker as Timestamp or Date object
+     * */
+    value?: Date | number;
+    /**
+     * Minimal unit to display (day, month or year).
+     *
+     * @default day
+     * */
+    minUnit?: 'day' | 'month' | 'year';
+  };
 
 const getOptionByValue = (value: Nullable<number> | undefined, options: Option<number>[]) => {
   return options.find(option => option.value === value) || options[0];
 };
-const getOptionByLabel = (label: string, options: Option<number>[]) => {
+const getOptionByLabel = (label: string | undefined, options: Option<number>[]) => {
   return options.find(option => option.label === label) || options[0];
 };
 
-const defaultGetInputValue: DatePickerProps['getInputValue'] = values => {
-  if (!values || !values.at(-1)) return '';
-
-  let value = format(values.at(-1) as number, 'y');
-  if (values.length > 1 && values.at(-2)) {
-    value = `${format(values.at(-2) as number, 'LLLL')} ${value}`;
-  }
-  if (values.length > 2 && values.at(-3)) {
-    value = `${format(values.at(-3) as number, 'd')} ${value}`;
-  }
-
-  return value;
+const defaultGetInputValue: DatePickerProps['getInputValue'] = value => {
+  return value ? format(value, 'd LLLL y') : '';
 };
 
 /* TODO: maybe should re-write state management to useReducer */
@@ -104,7 +76,7 @@ export const DatePicker: React.FC<DatePickerProps> = props => {
     minDate = now.current,
     maxDate,
     minUnit = 'day',
-    values,
+    value,
     onChange,
     title,
     saveButtonLabel,
@@ -123,7 +95,7 @@ export const DatePicker: React.FC<DatePickerProps> = props => {
     }));
   }, [minDate, maxDate]);
   const [chosenYearOption, setChosenYearOption] = useState(() =>
-    getOptionByValue(values?.at(-1), yearOptions),
+    getOptionByLabel(value ? format(value, 'y') : undefined, yearOptions),
   );
   const yearValue = chosenYearOption.value;
 
@@ -141,7 +113,7 @@ export const DatePicker: React.FC<DatePickerProps> = props => {
     }));
   }, [minDate, maxDate, minUnit, yearValue]);
   const [chosenMonthOption, setChosenMonthOption] = useState(() =>
-    getOptionByValue(values?.at(-2), monthOptions),
+    getOptionByLabel(value ? format(value, 'LLLL') : undefined, monthOptions),
   );
   const actualChosenMonthOption = useMemo(() => {
     return getOptionByLabel(chosenMonthOption.label, monthOptions);
@@ -166,7 +138,7 @@ export const DatePicker: React.FC<DatePickerProps> = props => {
     }));
   }, [minDate, maxDate, minUnit, monthValue]);
   const [chosenDayOption, setChosenDayOption] = useState(() =>
-    getOptionByValue(values?.at(-3), daysOptions),
+    getOptionByLabel(value ? format(value, 'd') : undefined, daysOptions),
   );
   const actualChosenDayOption = useMemo(() => {
     return getOptionByLabel(chosenDayOption.label, daysOptions);
@@ -203,7 +175,7 @@ export const DatePicker: React.FC<DatePickerProps> = props => {
 
   const handleSave = useCallback(
     (values: (string | number)[]) => {
-      onChange(values as [number]);
+      onChange(values.at(-3) as number);
     },
     [onChange],
   );
@@ -238,7 +210,7 @@ export const DatePicker: React.FC<DatePickerProps> = props => {
   return (
     <Dropdown
       Icon={Icon}
-      inputValue={getInputValue(values)}
+      inputValue={getInputValue(value)}
       renderPicker={renderPicker}
       {...textInputProps}
     />
