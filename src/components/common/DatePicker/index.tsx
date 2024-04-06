@@ -25,7 +25,7 @@ export type DatePickerProps = Pick<MultiRollerPickerProps, 'title' | 'saveButton
     /**
      * @default CalendarIcon
      * */
-    Icon: DropdownInputProps['Icon'];
+    Icon?: DropdownInputProps['Icon'];
     /**
      * Minimum date for the picker.
      *
