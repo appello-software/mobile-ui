@@ -6,7 +6,7 @@ import { Animated, Platform, StyleSheet, TextInput as RNTextInput, UIManager } f
 import { useUIKitTheme } from '../../../config/utils';
 import { useCombinedPropsWithConfig } from '../../../hooks/useCombinedPropsWithConfig';
 import { makeStyles } from '../../../utils';
-import { RollerPicker, RollerPickerProps } from '../RollerPicker';
+import { CommonPickerProps, RollerPicker, RollerPickerProps } from '../RollerPicker';
 import { TextInput, TextInputProps } from '../TextInput';
 
 if (Platform.OS === 'android') {
@@ -15,18 +15,36 @@ if (Platform.OS === 'android') {
   }
 }
 
-export type DropdownProps = RollerPickerProps &
-  Pick<
-    TextInputProps,
-    'error' | 'disabled' | 'Icon' | 'iconSize' | 'placeholder' | 'placeholderTextColor' | 'style'
-  > & {
-    /**
-     * Should arrow look down when the dropdown is open
-     *
-     * @default true
-     * */
-    arrowIndicatesOpening?: boolean;
-  };
+export type DropdownInputProps = Pick<
+  TextInputProps,
+  'error' | 'disabled' | 'Icon' | 'iconSize' | 'placeholder' | 'placeholderTextColor' | 'style'
+>;
+
+export interface DropdownOwnProps {
+  /**
+   * Text value of the dropdown.
+   *
+   * @default options.find(option => option.value === value)?.label
+   * */
+  inputValue?: string;
+  /**
+   * Render function for custom picker. It should return a picker component.
+   * If this prop is defined, all the picker props are being ignored.
+   *
+   * @default RollerPicker
+   * */
+  renderPicker?: React.FC<
+    Pick<CommonPickerProps, 'onDismiss'> & { ref: React.RefObject<BottomSheetModal> }
+  >;
+  /**
+   * Should arrow look down when the dropdown is open
+   *
+   * @default true
+   * */
+  arrowIndicatesOpening?: boolean;
+}
+
+export type DropdownProps = Partial<RollerPickerProps> & DropdownInputProps & DropdownOwnProps;
 
 /**
  * A common dropdown component. It combines TextInput and RollerPicker with most of their props.
@@ -35,25 +53,32 @@ export const Dropdown: React.FC<DropdownProps> = props => {
   const inputRef = useRef<RNTextInput>(null);
   const pickerRef = useRef<BottomSheetModal>(null);
   const {
-    value,
-    options,
+    value = null,
+    options = [],
     onChange,
     onSave,
     saveButtonLabel,
     title,
     arrowIndicatesOpening = true,
     disabled,
+    renderPicker,
+    inputValue,
     ...textInputProps
   } = useCombinedPropsWithConfig('Dropdown', props);
 
   const rotation = useRef(new Animated.Value(0)).current;
-  const animateArrow = useCallback((isOpen: boolean) => {
-    Animated.timing(rotation, {
-      toValue: isOpen ? 90 : 0,
-      duration: 200,
-      useNativeDriver: true,
-    }).start();
-  }, []);
+  const animateArrow = useCallback(
+    (isOpen: boolean) => {
+      if (!arrowIndicatesOpening) return;
+
+      Animated.timing(rotation, {
+        toValue: isOpen ? 90 : 0,
+        duration: 200,
+        useNativeDriver: true,
+      }).start();
+    },
+    [arrowIndicatesOpening],
+  );
 
   const handleOpen = useCallback(() => {
     animateArrow(true);
@@ -68,15 +93,15 @@ export const Dropdown: React.FC<DropdownProps> = props => {
 
   const handleSave = useCallback<RollerPickerProps['onSave']>(
     value => {
-      onSave(value);
+      onSave?.(value);
       pickerRef.current?.dismiss();
     },
     [onSave],
   );
 
   const labelValue = useMemo(
-    () => options.find(option => option.value === value)?.label,
-    [options, value],
+    () => inputValue ?? options.find(option => option.value === value)?.label,
+    [inputValue, options, value],
   );
 
   const styles = useStyles();
@@ -105,7 +130,7 @@ export const Dropdown: React.FC<DropdownProps> = props => {
         />
       </Animated.View>
     );
-  }, [arrowIndicatesOpening, disabled, colors, styles]);
+  }, [disabled, colors, styles]);
 
   return (
     <>
@@ -116,16 +141,20 @@ export const Dropdown: React.FC<DropdownProps> = props => {
         onPress={handleOpen}
         {...textInputProps}
       />
-      <RollerPicker
-        options={options}
-        ref={pickerRef}
-        saveButtonLabel={saveButtonLabel}
-        title={title}
-        value={value}
-        onChange={onChange}
-        onDismiss={handleDismiss}
-        onSave={handleSave}
-      />
+      {renderPicker ? (
+        renderPicker({ ref: pickerRef, onDismiss: handleDismiss })
+      ) : (
+        <RollerPicker
+          options={options}
+          ref={pickerRef}
+          saveButtonLabel={saveButtonLabel}
+          title={title}
+          value={value}
+          onChange={onChange}
+          onDismiss={handleDismiss}
+          onSave={handleSave}
+        />
+      )}
     </>
   );
 };

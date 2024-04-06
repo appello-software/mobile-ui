@@ -61,18 +61,26 @@ export const MultiRollerPicker = forwardRef<BottomSheetModal, MultiRollerPickerP
       ...modalProps
     } = useCombinedPropsWithConfig('MultiRollerPicker', props);
     const [internalValues, setInternalValues] = useInternalState(values);
+    const actualValues = onChange ? values : internalValues;
 
     const selectedIndexes = useMemo(
       () =>
-        internalValues.map((value, index) =>
-          value ? options[index].findIndex(option => option.value === value) : 0,
-        ),
-      [options, internalValues],
+        actualValues.map((value, index) => {
+          if (value) {
+            const foundedIndex = options[index].findIndex(option => option.value === value);
+            if (foundedIndex > -1) {
+              return foundedIndex;
+            }
+          }
+
+          return 0;
+        }),
+      [options, actualValues],
     );
 
     const handlePickerChange = useCallback(
       (pickerIndex: number, selectedIndex: number) => {
-        const newValues = internalValues.map((value, index) => value ?? options[index][0].value);
+        const newValues = actualValues.map((value, index) => value ?? options[index][0].value);
         newValues[pickerIndex] = options[pickerIndex][selectedIndex].value;
 
         if (onChange) {
@@ -81,14 +89,14 @@ export const MultiRollerPicker = forwardRef<BottomSheetModal, MultiRollerPickerP
           setInternalValues(newValues);
         }
       },
-      [internalValues, options, onChange, setInternalValues],
+      [actualValues, options, onChange, setInternalValues],
     );
 
     const handleSave = useCallback(() => {
-      const filledValues = internalValues.map((value, index) => value ?? options[index][0].value);
+      const filledValues = actualValues.map((value, index) => value ?? options[index][0].value);
 
       onSave(filledValues);
-    }, [internalValues, options, onSave]);
+    }, [actualValues, options, onSave]);
 
     const styles = useStyles();
     return (
@@ -99,21 +107,24 @@ export const MultiRollerPicker = forwardRef<BottomSheetModal, MultiRollerPickerP
             {saveButtonLabel}
           </Button>
         </View>
-        <View style={styles.pickerContainer}>
-          {options.map((options, index) => (
-            <WheelPicker
-              containerStyle={styles.picker}
-              decelerationRate="normal"
-              itemHeight={40}
-              itemTextStyle={styles.pickerItemText}
-              key={index}
-              options={options.map(option => option.label)}
-              selectedIndex={selectedIndexes[index]}
-              selectedIndicatorStyle={styles.selectedIndicator}
-              visibleRest={2}
-              onChange={selected => handlePickerChange(index, selected)}
-            />
-          ))}
+        <View key={JSON.stringify(options)} style={styles.pickerContainer}>
+          {options.map((options, index) => {
+            const optionLabels = options.map(option => option.label);
+            return (
+              <WheelPicker
+                containerStyle={styles.picker}
+                decelerationRate="normal"
+                itemHeight={40}
+                itemTextStyle={styles.pickerItemText}
+                key={index}
+                options={optionLabels}
+                selectedIndex={selectedIndexes[index]}
+                selectedIndicatorStyle={styles.selectedIndicator}
+                visibleRest={2}
+                onChange={selected => handlePickerChange(index, selected)}
+              />
+            );
+          })}
         </View>
       </BottomSheet>
     );

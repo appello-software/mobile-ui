@@ -3,8 +3,12 @@ import React, { forwardRef, useCallback, useMemo } from 'react';
 
 import { MultiRollerPicker, MultiRollerPickerProps, Option, Value } from '../MultiRollerPicker';
 
-export interface RollerPickerProps
-  extends Omit<MultiRollerPickerProps, 'values' | 'options' | 'onChange' | 'onSave'> {
+export type CommonPickerProps = Omit<
+  MultiRollerPickerProps,
+  'values' | 'options' | 'onChange' | 'onSave'
+>;
+
+export interface RollerPickerProps extends CommonPickerProps {
   /* Value of the picker */
   value: Value;
   /* List of options for the picker */

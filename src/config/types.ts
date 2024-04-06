@@ -1,7 +1,14 @@
 import { ElementType } from 'react';
 import { ShadowStyleIOS } from 'react-native';
 
-import { Checkbox, Radio } from '../components';
+import {
+  Checkbox,
+  DatePicker,
+  Dropdown,
+  MultiRollerPicker,
+  PasswordField,
+  Radio,
+} from '../components';
 import { ActionSheet, useActionSheetStyles } from '../components/common/ActionSheet';
 import { AppText, useAppTextStyles } from '../components/common/AppText';
 import { BottomSheet, useBottomSheetStyles } from '../components/common/BottomSheet';
@@ -11,11 +18,8 @@ import {
   usePrimaryButtonStyles,
   useSecondaryButtonStyles,
 } from '../components/common/Button';
-import { Dropdown } from '../components/common/Dropdown';
-import { MultiRollerPicker } from '../components/common/MultiRollerPicker';
 import { TextInput, useTextInputStyles } from '../components/common/TextInput';
 import { Field, useFieldStyle } from '../components/form/Field';
-import { PasswordField } from '../components/form/PasswordField';
 import { BasicHeader, useBasicHeaderStyles } from '../components/screens/BasicHeader';
 import { ScreenContainer, useScreenContainerStyles } from '../components/screens/ScreenContainer';
 import { PartialProps } from '../types';
@@ -109,6 +113,10 @@ export interface UIComponents {
   };
   Dropdown: {
     defaultProps: DefaultPropsConfig<typeof Dropdown>;
+    styles: never;
+  };
+  DatePicker: {
+    defaultProps: DefaultPropsConfig<typeof DatePicker>;
     styles: never;
   };
 }
