@@ -48,6 +48,8 @@ export type DatePickerProps = Pick<MultiRollerPickerProps, 'title' | 'saveButton
     getInputValue?: (value?: Date | number) => string;
     /**
      * Value of the picker as Timestamp or Date object
+     *
+     * @default minDate
      * */
     value?: Date | number;
     /**

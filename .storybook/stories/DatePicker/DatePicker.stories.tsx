@@ -1,7 +1,7 @@
 import { DatePicker, DatePickerProps } from '@appello/mobile-ui';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { Meta, StoryObj } from '@storybook/react';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { CONFIG_CATEGORY, EXTENDED_CATEGORY } from '../../constants';
 
@@ -12,6 +12,11 @@ const meta: Meta<DatePickerProps> = {
   render: props => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [value, setValue] = useState<DatePickerProps['value']>();
+
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    useEffect(() => {
+      setValue(props.value);
+    }, [props.value]);
 
     return (
       <BottomSheetModalProvider>
@@ -40,7 +45,7 @@ const meta: Meta<DatePickerProps> = {
       control: false,
     },
     value: {
-      control: false,
+      control: 'date',
     },
     Icon: {
       control: false,

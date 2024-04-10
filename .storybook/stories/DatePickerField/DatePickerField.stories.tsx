@@ -1,4 +1,4 @@
-import { DropdownField, DropdownFieldProps, Option } from '@appello/mobile-ui';
+import { DatePickerField, DatePickerFieldProps } from '@appello/mobile-ui';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
@@ -6,28 +6,22 @@ import { useForm } from 'react-hook-form';
 
 import { EXTENDED_CATEGORY } from '../../constants';
 
-const options: Option[] = [
-  { value: '1', label: 'Option 1' },
-  { value: '2', label: 'Option 2' },
-  { value: '3', label: 'Option 3' },
-];
-
-const meta: Meta<DropdownFieldProps<any>> = {
-  title: 'Forms/DropdownField',
-  component: DropdownField,
+const meta: Meta<DatePickerFieldProps<any>> = {
+  title: 'Forms/DatePickerField',
+  component: DatePickerField,
   render: props => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    const form = useForm<{ dropdownField: string }>();
+    const form = useForm<{ datePickerField: number }>();
 
     return (
       <BottomSheetModalProvider>
-        <DropdownField {...props} control={form.control} name="dropdownField" />
+        <DatePickerField {...props} control={form.control} name="datePickerField" />
       </BottomSheetModalProvider>
     );
   },
   args: {
-    options,
-    label: 'Dropdown Field',
+    label: 'DatePicker Field',
+    maxDate: new Date(2030, 11, 31),
   },
   argTypes: {
     control: {
@@ -36,20 +30,16 @@ const meta: Meta<DropdownFieldProps<any>> = {
     name: {
       control: false,
     },
+    minUnit: { control: false, table: { category: EXTENDED_CATEGORY } },
+    minDate: { control: false, table: { category: EXTENDED_CATEGORY } },
+    maxDate: { control: false, table: { category: EXTENDED_CATEGORY } },
     error: { control: false, table: { category: EXTENDED_CATEGORY } },
     disabled: { control: false, table: { category: EXTENDED_CATEGORY } },
     Icon: { control: false, table: { category: EXTENDED_CATEGORY } },
     iconSize: { control: false, table: { category: EXTENDED_CATEGORY } },
-    renderPicker: { control: false, table: { category: EXTENDED_CATEGORY } },
-    inputValue: { control: false, table: { category: EXTENDED_CATEGORY } },
+    getInputValue: { control: false, table: { category: EXTENDED_CATEGORY } },
     inputStyle: { control: false, table: { category: EXTENDED_CATEGORY } },
     style: { control: false, table: { category: EXTENDED_CATEGORY } },
-    options: {
-      control: false,
-      table: {
-        category: EXTENDED_CATEGORY,
-      },
-    },
     arrowIndicatesOpening: {
       control: false,
       table: {
@@ -68,16 +58,10 @@ const meta: Meta<DropdownFieldProps<any>> = {
         category: EXTENDED_CATEGORY,
       },
     },
-    onChange: {
-      control: false,
-      table: {
-        category: EXTENDED_CATEGORY,
-      },
-    },
   },
 };
 
-type Story = StoryObj<DropdownFieldProps<any>>;
+type Story = StoryObj<DatePickerFieldProps<any>>;
 
 export const DefaultStory: Story = {};
 
