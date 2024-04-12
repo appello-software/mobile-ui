@@ -1,6 +1,6 @@
 import { IS_IOS } from '@appello/mobile/lib/constants/platform';
 import React, { useMemo } from 'react';
-import { KeyboardAvoidingView, ViewStyle } from 'react-native';
+import { KeyboardAvoidingView, KeyboardAvoidingViewProps, ViewStyle } from 'react-native';
 import { Edge, SafeAreaView } from 'react-native-safe-area-context';
 
 import { useCombinedPropsWithConfig } from '../../../hooks/useCombinedPropsWithConfig';
@@ -8,7 +8,7 @@ import { useCombinedStylesWithConfig } from '../../../hooks/useCombinedStylesWit
 import { layout } from '../../../styles/layout';
 import { makeStyles } from '../../../utils';
 
-export interface ScreenContainerProps {
+export interface ScreenContainerProps extends KeyboardAvoidingViewProps {
   /* Header to render on top of the screen */
   header?: React.ReactNode;
   /* Screen content */
@@ -35,16 +35,15 @@ interface ScreenContainerStyles {
  * }```
  */
 export const ScreenContainer: React.FC<ScreenContainerProps> = props => {
-  const { header, children, containerStyle, contentContainerStyle } = useCombinedPropsWithConfig(
-    'ScreenContainer',
-    props,
-  );
+  const { header, children, containerStyle, contentContainerStyle, ...restProps } =
+    useCombinedPropsWithConfig('ScreenContainer', props);
   const style = useCombinedStylesWithConfig('ScreenContainer', useScreenContainerStyles);
 
   return (
     <KeyboardAvoidingView
       behavior={IS_IOS ? 'padding' : undefined}
       contentContainerStyle={[layout.fill]}
+      {...restProps}
       style={[style['screen-container'], containerStyle]}
     >
       {header}
