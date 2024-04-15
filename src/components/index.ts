@@ -5,6 +5,7 @@ export { Button, ButtonProps } from './common/Button';
 export { Checkbox, CheckboxProps } from './common/Checkbox';
 export { DatePicker, DatePickerProps } from './common/DatePicker';
 export { Dropdown, DropdownInputProps, DropdownOwnProps, DropdownProps } from './common/Dropdown';
+export { Label, LabelProps } from './common/Label';
 export {
   MultiRollerPicker,
   MultiRollerPickerProps,

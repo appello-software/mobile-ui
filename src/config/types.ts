@@ -18,6 +18,7 @@ import {
   usePrimaryButtonStyles,
   useSecondaryButtonStyles,
 } from '../components/common/Button';
+import { Label, useLabelStyle } from '../components/common/Label';
 import { TextInput, useTextInputStyles } from '../components/common/TextInput';
 import { Field, useFieldStyle } from '../components/form/Field';
 import { BasicHeader, useBasicHeaderStyles } from '../components/screens/BasicHeader';
@@ -118,6 +119,10 @@ export interface UIComponents {
   DatePicker: {
     defaultProps: DefaultPropsConfig<typeof DatePicker>;
     styles: never;
+  };
+  Label: {
+    defaultProps: DefaultPropsConfig<typeof Label>;
+    styles: typeof useLabelStyle;
   };
 }
 
