@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useMemo } from 'react';
 import {
   ColorValue,
   StyleSheet,
@@ -114,6 +114,13 @@ export const TextInput = forwardRef<RNTextInput, TextInputProps>((props, ref) =>
     !disabled && !error && isFocused && styles['text-input--focused'],
   ]);
 
+  const iconColor = useMemo(() => {
+    if (!value) return placeholderTextColor;
+    if ('color' in fullStyle) return fullStyle.color as ColorValue;
+
+    return undefined;
+  }, [fullStyle, placeholderTextColor, value]);
+
   const handleFocus: TextInputProps['onFocus'] = e => {
     textInputProps.onFocus?.(e);
     setIsFocused(true);
@@ -156,11 +163,7 @@ export const TextInput = forwardRef<RNTextInput, TextInputProps>((props, ref) =>
         />
         {!multiline && Icon ? (
           <View style={styles['text-input__icon-container']}>
-            <Icon
-              color={'color' in fullStyle ? (fullStyle?.color as ColorValue) : undefined}
-              height={iconSize?.height}
-              width={iconSize?.width}
-            />
+            <Icon color={iconColor} height={iconSize?.height} width={iconSize?.width} />
           </View>
         ) : null}
         {!multiline && accessoryRight ? (

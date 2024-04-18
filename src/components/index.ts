@@ -20,3 +20,4 @@ export { PasswordField, PasswordFieldProps } from './form/PasswordField';
 export { TextField, TextFieldProps } from './form/TextField';
 export { BasicHeader, BasicHeaderProps } from './screens/BasicHeader';
 export { ScreenContainer, ScreenContainerProps } from './screens/ScreenContainer';
+export { ScreenHeader, ScreenHeaderProps } from './screens/ScreenHeader';
