@@ -1,3 +1,4 @@
+import BackIcon from '@appello/mobile-ui/icons/unicons/left-arrow-3.svg';
 import { HeaderBackContext } from '@react-navigation/elements';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import React from 'react';
@@ -8,21 +9,31 @@ import { SvgProps } from 'react-native-svg';
 import { useUIKitTheme } from '../../../config/utils';
 import { useCombinedPropsWithConfig } from '../../../hooks/useCombinedPropsWithConfig';
 import { useCombinedStylesWithConfig } from '../../../hooks/useCombinedStylesWithConfig';
+import { layout } from '../../../styles/layout';
 import { makeStyles } from '../../../utils';
 import { AppText } from '../../common/AppText';
 
-export interface BasicHeaderProps {
-  /* Icon of back button */
+export interface BasicHeaderProps extends React.PropsWithChildren {
+  /**
+   *  Icon of back button
+   *
+   *  @default @appello/mobile-ui/icons/unicons/left-arrow-3.svg
+   *  */
   BackButtonIcon?: React.FC<SvgProps>;
   /* Should hide back button even if it's possible to go back */
   hideBackButton?: boolean;
   /* Title to display in the middle of header */
   title?: string;
+  /* Subtitle to display under the title */
+  subTitle?: string;
   /* Any element to display in the right part of header */
   accessoryRight?: Nullable<React.ReactNode>;
   /* Container style */
   containerStyle?: SafeAreaViewProps['style'];
-  /* Container style */
+  /** Title and BackButton color
+   *
+   * @default theme.colors.black['1']
+   * */
   textColor?: ColorValue;
 }
 
@@ -45,12 +56,14 @@ export const BasicHeader: React.FC<BasicHeaderProps> = props => {
   const route = useRoute();
 
   const {
-    BackButtonIcon,
+    BackButtonIcon = BackIcon,
     hideBackButton,
     accessoryRight,
     title,
+    subTitle,
     containerStyle,
     textColor = colors.black['1'],
+    children,
   } = useCombinedPropsWithConfig('BasicHeader', props);
   const styles = useCombinedStylesWithConfig('BasicHeader', useBasicHeaderStyles);
   const innerStyles = useInnerStyles();
@@ -82,11 +95,26 @@ export const BasicHeader: React.FC<BasicHeaderProps> = props => {
   return (
     <SafeAreaView edges={['top']} style={[innerStyles['basic-header__container'], containerStyle]}>
       <View style={styles['basic-header']}>
-        {backButton}
-        <AppText color={textColor} numberOfLines={2} variant="p3">
-          {title || route.name}
-        </AppText>
-        <View style={innerStyles['basic-header__right-accessory']}>{accessoryRight}</View>
+        <View style={[layout.row, layout.justifyContentBetween, layout.alignItemsCenter]}>
+          {backButton}
+          <View style={innerStyles['basic-header__titles']}>
+            <AppText color={textColor} numberOfLines={1} variant="p3">
+              {title || route.name}
+            </AppText>
+            {!!subTitle && (
+              <AppText
+                color={colors.gray['1']}
+                numberOfLines={1}
+                style={innerStyles['basic-header__subtitle']}
+                variant="p4"
+              >
+                {subTitle}
+              </AppText>
+            )}
+          </View>
+          <View style={innerStyles['basic-header__right-accessory']}>{accessoryRight}</View>
+        </View>
+        {children}
       </View>
     </SafeAreaView>
   );
@@ -94,9 +122,6 @@ export const BasicHeader: React.FC<BasicHeaderProps> = props => {
 
 export const useBasicHeaderStyles = makeStyles<void, BasicHeaderStyles>(() => ({
   'basic-header': {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
     paddingVertical: 16,
     paddingHorizontal: 15,
   },
@@ -108,6 +133,14 @@ const useInnerStyles = makeStyles(({ shadow, colors }) =>
       backgroundColor: colors.white,
       zIndex: 1,
       ...shadow[1],
+    },
+    'basic-header__titles': {
+      flex: 1,
+      marginHorizontal: 15,
+      alignItems: 'center',
+    },
+    'basic-header__subtitle': {
+      marginTop: -5,
     },
     'basic-button__left-accessory': {
       alignSelf: 'stretch',
