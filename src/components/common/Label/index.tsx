@@ -1,9 +1,9 @@
-import { useCombinedPropsWithConfig } from '@appello/mobile-ui/hooks/useCombinedPropsWithConfig';
-import { useCombinedStylesWithConfig } from '@appello/mobile-ui/hooks/useCombinedStylesWithConfig';
-import { makeStyles } from '@appello/mobile-ui/utils';
 import React from 'react';
 import { View, ViewStyle } from 'react-native';
 
+import { useCombinedPropsWithConfig } from '../../../hooks/useCombinedPropsWithConfig';
+import { useCombinedStylesWithConfig } from '../../../hooks/useCombinedStylesWithConfig';
+import { makeStyles } from '../../../utils';
 import { AppText, AppTextProps } from '../AppText';
 
 export interface LabelStyle {
