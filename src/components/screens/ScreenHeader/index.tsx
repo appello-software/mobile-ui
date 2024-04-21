@@ -1,8 +1,8 @@
 import SearchIcon from '@appello/mobile-ui/icons/unicons/magnifier.svg';
-import { makeStyles } from '@appello/mobile-ui/utils';
 import React from 'react';
 import { View } from 'react-native';
 
+import { makeStyles } from '../../../utils';
 import { TextInput } from '../../common/TextInput';
 import { BasicHeader, BasicHeaderProps } from '../BasicHeader';
 
