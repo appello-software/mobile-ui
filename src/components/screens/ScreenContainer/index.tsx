@@ -1,7 +1,7 @@
 import { IS_IOS } from '@appello/mobile/lib/constants/platform';
 import React, { useMemo } from 'react';
 import { KeyboardAvoidingView, KeyboardAvoidingViewProps, ViewStyle } from 'react-native';
-import { Edge, SafeAreaView } from 'react-native-safe-area-context';
+import { Edge, SafeAreaView, SafeAreaViewProps } from 'react-native-safe-area-context';
 
 import { useCombinedPropsWithConfig } from '../../../hooks/useCombinedPropsWithConfig';
 import { useCombinedStylesWithConfig } from '../../../hooks/useCombinedStylesWithConfig';
@@ -17,6 +17,8 @@ export interface ScreenContainerProps extends KeyboardAvoidingViewProps {
   containerStyle?: ViewStyle;
   /* Style of the content container */
   contentContainerStyle?: ViewStyle;
+  /* Custom edges of included into the component SafeArea */
+  safeAreaEdges?: SafeAreaViewProps['edges'];
 }
 
 interface ScreenContainerStyles {
@@ -35,7 +37,7 @@ interface ScreenContainerStyles {
  * }```
  */
 export const ScreenContainer: React.FC<ScreenContainerProps> = props => {
-  const { header, children, containerStyle, contentContainerStyle, ...restProps } =
+  const { header, children, containerStyle, contentContainerStyle, safeAreaEdges, ...restProps } =
     useCombinedPropsWithConfig('ScreenContainer', props);
   const style = useCombinedStylesWithConfig('ScreenContainer', useScreenContainerStyles);
 
@@ -49,11 +51,13 @@ export const ScreenContainer: React.FC<ScreenContainerProps> = props => {
       {header}
       <SafeAreaView
         edges={useMemo(() => {
+          if (safeAreaEdges) return safeAreaEdges;
+
           const edges: Edge[] = ['bottom'];
           if (!header) edges.push('top');
 
           return edges;
-        }, [header])}
+        }, [header, safeAreaEdges])}
         style={[style['screen-container__content'], contentContainerStyle]}
       >
         {children}
