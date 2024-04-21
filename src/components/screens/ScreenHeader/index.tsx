@@ -3,7 +3,7 @@ import React from 'react';
 import { View } from 'react-native';
 
 import { makeStyles } from '../../../utils';
-import { TextInput } from '../../common/TextInput';
+import { TextInput, TextInputProps } from '../../common/TextInput';
 import { BasicHeader, BasicHeaderProps } from '../BasicHeader';
 
 export interface ScreenHeaderProps extends BasicHeaderProps {
@@ -12,17 +12,30 @@ export interface ScreenHeaderProps extends BasicHeaderProps {
    * This prop is also responsible for displaying search input in the first place
    * */
   onSearchChange?: (value: string) => void;
+  /**
+   * Style of the search input if there is one
+   * */
+  searchInputStyle?: TextInputProps['style'];
 }
 
-export const ScreenHeader: React.FC<ScreenHeaderProps> = ({ onSearchChange, ...basicProps }) => {
+export const ScreenHeader: React.FC<ScreenHeaderProps> = ({
+  onSearchChange,
+  searchInputStyle,
+  ...basicProps
+}) => {
   const styles = useInnerStyles();
   return (
     <BasicHeader {...basicProps}>
-      <View>
-        {!!onSearchChange && (
-          <TextInput Icon={SearchIcon} placeholder="Search" style={styles.searchInput} />
-        )}
-      </View>
+      {!!onSearchChange && (
+        <View style={styles.searchInput}>
+          <TextInput
+            Icon={SearchIcon}
+            placeholder="Search"
+            style={searchInputStyle}
+            onChangeText={onSearchChange}
+          />
+        </View>
+      )}
     </BasicHeader>
   );
 };
