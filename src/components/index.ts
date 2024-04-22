@@ -14,7 +14,7 @@ export {
 } from './common/MultiRollerPicker';
 export { Radio, RadioProps } from './common/Radio';
 export { RollerPicker, RollerPickerProps } from './common/RollerPicker';
-export { TextInput, TextInputProps } from './common/TextInput';
+export { createNumberMask, Masks, TextInput, TextInputProps } from './common/TextInput';
 export { DatePickerField, DatePickerFieldProps } from './form/DatePickerField';
 export { DropdownField, DropdownFieldProps } from './form/DropdownField';
 export { Field, FieldProps } from './form/Field';
