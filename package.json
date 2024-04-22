@@ -1,6 +1,6 @@
 {
   "name": "@appello/mobile-ui",
-  "version": "1.1.16",
+  "version": "1.1.17",
   "description": "Appello Software mobile UIKit",
   "main": "dist/commonjs/index.js",
   "module": "dist/module/index.js",
