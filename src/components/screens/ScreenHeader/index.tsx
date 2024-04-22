@@ -8,32 +8,19 @@ import { BasicHeader, BasicHeaderProps } from '../BasicHeader';
 
 export interface ScreenHeaderProps extends BasicHeaderProps {
   /**
-   * Callback to call when search value changes.
+   * Props of the search input.
    * This prop is also responsible for displaying search input in the first place
    * */
-  onSearchChange?: (value: string) => void;
-  /**
-   * Style of the search input if there is one
-   * */
-  searchInputStyle?: TextInputProps['style'];
+  searchInput?: TextInputProps;
 }
 
-export const ScreenHeader: React.FC<ScreenHeaderProps> = ({
-  onSearchChange,
-  searchInputStyle,
-  ...basicProps
-}) => {
+export const ScreenHeader: React.FC<ScreenHeaderProps> = ({ searchInput, ...basicProps }) => {
   const styles = useInnerStyles();
   return (
     <BasicHeader {...basicProps}>
-      {!!onSearchChange && (
+      {!!searchInput && (
         <View style={styles.searchInput}>
-          <TextInput
-            Icon={SearchIcon}
-            placeholder="Search"
-            style={searchInputStyle}
-            onChangeText={onSearchChange}
-          />
+          <TextInput Icon={SearchIcon} placeholder="Search" {...searchInput} />
         </View>
       )}
     </BasicHeader>

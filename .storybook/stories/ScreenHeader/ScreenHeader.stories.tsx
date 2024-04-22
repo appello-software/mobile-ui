@@ -26,7 +26,7 @@ const meta: Meta<ScreenHeaderProps> = {
     accessoryRight: {
       control: 'boolean',
     },
-    onSearchChange: {
+    searchInput: {
       control: 'boolean',
     },
     BackButtonIcon: {
