@@ -2,9 +2,9 @@ import React from 'react';
 import { Control, FieldPath, FieldValues, useController } from 'react-hook-form';
 import { StyleProp, ViewStyle } from 'react-native';
 
-import { TextInput, TextInputProps } from '~/components/common/TextInput';
-import { Field } from '~/components/form/Field';
-import { getFieldError } from '~/components/form/utils';
+import { TextInput, TextInputProps } from '../../common/TextInput';
+import { Field } from '../Field';
+import { getFieldError } from '../utils';
 
 export interface TextFieldProps<TFormValues extends FieldValues>
   extends Omit<TextInputProps, 'style'> {

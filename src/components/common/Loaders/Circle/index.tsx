@@ -12,8 +12,8 @@ import Animated, {
 } from 'react-native-reanimated';
 import Svg, { Circle as RNCircle } from 'react-native-svg';
 
-import { useUIKitTheme } from '~/config/utils';
-import { useCombinedPropsWithConfig } from '~/hooks/useCombinedPropsWithConfig';
+import { useUIKitTheme } from '../../../../config/utils';
+import { useCombinedPropsWithConfig } from '../../../../hooks/useCombinedPropsWithConfig';
 
 export const DEFAULT_SIZE = 25;
 export const ANIMATION_DURATION = 1300;

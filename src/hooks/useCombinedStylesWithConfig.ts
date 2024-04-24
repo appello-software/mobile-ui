@@ -2,8 +2,8 @@ import { keys } from '@appello/common';
 import { StyleSheet } from 'react-native';
 import NamedStyles = StyleSheet.NamedStyles;
 
-import { UIComponents } from '~/config';
-import { useComponentsConfig } from '~/config/utils';
+import { UIComponents } from '../config';
+import { useComponentsConfig } from '../config/utils';
 
 export function useCombinedStylesWithConfig<T extends keyof UIComponents>(
   componentName: T,

@@ -1,8 +1,7 @@
+import { Button, Option, RollerPicker, RollerPickerProps, Value } from '@appello/mobile-ui';
 import { BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import type { Meta, StoryObj } from '@storybook/react';
 import React, { useRef, useState } from 'react';
-
-import { Button, Option, Value, RollerPicker, RollerPickerProps } from '@appello/mobile-ui';
 
 import { EXTENDED_CATEGORY } from '../../constants';
 
@@ -39,7 +38,7 @@ const meta = {
   },
   args: {
     title: 'Options',
-    buttonTitle: 'Done',
+    saveButtonLabel: 'Done',
     options,
   },
   argTypes: {
@@ -48,10 +47,13 @@ const meta = {
         category: EXTENDED_CATEGORY,
       },
     },
-    buttonTitle: {
+    saveButtonLabel: {
       table: {
         category: EXTENDED_CATEGORY,
       },
+    },
+    value: {
+      control: false,
     },
     onChange: {
       control: false,

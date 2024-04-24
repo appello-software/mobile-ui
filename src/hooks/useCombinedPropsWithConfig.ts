@@ -1,5 +1,5 @@
-import { UIComponents } from '~/config';
-import { useComponentsConfig } from '~/config/utils';
+import { UIComponents } from '../config';
+import { useComponentsConfig } from '../config/utils';
 
 export function useCombinedPropsWithConfig<
   T extends keyof UIComponents,

@@ -1,26 +1,33 @@
 import { ElementType } from 'react';
 import { ShadowStyleIOS } from 'react-native';
 
-import { Checkbox, Points, Radio } from '~/components';
-import { ActionSheet, useActionSheetStyles } from '~/components/common/ActionSheet';
-import { AppText, useAppTextStyles } from '~/components/common/AppText';
-import { BottomSheet, useBottomSheetStyles } from '~/components/common/BottomSheet';
+import {
+  Checkbox,
+  Circle,
+  DatePicker,
+  Dropdown,
+  MultiRollerPicker,
+  PasswordField,
+  Points,
+  Radio,
+} from '../components';
+import { ActionSheet, useActionSheetStyles } from '../components/common/ActionSheet';
+import { AppText, useAppTextStyles } from '../components/common/AppText';
+import { BottomSheet, useBottomSheetStyles } from '../components/common/BottomSheet';
 import {
   Button,
   useNegativeButtonStyles,
   usePrimaryButtonStyles,
   useSecondaryButtonStyles,
-} from '~/components/common/Button';
-import { HorizontalTabs, useHorizontalTabsStyles } from '~/components/common/HorizontalTabs';
-import { Circle } from '~/components/common/Loaders/Circle';
-import { MultiRollerPicker } from '~/components/common/MultiRollerPicker';
-import { TextInput, useTextInputStyles } from '~/components/common/TextInput';
-import { Field, useFieldStyle } from '~/components/form/Field';
-import { PasswordField } from '~/components/form/PasswordField';
-import { BasicHeader, useBasicHeaderStyles } from '~/components/screens/BasicHeader';
-import { ScreenContainer, useScreenContainerStyles } from '~/components/screens/ScreenContainer';
-import { PartialProps } from '~/types';
-import { makeDefaultProps, makeStyles } from '~/utils';
+} from '../components/common/Button';
+import { HorizontalTabs, useHorizontalTabsStyles } from '../components/common/HorizontalTabs';
+import { Label, useLabelStyle } from '../components/common/Label';
+import { TextInput, useTextInputStyles } from '../components/common/TextInput';
+import { Field, useFieldStyle } from '../components/form/Field';
+import { BasicHeader, useBasicHeaderStyles } from '../components/screens/BasicHeader';
+import { ScreenContainer, useScreenContainerStyles } from '../components/screens/ScreenContainer';
+import { PartialProps } from '../types';
+import { makeDefaultProps, makeStyles } from '../utils';
 
 export interface UIKitTheme {
   colors: {
@@ -119,6 +126,18 @@ export interface UIComponents {
   ActionSheet: {
     defaultProps: DefaultPropsConfig<typeof ActionSheet>;
     styles: typeof useActionSheetStyles;
+  };
+  Dropdown: {
+    defaultProps: DefaultPropsConfig<typeof Dropdown>;
+    styles: never;
+  };
+  DatePicker: {
+    defaultProps: DefaultPropsConfig<typeof DatePicker>;
+    styles: never;
+  };
+  Label: {
+    defaultProps: DefaultPropsConfig<typeof Label>;
+    styles: typeof useLabelStyle;
   };
 }
 

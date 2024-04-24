@@ -16,10 +16,10 @@ import Animated, {
   withSpring,
 } from 'react-native-reanimated';
 
-import { AppText, AppTextProps } from '~/components';
-import { useCombinedPropsWithConfig } from '~/hooks/useCombinedPropsWithConfig';
-import { useCombinedStylesWithConfig } from '~/hooks/useCombinedStylesWithConfig';
-import { makeStyles } from '~/utils';
+import { useCombinedPropsWithConfig } from '../../../hooks/useCombinedPropsWithConfig';
+import { useCombinedStylesWithConfig } from '../../../hooks/useCombinedStylesWithConfig';
+import { makeStyles } from '../../../utils';
+import { AppText, AppTextProps } from '../AppText';
 
 const DEFAULT_ITEM_SPACING = 16;
 export const DEFAULT_TAB_HEIGHT = 52;

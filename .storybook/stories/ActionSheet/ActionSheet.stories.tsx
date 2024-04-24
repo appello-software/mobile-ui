@@ -1,16 +1,10 @@
+import { Action, ActionSheet, ActionSheetProps, ActionWithIcon, Button } from '@appello/mobile-ui';
+import { BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import type { Meta, StoryObj } from '@storybook/react';
 import React, { useMemo, useRef } from 'react';
 import { Alert } from 'react-native';
 
-import { Button } from '@appello/mobile-ui';
-import {
-  ActionSheet,
-  ActionSheetProps,
-  Action,
-  ActionWithIcon,
-} from '@appello/mobile-ui/components/common/ActionSheet';
-import { BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet';
-import { PaperPlaneIcon, AccountIcon } from '../../components/icons';
+import { AccountIcon, PaperPlaneIcon } from '../../components/icons';
 import { CONFIG_CATEGORY } from '../../constants';
 
 /* eslint-disable react-hooks/rules-of-hooks */
@@ -50,7 +44,7 @@ const meta = {
     title: 'Header',
     iconSize: 18,
     actions: 'Without icons' as any,
-    closeOnAction: true
+    closeOnAction: true,
   },
   argTypes: {
     actions: {

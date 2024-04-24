@@ -1,7 +1,10 @@
+import {
+  ANIMATION_DURATION,
+  Circle,
+  CircleProps,
+  DEFAULT_SIZE,
+} from '@appello/mobile-ui/components/common/Loaders/Circle';
 import { Meta, StoryObj } from '@storybook/react';
-
-import { colors } from '~/__defaults__/defaultTheme';
-import { ANIMATION_DURATION, DEFAULT_SIZE, Circle, CircleProps } from '@appello/mobile-ui/components/common/Loaders/Circle';
 
 import { CONFIG_CATEGORY, CONFIG_DETAIL } from '../../constants';
 
@@ -47,8 +50,6 @@ const meta: Meta<CircleProps> = {
   args: {
     size: DEFAULT_SIZE,
     duration: ANIMATION_DURATION,
-    color: colors.primary,
-    colorBack: colors.gray['4'],
   },
 };
 

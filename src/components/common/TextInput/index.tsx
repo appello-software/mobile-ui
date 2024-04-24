@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { forwardRef, useMemo } from 'react';
 import {
   ColorValue,
   StyleSheet,
@@ -17,11 +17,11 @@ import {
 } from 'react-native-mask-input';
 import { SvgProps } from 'react-native-svg';
 
-import { AppText } from '~/components';
-import { useUIKitTheme } from '~/config/utils';
-import { useCombinedPropsWithConfig } from '~/hooks/useCombinedPropsWithConfig';
-import { useCombinedStylesWithConfig } from '~/hooks/useCombinedStylesWithConfig';
-import { makeStyles } from '~/utils';
+import { useUIKitTheme } from '../../../config/utils';
+import { useCombinedPropsWithConfig } from '../../../hooks/useCombinedPropsWithConfig';
+import { useCombinedStylesWithConfig } from '../../../hooks/useCombinedStylesWithConfig';
+import { makeStyles } from '../../../utils';
+import { AppText } from '../AppText';
 
 export interface TextInputProps extends RNTextInputProps {
   /** Should TextInput have an error state */
@@ -34,7 +34,10 @@ export interface TextInputProps extends RNTextInputProps {
   accessoryRight?: React.ReactNode;
   /** Icon component to display on the left of the TextInput */
   Icon?: React.FC<SvgProps>;
-  /** Size of the Icon component */
+  /** Size of the Icon component
+   *
+   * @default { width: 20, height: 20 }
+   * */
   iconSize?: {
     width: number;
     height: number;
@@ -75,7 +78,7 @@ interface TextInputStyle {
  *   'text-input__icon-container'?: ViewStyle;
  * }```
  */
-export const TextInput: FC<TextInputProps> = props => {
+export const TextInput = forwardRef<RNTextInput, TextInputProps>((props, ref) => {
   const { colors } = useUIKitTheme();
 
   const styles = useCombinedStylesWithConfig('TextInput', useTextInputStyles);
@@ -111,6 +114,13 @@ export const TextInput: FC<TextInputProps> = props => {
     !disabled && !error && isFocused && styles['text-input--focused'],
   ]);
 
+  const iconColor = useMemo(() => {
+    if (!value) return placeholderTextColor;
+    if ('color' in fullStyle) return fullStyle.color as ColorValue;
+
+    return undefined;
+  }, [fullStyle, placeholderTextColor, value]);
+
   const handleFocus: TextInputProps['onFocus'] = e => {
     textInputProps.onFocus?.(e);
     setIsFocused(true);
@@ -143,6 +153,7 @@ export const TextInput: FC<TextInputProps> = props => {
           multiline={multiline}
           placeholder={placeholder ?? maskPlaceholder}
           placeholderTextColor={placeholderTextColor}
+          ref={ref}
           selectionColor={colors.primary}
           style={fullStyle}
           value={maskValue}
@@ -152,11 +163,7 @@ export const TextInput: FC<TextInputProps> = props => {
         />
         {!multiline && Icon ? (
           <View style={styles['text-input__icon-container']}>
-            <Icon
-              color={'color' in fullStyle ? (fullStyle?.color as ColorValue) : undefined}
-              height={iconSize?.height}
-              width={iconSize?.width}
-            />
+            <Icon color={iconColor} height={iconSize?.height} width={iconSize?.width} />
           </View>
         ) : null}
         {!multiline && accessoryRight ? (
@@ -170,7 +177,7 @@ export const TextInput: FC<TextInputProps> = props => {
       </View>
     </TouchableOpacity>
   );
-};
+});
 
 export const useTextInputStyles = makeStyles(theme => {
   return StyleSheet.create({

@@ -10,9 +10,9 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 
-import { useUIKitTheme } from '~/config/utils';
-import { useCombinedPropsWithConfig } from '~/hooks/useCombinedPropsWithConfig';
-import { makeStyles } from '~/utils';
+import { useUIKitTheme } from '../../../../config/utils';
+import { useCombinedPropsWithConfig } from '../../../../hooks/useCombinedPropsWithConfig';
+import { makeStyles } from '../../../../utils';
 
 export const DEFAULT_SIZE = 8;
 export const ANIMATION_DURATION = 600;

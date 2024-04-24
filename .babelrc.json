@@ -2,16 +2,6 @@
   "sourceType": "unambiguous",
   "presets": ["@babel/preset-env", "@babel/preset-react", "@babel/preset-typescript"],
   "plugins": [
-    [
-      "module-resolver",
-      {
-        "root": ["./"],
-        "alias": {
-          "~": "./src",
-          "@appello/mobile-ui/icons": "./icons"
-        }
-      }
-    ],
     "@babel/plugin-proposal-export-namespace-from",
     "react-native-reanimated/plugin",
     [
