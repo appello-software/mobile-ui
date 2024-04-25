@@ -1,12 +1,7 @@
-import {
-  ANIMATION_DURATION,
-  DEFAULT_SIZE,
-  Points,
-  PointsProps,
-} from '@appello/mobile-ui/components/common/Loaders/Points';
+import { Points, PointsProps } from '@appello/mobile-ui';
 import { Meta, StoryObj } from '@storybook/react';
 
-import { CONFIG_CATEGORY, CONFIG_DETAIL } from '../../constants';
+import { CONFIG_CATEGORY } from '../../constants';
 
 const meta: Meta<PointsProps> = {
   title: 'Basic/Loaders/Points',
@@ -15,32 +10,18 @@ const meta: Meta<PointsProps> = {
     size: {
       table: {
         category: CONFIG_CATEGORY,
-        defaultValue: {
-          summary: DEFAULT_SIZE,
-        },
       },
     },
     duration: {
       table: {
         category: CONFIG_CATEGORY,
-        defaultValue: {
-          summary: ANIMATION_DURATION,
-        },
       },
     },
     color: {
       table: {
         category: CONFIG_CATEGORY,
-        defaultValue: {
-          summary: 'theme.colors.primary',
-          detail: CONFIG_DETAIL,
-        },
       },
     },
-  },
-  args: {
-    size: DEFAULT_SIZE,
-    duration: ANIMATION_DURATION,
   },
 };
 

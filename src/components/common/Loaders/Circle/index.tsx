@@ -23,13 +23,29 @@ const STROKE_LIGHT = 3;
 const AnimatedCircle = Animated.createAnimatedComponent(RNCircle);
 
 export interface CircleProps {
-  /** Size for loader */
+  /**
+   * Size for loader
+   *
+   * @default 25
+   * */
   size?: number;
-  /** Duration for loader */
+  /**
+   * Duration of loader animation
+   *
+   * @default 1300
+   * */
   duration?: number;
-  /** Color spinner */
+  /**
+   * Color of spinner
+   *
+   * @default theme.colors.primary
+   * */
   color?: string;
-  /** Color background circle */
+  /**
+   * Color of the circle background
+   *
+   * @default theme.colors.gray['4']
+   * */
   colorBack?: string;
 }
 

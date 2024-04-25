@@ -18,11 +18,23 @@ export const DEFAULT_SIZE = 8;
 export const ANIMATION_DURATION = 600;
 
 export interface PointsProps {
-  /** Size for loader */
+  /**
+   * Size of loader
+   *
+   * @default 8
+   * */
   size?: number;
-  /** Duration for loader */
+  /**
+   * Duration of loader animation
+   *
+   * @default 600
+   * */
   duration?: number;
-  /** Color points */
+  /**
+   * Color of points
+   *
+   * @default theme.colors.primary
+   * */
   color?: string;
 }
 
