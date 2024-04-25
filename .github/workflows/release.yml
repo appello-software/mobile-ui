@@ -16,11 +16,13 @@ jobs:
           git config user.name "${GITHUB_ACTOR}"
           git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
       - run: yarn
-      - run: npm run release
+      - run: npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-      - run: npx chromatic --project-token=${CHROMATIC_TOKEN}
+      - run: npm run release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: npx chromatic --project-token="${CHROMATIC_TOKEN}"
         env:
           CHROMATIC_TOKEN: ${{ secrets.CHROMATIC_TOKEN }}
 
