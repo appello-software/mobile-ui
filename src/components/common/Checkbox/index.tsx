@@ -1,5 +1,6 @@
+import CheckboxIcon from '@appello/mobile-ui/icons/unicons/approve-tick-checkmark.svg';
 import React from 'react';
-import { TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity, View, ViewStyle } from 'react-native';
 import { SvgProps } from 'react-native-svg';
 
 import { useUIKitTheme } from '../../../config/utils';
@@ -9,32 +10,55 @@ import { makeStyles } from '../../../utils';
 export interface CheckboxProps {
   checked: boolean;
   onChange: (checked: boolean) => void;
+  /**
+   * Icon to display when the checkbox is checked
+   *
+   * @default @appello/mobile-ui/icons/unicons/approve-tick-checkmark.svg
+   * */
   checkIcon?: React.FC<SvgProps>;
+  /**
+   * Should checkbox be round instead rectangular
+   * */
   rounded?: boolean;
   disabled?: boolean;
+  /**
+   * Background color when the checkbox is checked
+   *
+   * @default theme.colors.success
+   * */
   activeColor?: string;
+  /**
+   * Size of the checkbox
+   *
+   * @default 24
+   * */
   size?: number;
+  /**
+   * Style of checkbox container
+   * */
+  style?: ViewStyle;
 }
 
 /**
  * Simple checkbox.<br>
- * The style isn't configurable
+ * The style isn't configurable except for a container style prop
  */
 export const Checkbox: React.FC<CheckboxProps> = props => {
   const { colors } = useUIKitTheme();
   const {
-    checkIcon: CheckIcon,
+    checkIcon: CheckIcon = CheckboxIcon,
     checked,
     onChange,
     rounded,
     disabled,
+    style,
     activeColor = colors.success,
     size = 24,
   } = useCombinedPropsWithConfig('Checkbox', props);
   const styles = useStyles({ size, activeColor });
 
   return (
-    <TouchableOpacity disabled={disabled} onPress={() => onChange(!checked)}>
+    <TouchableOpacity disabled={disabled} style={style} onPress={() => onChange(!checked)}>
       <View
         style={[
           styles.box,
