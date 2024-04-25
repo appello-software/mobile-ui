@@ -5,7 +5,13 @@ export { Button, ButtonProps } from './common/Button';
 export { Checkbox, CheckboxProps } from './common/Checkbox';
 export { DatePicker, DatePickerProps } from './common/DatePicker';
 export { Dropdown, DropdownInputProps, DropdownOwnProps, DropdownProps } from './common/Dropdown';
+export {
+  HorizontalTabs,
+  HorizontalTabsProps,
+  HorizontalTabsRefType,
+} from './common/HorizontalTabs';
 export { Label, LabelProps } from './common/Label';
+export { Circle, CircleProps, Points, PointsProps } from './common/Loaders';
 export {
   MultiRollerPicker,
   MultiRollerPickerProps,

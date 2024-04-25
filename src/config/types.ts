@@ -3,10 +3,12 @@ import { ShadowStyleIOS } from 'react-native';
 
 import {
   Checkbox,
+  Circle,
   DatePicker,
   Dropdown,
   MultiRollerPicker,
   PasswordField,
+  Points,
   Radio,
 } from '../components';
 import { ActionSheet, useActionSheetStyles } from '../components/common/ActionSheet';
@@ -18,6 +20,7 @@ import {
   usePrimaryButtonStyles,
   useSecondaryButtonStyles,
 } from '../components/common/Button';
+import { HorizontalTabs, useHorizontalTabsStyles } from '../components/common/HorizontalTabs';
 import { Label, useLabelStyle } from '../components/common/Label';
 import { TextInput, useTextInputStyles } from '../components/common/TextInput';
 import { Field, useFieldStyle } from '../components/form/Field';
@@ -99,6 +102,18 @@ export interface UIComponents {
   BasicHeader: {
     defaultProps: DefaultPropsConfig<typeof BasicHeader>;
     styles: typeof useBasicHeaderStyles;
+  };
+  HorizontalTabs: {
+    defaultProps: DefaultPropsConfig<typeof HorizontalTabs>;
+    styles: typeof useHorizontalTabsStyles;
+  };
+  Circle: {
+    defaultProps: DefaultPropsConfig<typeof Circle>;
+    styles: never;
+  };
+  Points: {
+    defaultProps: DefaultPropsConfig<typeof Points>;
+    styles: never;
   };
   BottomSheet: {
     defaultProps: DefaultPropsConfig<typeof BottomSheet>;
