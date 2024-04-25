@@ -5,6 +5,7 @@ import React, {
   ReactElement,
   Ref,
   useImperativeHandle,
+  useMemo,
   useRef,
   useState,
 } from 'react';
@@ -51,21 +52,21 @@ export interface HorizontalTabsProps {
   /** Array of tabs */
   list: { key: string; title: string }[];
   /** Current active tab */
-  tab: string;
+  currentTab: string;
   /** Callback for changing the active tab */
-  setTab: (v: string) => void;
+  onTabChange: (key: string) => void;
   /** Tab height
    *
    * @default 52
    * */
   tabHeight?: number;
-  /** Additional content near the inscription (Suppose you need to show the number of elements) */
+  /** Additional content near the tab title (Suppose you need to show the number of elements) */
   tabContent?: (key: string) => ReactElement;
   /** If you want additional content (from tabContent) to be rendered on the left */
   tabContentReverse?: boolean;
   /** Text variant (from theme)
    *
-   * @default "p1"
+   * @default p1
    * */
   tabTextVariant?: AppTextProps['variant'];
 }
@@ -74,9 +75,9 @@ export const HorizontalTabs = forwardRef<HorizontalTabsRefType, HorizontalTabsPr
   (props, ref) => {
     // Themed functionality
     const {
-      tab,
+      currentTab,
       list,
-      setTab,
+      onTabChange,
       scrollable = false,
       tabHeight = DEFAULT_TAB_HEIGHT,
       tabContent,
@@ -84,11 +85,16 @@ export const HorizontalTabs = forwardRef<HorizontalTabsRefType, HorizontalTabsPr
       tabTextVariant = 'p1',
     } = useCombinedPropsWithConfig('HorizontalTabs', props);
     const styles = useCombinedStylesWithConfig('HorizontalTabs', useHorizontalTabsStyles);
-    const innerStyles = useInnerStyles();
+    const innerStyles = useInnerStyles(
+      useMemo(
+        () => ({ tabHeight, tabContentReverse, scrollable }),
+        [tabHeight, tabContentReverse, scrollable],
+      ),
+    );
 
     // Component functionality
     const [leftOffsetItems, setLeftOffsetItems] = useState<HorizontalTabsState[]>([]);
-    const getCurrent = leftOffsetItems.find(item => item.key === tab);
+    const getCurrent = leftOffsetItems.find(item => item.key === currentTab);
     const scrollOffsetX = useSharedValue(0);
     const scrollRef = useRef<Animated.ScrollView>(null);
 
@@ -134,33 +140,29 @@ export const HorizontalTabs = forwardRef<HorizontalTabsRefType, HorizontalTabsPr
       return (
         <View style={innerStyles['horizontal-tabs__row']}>
           {list.map(({ key, title }, index) => (
-            <TouchableOpacity
-              key={key}
-              style={[
-                {
-                  height: tabHeight,
-                  flexDirection: tabContentReverse ? 'row-reverse' : 'row',
-                  paddingHorizontal: scrollable ? DEFAULT_ITEM_SPACING : 'none',
-                  marginRight: list.length - 1 !== index ? DEFAULT_ITEM_SPACING : undefined,
-                },
-                styles['horizontal-tabs__item'],
-              ]}
-              onLayout={({
-                nativeEvent: {
-                  layout: { x, width },
-                },
-              }) => {
-                setLeftOffsetItems(prevState => {
-                  return mergeCollectionByKey(prevState, [{ key, x, width }], 'push', 'key');
-                });
-              }}
-              onPress={() => setTab(key)}
-            >
-              <AppText style={styles['horizontal-tabs__text']} variant={tabTextVariant}>
-                {title}
-              </AppText>
-              {tabContent?.(key)}
-            </TouchableOpacity>
+            <React.Fragment key={key}>
+              <TouchableOpacity
+                style={[innerStyles['horizontal-tabs__item'], styles['horizontal-tabs__item']]}
+                onLayout={({
+                  nativeEvent: {
+                    layout: { x, width },
+                  },
+                }) => {
+                  setLeftOffsetItems(prevState => {
+                    return mergeCollectionByKey(prevState, [{ key, x, width }], 'push', 'key');
+                  });
+                }}
+                onPress={() => onTabChange(key)}
+              >
+                <AppText style={styles['horizontal-tabs__text']} variant={tabTextVariant}>
+                  {title}
+                </AppText>
+                {tabContent?.(key)}
+              </TouchableOpacity>
+              {list.length - 1 !== index && (
+                <View style={innerStyles['horizontal-tabs__item-separator']} />
+              )}
+            </React.Fragment>
           ))}
         </View>
       );
@@ -206,23 +208,33 @@ export const useHorizontalTabsStyles = makeStyles(({ colors }) =>
   } as HorizontalTabsStyles),
 );
 
-const useInnerStyles = makeStyles(theme =>
-  StyleSheet.create({
-    'horizontal-tabs__row': {
-      flexDirection: 'row',
-      width: '100%',
-    },
-    'horizontal-tabs__item': {
-      flex: 1,
-      alignItems: 'center',
-      flexDirection: 'row',
-      justifyContent: 'center',
-    },
-    'horizontal-tabs__underline': {
-      position: 'absolute',
-      height: 2,
-      bottom: -1,
-      backgroundColor: theme.colors.primary,
-    },
-  }),
+const useInnerStyles = makeStyles(
+  (
+    theme,
+    {
+      tabHeight,
+      tabContentReverse,
+      scrollable,
+    }: Pick<HorizontalTabsProps, 'tabHeight' | 'tabContentReverse' | 'scrollable'>,
+  ) =>
+    StyleSheet.create({
+      'horizontal-tabs__row': {
+        flexDirection: 'row',
+        width: '100%',
+      },
+      'horizontal-tabs__item': {
+        height: tabHeight,
+        flexDirection: tabContentReverse ? 'row-reverse' : 'row',
+        paddingHorizontal: scrollable ? DEFAULT_ITEM_SPACING : 'none',
+      },
+      'horizontal-tabs__item-separator': {
+        width: DEFAULT_ITEM_SPACING,
+      },
+      'horizontal-tabs__underline': {
+        position: 'absolute',
+        height: 2,
+        bottom: -1,
+        backgroundColor: theme.colors.primary,
+      },
+    }),
 );
