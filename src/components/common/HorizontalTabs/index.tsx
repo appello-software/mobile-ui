@@ -9,7 +9,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { StyleSheet, TouchableOpacity, View, ViewStyle } from 'react-native';
+import { ColorValue, StyleSheet, TextStyle, TouchableOpacity, View, ViewStyle } from 'react-native';
 import Animated, {
   useAnimatedScrollHandler,
   useAnimatedStyle,
@@ -17,6 +17,7 @@ import Animated, {
   withSpring,
 } from 'react-native-reanimated';
 
+import { useUIKitTheme } from '../../../config/utils';
 import { useCombinedPropsWithConfig } from '../../../hooks/useCombinedPropsWithConfig';
 import { useCombinedStylesWithConfig } from '../../../hooks/useCombinedStylesWithConfig';
 import { makeStyles } from '../../../utils';
@@ -27,7 +28,7 @@ export const DEFAULT_TAB_HEIGHT = 52;
 
 interface HorizontalTabsStyles {
   'horizontal-tabs'?: ViewStyle;
-  'horizontal-tabs__text'?: ViewStyle;
+  'horizontal-tabs__text'?: TextStyle;
   'horizontal-tabs__item'?: ViewStyle;
 }
 
@@ -44,7 +45,10 @@ export interface HorizontalTabsRefType {
 export interface HorizontalTabsProps {
   /** Ref component for calling methods */
   ref?: Ref<HorizontalTabsRefType>;
-  /** Adds the ability to scroll elements; if false, then all elements will stretch to the full width provided to them
+  /** Ref component for calling methods */
+  style?: ViewStyle;
+  /**
+   * Adds the ability to scroll elements; if false, then all elements will stretch to the full width provided to them
    *
    * @default false
    * */
@@ -55,24 +59,36 @@ export interface HorizontalTabsProps {
   currentTab: string;
   /** Callback for changing the active tab */
   onTabChange: (key: string) => void;
-  /** Tab height
+  /**
+   * Tab height
    *
    * @default 52
    * */
   tabHeight?: number;
-  /** Additional content near the tab title (Suppose you need to show the number of elements) */
-  tabContent?: (key: string) => ReactElement;
-  /** If you want additional content (from tabContent) to be rendered on the left */
-  tabContentReverse?: boolean;
-  /** Text variant (from theme)
-   *
-   * @default p1
+  /**
+   * Additional content near the tab title (Suppose you need to show the number of elements)
    * */
-  tabTextVariant?: AppTextProps['variant'];
+  tabContent?: (key: string) => ReactElement;
+  /**
+   * If you want additional content (from tabContent) to be rendered on the left
+   * */
+  tabContentReverse?: boolean;
+  /** Text props
+   *
+   * @default { variant: 'p1' }
+   * */
+  tabTextProps?: Omit<AppTextProps, 'style'>;
+  /**
+   * Tab height
+   *
+   * @default theme.colors.primary
+   * */
+  activeColor?: ColorValue;
 }
 
 export const HorizontalTabs = forwardRef<HorizontalTabsRefType, HorizontalTabsProps>(
   (props, ref) => {
+    const { colors } = useUIKitTheme();
     // Themed functionality
     const {
       currentTab,
@@ -82,7 +98,9 @@ export const HorizontalTabs = forwardRef<HorizontalTabsRefType, HorizontalTabsPr
       tabHeight = DEFAULT_TAB_HEIGHT,
       tabContent,
       tabContentReverse,
-      tabTextVariant = 'p1',
+      tabTextProps = { variant: 'p1' },
+      activeColor = colors.primary,
+      style,
     } = useCombinedPropsWithConfig('HorizontalTabs', props);
     const styles = useCombinedStylesWithConfig('HorizontalTabs', useHorizontalTabsStyles);
     const innerStyles = useInnerStyles(
@@ -154,7 +172,13 @@ export const HorizontalTabs = forwardRef<HorizontalTabsRefType, HorizontalTabsPr
                 }}
                 onPress={() => onTabChange(key)}
               >
-                <AppText style={styles['horizontal-tabs__text']} variant={tabTextVariant}>
+                <AppText
+                  style={styles['horizontal-tabs__text']}
+                  {...{
+                    ...tabTextProps,
+                    color: key === currentTab ? activeColor : tabTextProps.color,
+                  }}
+                >
                   {title}
                 </AppText>
                 {tabContent?.(key)}
@@ -169,7 +193,7 @@ export const HorizontalTabs = forwardRef<HorizontalTabsRefType, HorizontalTabsPr
     };
 
     return (
-      <View style={[{ height: tabHeight }, styles['horizontal-tabs']]}>
+      <View style={[{ height: tabHeight }, styles['horizontal-tabs'], style]}>
         {scrollable ? (
           <Animated.ScrollView
             horizontal
@@ -215,7 +239,8 @@ const useInnerStyles = makeStyles(
       tabHeight,
       tabContentReverse,
       scrollable,
-    }: Pick<HorizontalTabsProps, 'tabHeight' | 'tabContentReverse' | 'scrollable'>,
+      activeColor,
+    }: Pick<HorizontalTabsProps, 'tabHeight' | 'tabContentReverse' | 'scrollable' | 'activeColor'>,
   ) =>
     StyleSheet.create({
       'horizontal-tabs__row': {
@@ -234,7 +259,7 @@ const useInnerStyles = makeStyles(
         position: 'absolute',
         height: 2,
         bottom: -1,
-        backgroundColor: theme.colors.primary,
+        backgroundColor: activeColor,
       },
     }),
 );

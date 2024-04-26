@@ -49,8 +49,7 @@ const meta: Meta<HorizontalTabsProps> = {
     );
   },
   argTypes: {
-    tabTextVariant: {
-      control: 'text',
+    tabTextProps: {
       table: {
         category: CONFIG_CATEGORY,
       },
