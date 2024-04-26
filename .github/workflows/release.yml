@@ -25,7 +25,7 @@ jobs:
       - run: npm run release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - run: npx chromatic --project-token="${CHROMATIC_TOKEN}"
+      - run: npx chromatic --project-token="${CHROMATIC_TOKEN}" --auto-accept-changes
         env:
           CHROMATIC_TOKEN: ${{ secrets.CHROMATIC_TOKEN }}
 
