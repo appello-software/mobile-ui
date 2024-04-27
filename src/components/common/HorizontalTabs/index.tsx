@@ -30,6 +30,7 @@ interface HorizontalTabsStyles {
   'horizontal-tabs'?: ViewStyle;
   'horizontal-tabs__text'?: TextStyle;
   'horizontal-tabs__item'?: ViewStyle;
+  'horizontal-tabs__underline'?: ViewStyle;
 }
 
 interface HorizontalTabsState {
@@ -188,6 +189,13 @@ export const HorizontalTabs = forwardRef<HorizontalTabsRefType, HorizontalTabsPr
               )}
             </React.Fragment>
           ))}
+          <Animated.View
+            style={[
+              innerStyles['horizontal-tabs__underline'],
+              styles['horizontal-tabs__underline'],
+              animatedStyleUnderline,
+            ]}
+          />
         </View>
       );
     };
@@ -209,9 +217,6 @@ export const HorizontalTabs = forwardRef<HorizontalTabsRefType, HorizontalTabsPr
         ) : (
           <>{renderTabs()}</>
         )}
-        <Animated.View
-          style={[innerStyles['horizontal-tabs__underline'], animatedStyleUnderline]}
-        />
       </View>
     );
   },
@@ -224,11 +229,14 @@ export const useHorizontalTabsStyles = makeStyles(({ colors }) =>
       borderBottomWidth: 1,
       justifyContent: 'center',
       position: 'relative',
+      zIndex: 0,
     },
+    'horizontal-tabs__item': {},
     'horizontal-tabs__text': {
       fontSize: 14,
       fontWeight: '500',
     },
+    'horizontal-tabs__underline': {},
   } as HorizontalTabsStyles),
 );
 
@@ -258,7 +266,7 @@ const useInnerStyles = makeStyles(
       'horizontal-tabs__underline': {
         position: 'absolute',
         height: 2,
-        bottom: -1,
+        bottom: 0,
         backgroundColor: activeColor,
       },
     }),
