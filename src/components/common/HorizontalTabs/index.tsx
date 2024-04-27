@@ -105,8 +105,8 @@ export const HorizontalTabs = forwardRef<HorizontalTabsRefType, HorizontalTabsPr
     const styles = useCombinedStylesWithConfig('HorizontalTabs', useHorizontalTabsStyles);
     const innerStyles = useInnerStyles(
       useMemo(
-        () => ({ tabHeight, tabContentReverse, scrollable }),
-        [tabHeight, tabContentReverse, scrollable],
+        () => ({ tabHeight, tabContentReverse, scrollable, activeColor }),
+        [tabHeight, tabContentReverse, scrollable, activeColor],
       ),
     );
 
