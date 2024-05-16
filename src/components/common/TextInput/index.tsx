@@ -46,6 +46,14 @@ export interface TextInputProps extends RNTextInputProps {
   mask?: MaskInputProps['mask'];
   /** Character to be used as the "fill character" on the default placeholder value when using mask. */
   placeholderFillCharacter?: MaskInputProps['placeholderFillCharacter'];
+  /**
+   * The type of value that goes as an argument into the `onChangeText` callback.
+   * - `masked` – full value as it's displaying on the input (includes all the additional symbols from the mask)
+   * - `unmasked` – only the symbols from the mask defined as a RegExp
+   *
+   * @default unmasked
+   * */
+  maskValueType?: 'masked' | 'unmasked';
 }
 
 interface TextInputStyle {
@@ -96,6 +104,7 @@ export const TextInput = forwardRef<RNTextInput, TextInputProps>((props, ref) =>
     accessoryRight,
     mask,
     placeholderFillCharacter,
+    maskValueType = 'unmasked',
     iconSize = { width: 20, height: 20 },
     placeholderTextColor = colors.gray['3'],
     maxLength,
@@ -138,7 +147,8 @@ export const TextInput = forwardRef<RNTextInput, TextInputProps>((props, ref) =>
   } = useMaskedInputProps({
     mask,
     value,
-    onChangeText: (_, unmasked) => onChangeText?.(unmasked),
+    onChangeText: (masked, unmasked) =>
+      onChangeText?.(maskValueType === 'masked' ? masked : unmasked),
     placeholderFillCharacter,
   });
 
