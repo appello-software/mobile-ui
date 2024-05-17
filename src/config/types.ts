@@ -22,6 +22,7 @@ import {
 } from '../components/common/Button';
 import { HorizontalTabs, useHorizontalTabsStyles } from '../components/common/HorizontalTabs';
 import { Label, useLabelStyle } from '../components/common/Label';
+import { Popup, usePopupStyles } from '../components/common/Popup';
 import { TextInput, useTextInputStyles } from '../components/common/TextInput';
 import { Field, useFieldStyle } from '../components/form/Field';
 import { BasicHeader, useBasicHeaderStyles } from '../components/screens/BasicHeader';
@@ -138,6 +139,10 @@ export interface UIComponents {
   Label: {
     defaultProps: DefaultPropsConfig<typeof Label>;
     styles: typeof useLabelStyle;
+  };
+  Popup: {
+    defaultProps: DefaultPropsConfig<typeof Popup>;
+    styles: typeof usePopupStyles;
   };
 }
 

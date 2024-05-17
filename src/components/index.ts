@@ -5,6 +5,7 @@ export { Button, ButtonProps } from './common/Button';
 export { Checkbox, CheckboxProps } from './common/Checkbox';
 export { DatePicker, DatePickerProps } from './common/DatePicker';
 export { Dropdown, DropdownInputProps, DropdownOwnProps, DropdownProps } from './common/Dropdown';
+export { EqualSidesContainer, EqualSidesContainerProps } from './common/EqualSidesContainer';
 export {
   HorizontalTabs,
   HorizontalTabsProps,
@@ -18,6 +19,7 @@ export {
   Option,
   Value,
 } from './common/MultiRollerPicker';
+export { Popup, PopupProps } from './common/Popup';
 export { Radio, RadioProps } from './common/Radio';
 export { RollerPicker, RollerPickerProps } from './common/RollerPicker';
 export { createNumberMask, Masks, TextInput, TextInputProps } from './common/TextInput';
