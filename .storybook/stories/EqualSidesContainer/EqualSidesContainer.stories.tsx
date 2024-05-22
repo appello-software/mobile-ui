@@ -1,30 +1,29 @@
-import { Label, LabelProps } from '@appello/mobile-ui';
+import { AppText, EqualSidesContainer, EqualSidesContainerProps } from '@appello/mobile-ui';
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
-import { CONFIG_CATEGORY } from '../../constants';
-
 const meta = {
-  title: 'Basic/Label',
-  component: Label,
-  render: ({ ...restProps }) => {
-    return <Label {...restProps} />;
-  },
+  title: 'Basic/EqualSidesContainer',
+  component: EqualSidesContainer,
   args: {
-    children: 'Label',
-    bgColor: '#1C88EC',
-    textColor: '#fff',
+    children: <AppText variant="h3">DD</AppText>,
+    bgColor: '#FDD835',
+    size: 100,
   },
   argTypes: {
-    textProps: {
-      table: {
-        category: CONFIG_CATEGORY,
-      },
+    bgColor: {
+      control: 'color',
+    },
+    children: {
+      control: false,
+    },
+    borderRadius: {
+      control: 'number',
     },
   },
-} satisfies Meta<LabelProps>;
+} satisfies Meta<EqualSidesContainerProps>;
 
-type Story = StoryObj<LabelProps>;
+type Story = StoryObj<EqualSidesContainerProps>;
 
 export const DefaultStory: Story = {};
 

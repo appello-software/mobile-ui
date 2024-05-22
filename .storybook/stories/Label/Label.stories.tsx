@@ -1,29 +1,43 @@
-import { AppText, EqualSidesContainer, EqualSidesContainerProps } from '@appello/mobile-ui';
+import { Label, LabelProps } from '@appello/mobile-ui';
+import ChatIcon from '@appello/mobile-ui/icons/unicons/chat.svg';
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
+import { CONFIG_CATEGORY } from '../../constants';
+
 const meta = {
-  title: 'Basic/EqualSidesContainer',
-  component: EqualSidesContainer,
+  title: 'Basic/Label',
+  component: Label,
+  render: ({ icon, ...restProps }) => {
+    return <Label icon={icon ? ChatIcon : undefined} {...restProps} />;
+  },
   args: {
-    children: <AppText variant="h3">DD</AppText>,
-    bgColor: '#FDD835',
-    size: 100,
+    children: 'Label',
+    bgColor: '#1C88EC',
+    textColor: '#fff',
+    iconSize: {
+      width: 16,
+      height: 16,
+    },
   },
   argTypes: {
-    bgColor: {
-      control: 'color',
+    textProps: {
+      table: {
+        category: CONFIG_CATEGORY,
+      },
     },
-    children: {
-      control: false,
+    iconSize: {
+      table: {
+        category: CONFIG_CATEGORY,
+      },
     },
-    borderRadius: {
-      control: 'number',
+    icon: {
+      control: 'boolean',
     },
   },
-} satisfies Meta<EqualSidesContainerProps>;
+} satisfies Meta<LabelProps>;
 
-type Story = StoryObj<EqualSidesContainerProps>;
+type Story = StoryObj<LabelProps>;
 
 export const DefaultStory: Story = {};
 
